@@ -1,41 +1,39 @@
 import Link from "next/link";
 import season0 from "@/data/season0.json";
-import { ARMY_BY_SLUG } from "@/lib/armies";
-import { fmtInt, fmtUsd } from "@/lib/format";
-import { Tower } from "@/components/Tower";
-import { WarMap } from "@/components/WarMap";
+import { ARMIES, ARMY_BY_SLUG } from "@/lib/armies";
+import { fmtInt, fmtUsd, plural } from "@/lib/format";
 import { Provenance } from "@/components/Provenance";
+import { Replay } from "@/components/Replay";
+import { Swatch } from "@/components/Swatch";
 
 export default function Home() {
   const tiles = season0.tiles;
   const held = new Map<string, number>();
   for (const t of tiles) if (t.owner) held.set(t.owner, (held.get(t.owner) ?? 0) + 1);
+  const garrisonHeld = held.get("strike") ?? 0;
+  const communityHeld = tiles.length - garrisonHeld - tiles.filter((t) => !t.owner).length;
 
-  const byVolume = [...season0.armies].sort((a, b) => b.volume - a.volume);
-  const towerRows = byVolume.map((a) => ({
-    slug: a.slug,
-    primary: a.volume,
-    primaryLabel: "volume, all time",
-    secondary: `${fmtInt(a.holders)} holders · ${fmtInt(a.members)} fight here · ${held.get(a.slug) ?? 0} tiles`,
-  }));
-
+  const armies = [...season0.armies].filter((a) => !ARMY_BY_SLUG[a.slug].garrison).sort((a, b) => b.volume7d - a.volume7d);
+  const garrison = season0.armies.find((a) => ARMY_BY_SLUG[a.slug].garrison)!;
   const snek = season0.armies.find((a) => a.slug === "snek")!;
-  const leaderTiles = [...held.entries()].sort((a, b) => b[1] - a[1])[0];
-  const leaderArmy = leaderTiles ? ARMY_BY_SLUG[leaderTiles[0]] : undefined;
+  const topCommunity = [...held.entries()].filter(([s]) => !ARMY_BY_SLUG[s].garrison).sort((a, b) => b[1] - a[1])[0];
 
   return (
     <main className="mx-auto max-w-[1400px] px-4 pb-24 md:px-8">
-      <section className="grid gap-8 pt-8 lg:grid-cols-[1fr_360px]">
+      <section className="grid gap-8 pt-8 lg:grid-cols-[1fr_380px] lg:pt-12">
         <div>
-          <p className="label">Season 0 · Strike mainnet · last {season0.windowDays} days</p>
-          <h1 className="display mt-2 max-w-[18ch] text-[clamp(44px,7vw,92px)]">
-            {leaderArmy ? `${leaderArmy.ticker === "STRIKE" ? "The home army" : leaderArmy.ticker} holds ${leaderTiles![1]} of ${tiles.length} markets` : `${tiles.length} markets, no owner yet`}
+          <p className="kicker">Season 0 · read from Strike mainnet · last {season0.windowDays} days</p>
+          <h1 className="display mt-3 text-[clamp(40px,7vw,96px)]">
+            Your token is your army.
+            <br />
+            Take Strike&apos;s markets.
           </h1>
-          <p className="mt-4 max-w-[62ch] text-[17px] text-ink-2">
-            {fmtInt(season0.totals.armyMembers)} of Strike&apos;s traders already hold a community token. Raid groups them into armies and
-            maps who trades where. Armies claim a market by bringing it traders who pay real fees, never by trading with each other.
+          <p className="mt-5 max-w-[60ch] text-[17px] leading-relaxed text-ink-2">
+            Raid turns Cardano communities (SNEK, HOSKY, NIGHT and eleven more) into trading armies on Strike. Hold the token, enlist with one
+            signature, and claim markets by bringing traders who pay real fees. Wash trades and self-funded recruits never score, and you can check
+            every fee yourself.
           </p>
-          <div className="mt-5 flex flex-wrap gap-3">
+          <div className="mt-6 flex flex-wrap gap-3">
             <Link href="/join" className="btn">
               Enlist your wallet
             </Link>
@@ -44,34 +42,88 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        <aside className="self-end border-2 border-ink p-4">
-          <p className="label">Dispatch</p>
-          <p className="display mt-1 text-[30px]">{fmtInt(snek.holders)} SNEK holders already trade on Strike</p>
-          <p className="num mt-2 text-[14px] text-ink-2">
-            {fmtInt(snek.members)} fight for SNEK · {held.get("snek") ?? 0} markets held
+
+        <aside className="self-end border-l-4 border-ink pl-5">
+          <p className="label">Dispatch from the front</p>
+          <p className="display mt-2 text-[34px]">
+            The garrison holds {garrisonHeld} of {tiles.length}. Your move.
           </p>
-          <Link href="/army/snek" className="link mt-3 inline-block text-[14px] font-semibold">
-            The Snek army needs ground →
+          <p className="mt-3 text-[15px] text-ink-2">
+            Community armies hold {communityHeld}
+            {topCommunity ? `, led by ${ARMY_BY_SLUG[topCommunity[0]].ticker} with ${plural(topCommunity[1], "market")}` : ""}.{" "}
+            {fmtInt(snek.holders)} wallets on Strike hold SNEK; the Snek army holds {plural(held.get("snek") ?? 0, "market")}.
+          </p>
+          <Link href="/army/snek" className="link mt-3 inline-block text-[15px] font-semibold">
+            The Snek army needs ground
           </Link>
         </aside>
       </section>
 
-      <section className="mt-10 grid gap-10 lg:grid-cols-[1fr_360px]">
+      <section className="mt-12 grid gap-10 xl:grid-cols-[1fr_380px]">
         <div>
-          <div className="flex items-baseline justify-between rule-b pb-2">
-            <h2 className="display text-[26px]">The board</h2>
-            <span className="label">Pips = frontier weight, up to 3x on quiet markets</span>
+          <div className="rule-b flex flex-wrap items-baseline justify-between gap-2 pb-2">
+            <h2 className="display text-[30px]">The board</h2>
+            <span className="label">A market goes to the army whose traders paid the most fees there this week</span>
           </div>
           <div className="mt-4">
-            <WarMap tiles={tiles} />
+            <Replay final={tiles} days={season0.days} generatedAt={season0.generatedAt} />
           </div>
           <Legend />
         </div>
-        <Tower rows={towerRows} unit="usd" title="Armies" note="volume of members, all time" />
+
+        <section aria-label="Armies">
+          <div className="rule-b flex items-baseline justify-between pb-2">
+            <h2 className="display text-[30px]">Armies</h2>
+            <span className="label">volume, last 7 days</span>
+          </div>
+          <table className="w-full text-[14px]">
+            <thead className="sr-only">
+              <tr>
+                <th>Rank</th>
+                <th>Army</th>
+                <th>Volume, 7 days</th>
+                <th>Gap to the army above</th>
+              </tr>
+            </thead>
+            <tbody>
+              {armies.map((a, i) => {
+                const army = ARMY_BY_SLUG[a.slug];
+                const above = armies[i - 1];
+                return (
+                  <tr key={a.slug} className="rule-b">
+                    <td className="num w-8 py-2 pr-2 text-right align-top text-[15px] font-semibold">{i + 1}</td>
+                    <td className="py-2 align-top">
+                      <Link href={`/army/${a.slug}`} className="flex items-start gap-2.5 hover:underline">
+                        <Swatch army={army} className="mt-1 h-5 w-3" />
+                        <span>
+                          <span className="display block text-[22px]">{army.ticker}</span>
+                          <span className="block text-[12px] text-ink-2">
+                            {plural(a.traders7d, "trader")} · {plural(held.get(a.slug) ?? 0, "market")}
+                          </span>
+                        </span>
+                      </Link>
+                    </td>
+                    <td className="num py-2 text-right align-top">
+                      <span className="block text-[15px] font-semibold">{fmtUsd(a.volume7d)}</span>
+                      <span className="block text-[11px] text-ink-3">{above ? `${fmtUsd(above.volume7d - a.volume7d)} behind #${i}` : "leader"}</span>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+          <p className="mt-4 flex items-start gap-2.5 text-[13px] text-ink-2">
+            <Swatch army={ARMY_BY_SLUG.strike} className="mt-0.5 h-5 w-3" />
+            <span>
+              Garrison: wallets that hold only STRIKE. {plural(garrison.traders7d, "trader")}, {fmtUsd(garrison.volume7d)} this week, holding{" "}
+              {plural(garrisonHeld, "market")}. Shown in grey so the community race stays readable.
+            </span>
+          </p>
+        </section>
       </section>
 
       <Provenance
-        className="mt-12"
+        className="mt-14"
         generatedAt={season0.generatedAt}
         rows={[
           ["Leaderboard", season0.sources.leaderboard],
@@ -80,29 +132,41 @@ export default function Home() {
           ["24h volume", season0.sources.volume],
         ]}
         footnote={`${fmtInt(season0.totals.leaderboardAccounts)} accounts read, ${fmtInt(season0.totals.resolvedStakeKeys)} Cardano stake keys resolved, ${fmtInt(
-          season0.totals.fillsScanned,
-        )} fills scanned, ${fmtInt(season0.totals.internalFillsDropped)} fills dropped as trades between army members.`}
+          season0.totals.armyMembers,
+        )} wallets hold an army token, ${fmtInt(season0.totals.fillsScanned)} fills scanned, ${fmtInt(season0.totals.internalFillsDropped)} dropped as trades between army members.`}
       />
     </main>
   );
 }
 
 function Legend() {
+  const sample = ARMIES.filter((a) => ["snek", "indy", "fren"].includes(a.slug));
   return (
-    <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-[13px] text-ink-2">
-      <span className="flex items-center gap-2">
-        <span className="inline-block h-4 w-4 border-2 border-ink" style={{ background: "var(--field)" }} /> Held
-      </span>
-      <span className="flex items-center gap-2">
-        <span
-          className="inline-block h-4 w-4 border-2 border-ink"
-          style={{ background: "repeating-linear-gradient(45deg,var(--field) 0 4px,var(--ochre) 4px 8px)" }}
-        />
-        Contested: lead under 15%
-      </span>
-      <span className="flex items-center gap-2">
-        <span className="inline-block h-4 w-4 border border-dashed border-ink bg-[var(--paper-2)]" /> Unclaimed
-      </span>
-    </div>
+    <dl className="mt-5 grid gap-x-8 gap-y-2 text-[13px] text-ink-2 sm:grid-cols-2">
+      <div className="flex items-center gap-2">
+        <dt className="flex gap-1">
+          {sample.map((a) => (
+            <Swatch key={a.slug} army={a} />
+          ))}
+        </dt>
+        <dd>Each army has its own ink and pattern</dd>
+      </div>
+      <div className="flex items-center gap-2">
+        <dt className="num border border-ink bg-[var(--field)] px-1.5 text-[11px] font-semibold text-[var(--paper)]">SNK 12</dt>
+        <dd>Counter: army and its traders on that market this week</dd>
+      </div>
+      <div className="flex items-center gap-2">
+        <dt className="flex items-end gap-[3px]" aria-hidden>
+          {[0, 1, 2].map((i) => (
+            <span key={i} className="inline-block h-[5px] w-[3px] bg-ink" />
+          ))}
+        </dt>
+        <dd>Ticks over a counter: quiet market, worth up to 3x</dd>
+      </div>
+      <div className="flex items-center gap-2">
+        <dt className="inline-block h-4 w-4 border border-ink" style={{ background: "repeating-linear-gradient(45deg,var(--field) 0 4px,var(--ochre) 4px 8px)" }} />
+        <dd>Two inks striped: contested, lead under 15%</dd>
+      </div>
+    </dl>
   );
 }

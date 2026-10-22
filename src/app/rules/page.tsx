@@ -42,7 +42,7 @@ const RULES: { h: string; body: React.ReactNode; formula?: string }[] = [
 export default function RulesPage() {
   return (
     <main className="mx-auto max-w-[900px] px-4 pb-24 pt-8 md:px-8">
-      <p className="label">Rules of engagement · live on Strike {LIVE_NETWORK}</p>
+      <p className="kicker">Rules of engagement · live on Strike {LIVE_NETWORK}</p>
       <h1 className="display mt-2 text-[clamp(40px,6vw,76px)]">How a market is claimed</h1>
       <ol className="mt-8">
         {RULES.map((r, i) => (

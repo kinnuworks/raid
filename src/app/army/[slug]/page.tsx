@@ -1,16 +1,24 @@
 import { Suspense } from "react";
 import { connection } from "next/server";
-import { Loading } from "@/components/Loading";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import season0 from "@/data/season0.json";
 import { ARMIES, ARMY_BY_SLUG } from "@/lib/armies";
-import { fmtInt, fmtSignedUsd, fmtUsd } from "@/lib/format";
+import { fmtInt, fmtSignedUsd, fmtUsd, plural } from "@/lib/format";
 import { liveSeason } from "@/lib/season";
+import { Loading } from "@/components/Loading";
+import { Swatch } from "@/components/Swatch";
 import { WarMap } from "@/components/WarMap";
+import { ShareButton } from "@/components/ShareButton";
 
 export function generateStaticParams() {
   return ARMIES.map((a) => ({ slug: a.slug }));
+}
+
+export async function generateMetadata(props: PageProps<"/army/[slug]">) {
+  const { slug } = await props.params;
+  const a = ARMY_BY_SLUG[slug];
+  return a ? { title: `${a.ticker} army · Raid`, description: `Where the ${a.ticker} army stands on Strike, from public data.` } : {};
 }
 
 async function ArmyPageContent(props: PageProps<"/army/[slug]">) {
@@ -21,80 +29,93 @@ async function ArmyPageContent(props: PageProps<"/army/[slug]">) {
   const s0 = season0.armies.find((a) => a.slug === slug)!;
   const held = season0.tiles.filter((t) => t.owner === slug);
   const contested = season0.tiles.filter((t) => t.runnerUp === slug);
+  const foughtIn = season0.tiles.filter((t) => (t.traders as Record<string, number | undefined>)[slug]);
+  const ranked = [...season0.armies].filter((a) => !ARMY_BY_SLUG[a.slug].garrison).sort((a, b) => b.volume7d - a.volume7d);
+  const rank = ranked.findIndex((a) => a.slug === slug) + 1;
+
   const live = await liveSeason();
   const liveMembers = live.members.filter((m) => m.army === slug);
   const board = live.recruitBoard.find((r) => r.army === slug);
   const fees = live.fees[slug];
-  const rank = [...season0.armies].sort((a, b) => b.volume - a.volume).findIndex((a) => a.slug === slug) + 1;
+  const liveHeld = live.tiles.filter((t) => t.owner === slug).map((t) => t.symbol.replace("-USD", ""));
+
+  const facts: [string, string][] = [
+    [fmtInt(s0.holders), "wallets on Strike hold the token"],
+    [fmtInt(s0.members), `fight for ${army.ticker} (it is their rarest army token)`],
+    [plural(s0.traders7d, "trader"), "active this week"],
+    [fmtUsd(s0.volume7d), "volume this week"],
+    [fmtSignedUsd(s0.pnl), `net PnL all time, ${fmtInt(s0.inProfit)} of ${fmtInt(s0.traded)} in profit`],
+  ];
 
   return (
     <main className="mx-auto max-w-[1300px] px-4 pb-24 pt-8 md:px-8">
-      <div className="flex items-start gap-5">
-        <span className="mt-2 h-20 w-4 shrink-0" style={{ background: army.ink }} aria-hidden />
-        <div>
-          <p className="label">Army · rank {rank} of {season0.armies.length} by volume</p>
-          <h1 className="display text-[clamp(56px,9vw,120px)]">{army.ticker}</h1>
-          <p className="max-w-[60ch] text-[17px] text-ink-2">
-            Holders of the {army.name} token who trade on Strike. Membership is read from the chain, never self-declared.
-          </p>
-        </div>
+      <p className="kicker">{army.garrison ? "Garrison" : `Army · ${rank} of ${ranked.length} by volume this week`}</p>
+      <div className="mt-2 flex items-center gap-4">
+        <Swatch army={army} className="h-16 w-6 md:h-24 md:w-8" />
+        <h1 className="display text-[clamp(64px,10vw,140px)]">{army.ticker}</h1>
       </div>
 
-      <section className="mt-8 grid grid-cols-2 gap-px border-2 border-ink bg-ink md:grid-cols-5">
-        {[
-          ["Holders on Strike", fmtInt(s0.holders), "hold the token, any army"],
-          ["Fight for " + army.ticker, fmtInt(s0.members), `${fmtInt(s0.traded)} have traded`],
-          ["Volume", fmtUsd(s0.volume), "all time"],
-          ["Net PnL", fmtSignedUsd(s0.pnl), `${fmtInt(s0.inProfit)} of ${fmtInt(s0.traded)} in profit`],
-          ["Markets held", `${held.length}`, `${contested.length} more as runner-up`],
-        ].map(([k, v, sub]) => (
-          <div key={k} className="bg-[var(--paper)] p-4">
-            <p className="label">{k}</p>
-            <p className="num mt-1 text-[28px] font-semibold" style={k === "Net PnL" ? { color: s0.pnl >= 0 ? "var(--gain)" : "var(--loss)" } : undefined}>
-              {v}
-            </p>
-            <p className="text-[12px] text-ink-3">{sub}</p>
+      <dl className="mt-6 flex flex-wrap gap-x-8 gap-y-3 border-y border-[var(--rule-strong)] py-3">
+        {facts.map(([v, k]) => (
+          <div key={k} className="flex items-baseline gap-2">
+            <dt className="num text-[20px] font-semibold">{v}</dt>
+            <dd className="text-[14px] text-ink-2">{k}</dd>
           </div>
         ))}
-      </section>
+      </dl>
 
-      <section className="mt-10 grid gap-10 lg:grid-cols-[1fr_360px]">
+      <section className="mt-10 grid gap-10 xl:grid-cols-[1fr_380px]">
         <div>
-          <div className="rule-b flex items-baseline justify-between pb-2">
-            <h2 className="display text-[26px]">Where {army.ticker} holds ground</h2>
-            <span className="label">Season 0 · last {season0.windowDays} days</span>
+          <div className="rule-b flex flex-wrap items-baseline justify-between gap-2 pb-2">
+            <h2 className="display text-[28px]">Season 0 · Strike mainnet</h2>
+            <span className="label">last {season0.windowDays} days, read-only</span>
           </div>
+          {held.length === 0 && (
+            <p className="mt-4 border-l-4 pl-4 text-[17px]" style={{ borderColor: army.ink }}>
+              No ground held. {plural(foughtIn.length, "market")} where {army.ticker} traders fought this week
+              {contested.length ? `, runner-up in ${contested.map((t) => t.symbol.replace("-USD", "")).join(", ")}` : ""}.
+            </p>
+          )}
+          {held.length > 0 && (
+            <p className="mt-4 border-l-4 pl-4 text-[17px]" style={{ borderColor: army.ink }}>
+              Holds {held.map((t) => t.symbol.replace("-USD", "")).join(", ")}
+              {contested.length ? `. Runner-up in ${contested.map((t) => t.symbol.replace("-USD", "")).join(", ")}` : ""}.
+            </p>
+          )}
           <div className="mt-4">
             <WarMap tiles={season0.tiles} highlight={slug} />
           </div>
         </div>
+
         <aside>
-          <div className="rule-b pb-2">
-            <h2 className="display text-[26px]">Season 1 · live</h2>
-            <p className="label">Strike {live.network}</p>
+          <div className="rule-b flex items-baseline justify-between pb-2">
+            <h2 className="display text-[28px]">Season 1 · live</h2>
+            <span className="label">Strike {live.network}</span>
           </div>
-          <dl className="num mt-2 grid grid-cols-[1fr_auto] gap-y-2 text-[15px]">
-            <dt className="text-ink-2">Enlisted</dt>
-            <dd>{liveMembers.length}</dd>
+          <dl className="mt-2 grid grid-cols-[1fr_auto] gap-y-2 text-[15px]">
+            <dt className="text-ink-2">Enlisted through Raid</dt>
+            <dd className="num">{liveMembers.length}</dd>
             <dt className="text-ink-2">Confirmed recruits</dt>
-            <dd>{board?.confirmed ?? 0}</dd>
-            <dt className="text-ink-2">Pending recruits</dt>
-            <dd>{board?.pending ?? 0}</dd>
-            <dt className="text-ink-2">Treasury share (builder fees)</dt>
-            <dd>${(fees?.builderFee ?? 0).toFixed(4)}</dd>
+            <dd className="num">{board?.confirmed ?? 0}</dd>
+            <dt className="text-ink-2">Recruits waiting on day two</dt>
+            <dd className="num">{board?.pending ?? 0}</dd>
             <dt className="text-ink-2">Markets held</dt>
-            <dd>{live.tiles.filter((t) => t.owner === slug).length} of {live.tiles.length}</dd>
+            <dd className="num">{liveHeld.length ? liveHeld.join(", ") : "none"}</dd>
+            <dt className="text-ink-2">Builder fees from this army</dt>
+            <dd className="num">${(fees?.builderFee ?? 0).toFixed(2)}</dd>
           </dl>
+          <p className="mt-3 text-[13px] text-ink-2">
+            Builder fees are paid to Raid&apos;s builder account by Strike on every fill. At the end of the season each army&apos;s share goes to the
+            treasury wallet its community names, and every payout will be listed on the Proof of Fees page.
+          </p>
           <div className="mt-6 flex flex-wrap gap-2">
             <Link href="/join" className="btn">
               Enlist in {army.ticker}
             </Link>
-            <Link href="/proof" className="btn ghost">
-              Audit the fees
-            </Link>
+            <ShareButton army={army.slug} text={`${army.ticker} on Raid: ${plural(held.length, "market")} held on Strike this week, ${plural(s0.traders7d, "trader")} in the field. Come take ground.`} />
           </div>
-          <p className="mt-6 text-[12px] text-ink-3">
-            Net PnL is shown as it is, including losses. It never affects the score: armies are ranked on new traders and fees paid to outsiders.
+          <p className="mt-6 text-[13px] text-ink-3">
+            Net PnL is shown as it is, losses included. It never affects the score: armies rank on traders who pay fees to outsiders and on new traders who stay.
           </p>
         </aside>
       </section>

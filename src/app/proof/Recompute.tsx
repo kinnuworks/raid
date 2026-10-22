@@ -105,7 +105,7 @@ export function Recompute({ server, accounts, seasonStart }: { server: Rows; acc
                 <span>{ARMY_BY_SLUG[parseRaidTag(f.client_order_id)!.army]?.ticker}</span>
                 <span>{f.symbol}</span>
                 <span className="truncate text-[#a59d88]">
-                  {f.price} × {f.size} · trade {f.trade_id}
+                  {Number(f.price)} × {Number(f.size)} · trade {f.trade_id}
                 </span>
                 <span className="text-right">{fmtExact(fee)}</span>
               </li>

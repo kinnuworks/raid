@@ -21,6 +21,10 @@ export function fmtInt(n: number): string {
   return Math.round(n).toLocaleString("en-US");
 }
 
+export function plural(n: number, one: string, many = one + "s") {
+  return `${n} ${n === 1 ? one : many}`;
+}
+
 export function fmtExact(n: number, dp = 8): string {
   return n.toFixed(dp);
 }

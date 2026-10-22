@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ARMY_BY_SLUG } from "@/lib/armies";
+import { Swatch } from "./Swatch";
 import { fmtInt, fmtUsd } from "@/lib/format";
 
 export interface TowerRow {
@@ -27,7 +28,7 @@ export function Tower({ rows, unit, title, note }: { rows: TowerRow[]; unit: "us
             <li key={r.slug} className="rule-b">
               <Link href={`/army/${r.slug}`} className="grid grid-cols-[34px_8px_1fr_auto] items-center gap-3 py-[7px] hover:bg-[var(--paper-2)]">
                 <span className="num text-right text-[15px] font-semibold">{i + 1}</span>
-                <span className="h-7 w-2" style={{ background: a?.ink }} aria-hidden />
+                {a ? <Swatch army={a} className="h-7 w-2" /> : <span />}
                 <span className="min-w-0">
                   <span className="display block text-[21px]">{a?.ticker ?? r.slug}</span>
                   {r.secondary && <span className="block truncate text-[12px] text-ink-2">{r.secondary}</span>}
@@ -35,7 +36,7 @@ export function Tower({ rows, unit, title, note }: { rows: TowerRow[]; unit: "us
                 <span className="text-right">
                   <span className="num block text-[15px] font-semibold">{fmt(r.primary)}</span>
                   <span className="num block text-[11px] text-ink-3">
-                    {i === 0 ? r.primaryLabel : `−${fmt(leader - r.primary)}`}
+                    {i === 0 ? r.primaryLabel : `${fmt(leader - r.primary)} behind`}
                   </span>
                 </span>
               </Link>

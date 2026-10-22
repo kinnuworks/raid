@@ -86,9 +86,24 @@ export function Enlist({ refCode, recruiterArmy }: { refCode?: string; recruiter
       <ol className="space-y-0">
         <StepRow n={1} title="Connect a wallet" active={step === "pick" || step === "reading"} done={!!conn}>
           {wallets.length === 0 ? (
-            <p className="text-ink-2">
-              No Cardano wallet found in this browser. Install Lace, Eternl or Vespr, switch it to {LIVE_NETWORK === "mainnet" ? "Mainnet" : "Preprod"}, then reload.
-            </p>
+            <div className="border-l-4 border-[var(--alert)] pl-4">
+              <p className="font-semibold">No Cardano wallet in this browser.</p>
+              <p className="mt-1 text-ink-2">Install one, switch it to {LIVE_NETWORK === "mainnet" ? "Mainnet" : "Preprod"}, then reload this page.</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {[
+                  ["Lace", "https://www.lace.io"],
+                  ["Eternl", "https://eternl.io"],
+                  ["Vespr", "https://vespr.xyz"],
+                ].map(([n, href]) => (
+                  <a key={n} href={href} target="_blank" rel="noopener noreferrer" className="btn ghost">
+                    Get {n}
+                  </a>
+                ))}
+              </div>
+              <p className="mt-3 text-[13px] text-ink-2">
+                Just looking? The <Link href="/trade" className="link">field terminal</Link> shows a real recruit&apos;s account read-only.
+              </p>
+            </div>
           ) : (
             <div className="flex flex-wrap gap-2">
               {wallets.map((w) => (

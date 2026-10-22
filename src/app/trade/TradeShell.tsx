@@ -10,7 +10,7 @@ export function TradeShell() {
   useEffect(() => {
     (async () => {
       const s = await loadSession();
-      if (!s) return setInfo({});
+      if (!s) return setInfo({ army: "snek", isRecruit: true }); // read-only preview of a SNEK recruit
       const res = await fetch("/api/members");
       const { members } = (await res.json()) as { members: { account_id: string; army: string; is_recruit: boolean }[] };
       const me = members.find((m) => m.account_id === s.accountId);

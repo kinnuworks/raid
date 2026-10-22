@@ -1,7 +1,7 @@
 {
   "season": 0,
   "network": "mainnet",
-  "generatedAt": "2026-10-22T19:15:23.244Z",
+  "generatedAt": "2026-10-22T19:45:42.314Z",
   "windowDays": 7,
   "sources": {
     "leaderboard": "https://api.strikefinance.org/stat/v1/stats/leaderboard?limit=500&offset=0&time_range=all_time",
@@ -28,7 +28,9 @@
       "pnl": 5074.245740478008,
       "inProfit": 7,
       "equity": 3967.0706221925375,
-      "fees7d": 7.07256405
+      "fees7d": 7.07256405,
+      "volume7d": 14513.15503,
+      "traders7d": 5
     },
     {
       "slug": "hosky",
@@ -39,7 +41,9 @@
       "pnl": -20329.76730805898,
       "inProfit": 11,
       "equity": 13866.37892854215,
-      "fees7d": 416.0017327900003
+      "fees7d": 416.0017327900003,
+      "volume7d": 973395.6165704998,
+      "traders7d": 11
     },
     {
       "slug": "night",
@@ -50,18 +54,9 @@
       "pnl": -16238.584089286367,
       "inProfit": 12,
       "equity": 13234.945468676093,
-      "fees7d": 91.76664305
-    },
-    {
-      "slug": "strike",
-      "members": 222,
-      "holders": 943,
-      "traded": 64,
-      "volume": 35980644.36864263,
-      "pnl": -171572.16305992144,
-      "inProfit": 21,
-      "equity": 93200.47270897,
-      "fees7d": 812.2032364500001
+      "fees7d": 91.76664305,
+      "volume7d": 205307.21969,
+      "traders7d": 7
     },
     {
       "slug": "min",
@@ -72,7 +67,9 @@
       "pnl": -32234.537735303427,
       "inProfit": 10,
       "equity": 12574.99176219582,
-      "fees7d": 108.99917425000001
+      "fees7d": 108.99917425000001,
+      "volume7d": 232565.94477760006,
+      "traders7d": 10
     },
     {
       "slug": "iag",
@@ -83,29 +80,9 @@
       "pnl": -33672.0183745999,
       "inProfit": 5,
       "equity": 70189.02692237045,
-      "fees7d": 115.31053953000007
-    },
-    {
-      "slug": "wmtx",
-      "members": 64,
-      "holders": 317,
-      "traded": 22,
-      "volume": 10460334.242262244,
-      "pnl": -8555.746288263099,
-      "inProfit": 7,
-      "equity": 2905.8049129748624,
-      "fees7d": 110.43258857000004
-    },
-    {
-      "slug": "sundae",
-      "members": 69,
-      "holders": 293,
-      "traded": 30,
-      "volume": 6195734.240272699,
-      "pnl": -17200.297063619153,
-      "inProfit": 7,
-      "equity": 15812.710977579409,
-      "fees7d": 33.53758432999995
+      "fees7d": 115.31053953000007,
+      "volume7d": 305859.95891159994,
+      "traders7d": 10
     },
     {
       "slug": "indy",
@@ -116,62 +93,9 @@
       "pnl": 940.444174439075,
       "inProfit": 10,
       "equity": 8859.71857146811,
-      "fees7d": 52.19497974000007
-    },
-    {
-      "slug": "cock",
-      "members": 121,
-      "holders": 204,
-      "traded": 63,
-      "volume": 9459997.712140577,
-      "pnl": -16106.074124372222,
-      "inProfit": 17,
-      "equity": 27272.50172914787,
-      "fees7d": 96.25448113000039
-    },
-    {
-      "slug": "fren",
-      "members": 193,
-      "holders": 193,
-      "traded": 84,
-      "volume": 9576224.358315188,
-      "pnl": 26721.624324438206,
-      "inProfit": 22,
-      "equity": 83763.36102609156,
-      "fees7d": 41.48501596999991
-    },
-    {
-      "slug": "newm",
-      "members": 117,
-      "holders": 197,
-      "traded": 32,
-      "volume": 1804083.5881044,
-      "pnl": -6259.56793967064,
-      "inProfit": 8,
-      "equity": 13026.80852461439,
-      "fees7d": 42.65817591999999
-    },
-    {
-      "slug": "book",
-      "members": 69,
-      "holders": 214,
-      "traded": 22,
-      "volume": 4075961.1978455638,
-      "pnl": -6111.088351615225,
-      "inProfit": 6,
-      "equity": 7333.620229946094,
-      "fees7d": 23.51992864
-    },
-    {
-      "slug": "drip",
-      "members": 46,
-      "holders": 303,
-      "traded": 19,
-      "volume": 1788120.16343937,
-      "pnl": -7246.63794505111,
-      "inProfit": 4,
-      "equity": 2173.1024484820737,
-      "fees7d": 55.321202830000026
+      "fees7d": 52.19497974000007,
+      "volume7d": 116323.00576319991,
+      "traders7d": 5
     },
     {
       "slug": "flow",
@@ -182,13 +106,1773 @@
       "pnl": -18585.711918848196,
       "inProfit": 6,
       "equity": 9218.053349465921,
-      "fees7d": 129.73509412000004
+      "fees7d": 129.73509412000004,
+      "volume7d": 346462.8061520001,
+      "traders7d": 6
+    },
+    {
+      "slug": "book",
+      "members": 69,
+      "holders": 214,
+      "traded": 22,
+      "volume": 4075961.1978455638,
+      "pnl": -6111.088351615225,
+      "inProfit": 6,
+      "equity": 7333.620229946094,
+      "fees7d": 23.51992864,
+      "volume7d": 62529.73379849998,
+      "traders7d": 6
+    },
+    {
+      "slug": "wmtx",
+      "members": 64,
+      "holders": 317,
+      "traded": 22,
+      "volume": 10460334.242262244,
+      "pnl": -8555.746288263099,
+      "inProfit": 7,
+      "equity": 2905.8049129748624,
+      "fees7d": 110.43258857000004,
+      "volume7d": 324411.8462565,
+      "traders7d": 3
+    },
+    {
+      "slug": "sundae",
+      "members": 69,
+      "holders": 293,
+      "traded": 30,
+      "volume": 6195734.240272699,
+      "pnl": -17200.297063619153,
+      "inProfit": 7,
+      "equity": 15812.710977579409,
+      "fees7d": 33.53758432999995,
+      "volume7d": 157458.91508530022,
+      "traders7d": 4
+    },
+    {
+      "slug": "fren",
+      "members": 193,
+      "holders": 193,
+      "traded": 84,
+      "volume": 9576224.358315188,
+      "pnl": 26721.624324438206,
+      "inProfit": 22,
+      "equity": 83763.36102609156,
+      "fees7d": 41.48501596999991,
+      "volume7d": 172441.14983799995,
+      "traders7d": 23
+    },
+    {
+      "slug": "cock",
+      "members": 121,
+      "holders": 204,
+      "traded": 63,
+      "volume": 9459997.712140577,
+      "pnl": -16106.074124372222,
+      "inProfit": 17,
+      "equity": 27272.50172914787,
+      "fees7d": 96.25448113000039,
+      "volume7d": 226282.10001890032,
+      "traders7d": 18
+    },
+    {
+      "slug": "newm",
+      "members": 117,
+      "holders": 197,
+      "traded": 32,
+      "volume": 1804083.5881044,
+      "pnl": -6259.56793967064,
+      "inProfit": 8,
+      "equity": 13026.80852461439,
+      "fees7d": 42.65817591999999,
+      "volume7d": 86784.10778640003,
+      "traders7d": 9
+    },
+    {
+      "slug": "drip",
+      "members": 46,
+      "holders": 303,
+      "traded": 19,
+      "volume": 1788120.16343937,
+      "pnl": -7246.63794505111,
+      "inProfit": 4,
+      "equity": 2173.1024484820737,
+      "fees7d": 55.321202830000026,
+      "volume7d": 114037.09671190004,
+      "traders7d": 3
+    },
+    {
+      "slug": "strike",
+      "members": 222,
+      "holders": 943,
+      "traded": 64,
+      "volume": 35980644.36864263,
+      "pnl": -171572.16305992144,
+      "inProfit": 21,
+      "equity": 93200.47270897,
+      "fees7d": 812.2032364500001,
+      "volume7d": 3750793.0805246998,
+      "traders7d": 20
+    }
+  ],
+  "days": [
+    {
+      "date": "2026-10-16",
+      "tiles": [
+        {
+          "symbol": "AAOI-USD",
+          "owner": "strike",
+          "runnerUp": null,
+          "margin": 1,
+          "strength": 1
+        },
+        {
+          "symbol": "ADA-USD",
+          "owner": "hosky",
+          "runnerUp": "flow",
+          "margin": 0.37,
+          "strength": 4
+        },
+        {
+          "symbol": "BNB-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        },
+        {
+          "symbol": "BTC-USD",
+          "owner": "strike",
+          "runnerUp": "indy",
+          "margin": 0.07,
+          "strength": 2
+        },
+        {
+          "symbol": "COIN-USD",
+          "owner": "strike",
+          "runnerUp": "hosky",
+          "margin": 0.18,
+          "strength": 1
+        },
+        {
+          "symbol": "CRCL-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        },
+        {
+          "symbol": "CXMT-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        },
+        {
+          "symbol": "DOGE-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        },
+        {
+          "symbol": "DRAM-USD",
+          "owner": "book",
+          "runnerUp": "min",
+          "margin": 0.03,
+          "strength": 1
+        },
+        {
+          "symbol": "ETH-USD",
+          "owner": "drip",
+          "runnerUp": "cock",
+          "margin": 0.01,
+          "strength": 1
+        },
+        {
+          "symbol": "GOOGL-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        },
+        {
+          "symbol": "HYPE-USD",
+          "owner": "hosky",
+          "runnerUp": "fren",
+          "margin": 0.1,
+          "strength": 1
+        },
+        {
+          "symbol": "LIT-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        },
+        {
+          "symbol": "MINIMAX-USD",
+          "owner": "drip",
+          "runnerUp": "strike",
+          "margin": 0.14,
+          "strength": 1
+        },
+        {
+          "symbol": "MU-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        },
+        {
+          "symbol": "NAS100-USD",
+          "owner": "min",
+          "runnerUp": "book",
+          "margin": 0.8,
+          "strength": 1
+        },
+        {
+          "symbol": "NEAR-USD",
+          "owner": "hosky",
+          "runnerUp": "strike",
+          "margin": 0.69,
+          "strength": 1
+        },
+        {
+          "symbol": "NIGHT-USD",
+          "owner": "wmtx",
+          "runnerUp": "iag",
+          "margin": 0.4,
+          "strength": 1
+        },
+        {
+          "symbol": "NVDA-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        },
+        {
+          "symbol": "PUMP-USD",
+          "owner": "cock",
+          "runnerUp": "strike",
+          "margin": 0.5,
+          "strength": 1
+        },
+        {
+          "symbol": "SKHYNIX-USD",
+          "owner": "strike",
+          "runnerUp": null,
+          "margin": 1,
+          "strength": 1
+        },
+        {
+          "symbol": "SNDK-USD",
+          "owner": "strike",
+          "runnerUp": "drip",
+          "margin": 0.01,
+          "strength": 1
+        },
+        {
+          "symbol": "SOL-USD",
+          "owner": "strike",
+          "runnerUp": "drip",
+          "margin": 0.14,
+          "strength": 2
+        },
+        {
+          "symbol": "SP500-USD",
+          "owner": "newm",
+          "runnerUp": "cock",
+          "margin": 0.94,
+          "strength": 1
+        },
+        {
+          "symbol": "SPCX-USD",
+          "owner": "fren",
+          "runnerUp": "cock",
+          "margin": 0.83,
+          "strength": 2
+        },
+        {
+          "symbol": "TSLA-USD",
+          "owner": "strike",
+          "runnerUp": "cock",
+          "margin": 0.65,
+          "strength": 2
+        },
+        {
+          "symbol": "UNITREE-USD",
+          "owner": "strike",
+          "runnerUp": null,
+          "margin": 1,
+          "strength": 1
+        },
+        {
+          "symbol": "WTI-USD",
+          "owner": "fren",
+          "runnerUp": "strike",
+          "margin": 0.28,
+          "strength": 2
+        },
+        {
+          "symbol": "XAG-USD",
+          "owner": "iag",
+          "runnerUp": null,
+          "margin": 1,
+          "strength": 1
+        },
+        {
+          "symbol": "XAU-USD",
+          "owner": "min",
+          "runnerUp": null,
+          "margin": 1,
+          "strength": 1
+        },
+        {
+          "symbol": "XRP-USD",
+          "owner": "drip",
+          "runnerUp": null,
+          "margin": 1,
+          "strength": 1
+        },
+        {
+          "symbol": "ZEC-USD",
+          "owner": "hosky",
+          "runnerUp": "flow",
+          "margin": 0.59,
+          "strength": 3
+        },
+        {
+          "symbol": "ZHIPU-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-10-17",
+      "tiles": [
+        {
+          "symbol": "AAOI-USD",
+          "owner": "strike",
+          "runnerUp": null,
+          "margin": 1,
+          "strength": 1
+        },
+        {
+          "symbol": "ADA-USD",
+          "owner": "hosky",
+          "runnerUp": "flow",
+          "margin": 0.39,
+          "strength": 4
+        },
+        {
+          "symbol": "BNB-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        },
+        {
+          "symbol": "BTC-USD",
+          "owner": "strike",
+          "runnerUp": "indy",
+          "margin": 0.1,
+          "strength": 3
+        },
+        {
+          "symbol": "COIN-USD",
+          "owner": "strike",
+          "runnerUp": "hosky",
+          "margin": 0.18,
+          "strength": 1
+        },
+        {
+          "symbol": "CRCL-USD",
+          "owner": "strike",
+          "runnerUp": null,
+          "margin": 1,
+          "strength": 1
+        },
+        {
+          "symbol": "CXMT-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        },
+        {
+          "symbol": "DOGE-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        },
+        {
+          "symbol": "DRAM-USD",
+          "owner": "book",
+          "runnerUp": "min",
+          "margin": 0.03,
+          "strength": 1
+        },
+        {
+          "symbol": "ETH-USD",
+          "owner": "flow",
+          "runnerUp": "cock",
+          "margin": 0.63,
+          "strength": 1
+        },
+        {
+          "symbol": "GOOGL-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        },
+        {
+          "symbol": "HYPE-USD",
+          "owner": "fren",
+          "runnerUp": "hosky",
+          "margin": 0.21,
+          "strength": 2
+        },
+        {
+          "symbol": "LIT-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        },
+        {
+          "symbol": "MINIMAX-USD",
+          "owner": "strike",
+          "runnerUp": "drip",
+          "margin": 0.31,
+          "strength": 1
+        },
+        {
+          "symbol": "MU-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        },
+        {
+          "symbol": "NAS100-USD",
+          "owner": "min",
+          "runnerUp": "iag",
+          "margin": 0.4,
+          "strength": 1
+        },
+        {
+          "symbol": "NEAR-USD",
+          "owner": "hosky",
+          "runnerUp": "strike",
+          "margin": 0.69,
+          "strength": 1
+        },
+        {
+          "symbol": "NIGHT-USD",
+          "owner": "wmtx",
+          "runnerUp": "iag",
+          "margin": 0.57,
+          "strength": 1
+        },
+        {
+          "symbol": "NVDA-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        },
+        {
+          "symbol": "PUMP-USD",
+          "owner": "strike",
+          "runnerUp": "cock",
+          "margin": 0.44,
+          "strength": 3
+        },
+        {
+          "symbol": "SKHYNIX-USD",
+          "owner": "book",
+          "runnerUp": "strike",
+          "margin": 0.16,
+          "strength": 1
+        },
+        {
+          "symbol": "SNDK-USD",
+          "owner": "strike",
+          "runnerUp": "drip",
+          "margin": 0.02,
+          "strength": 1
+        },
+        {
+          "symbol": "SOL-USD",
+          "owner": "strike",
+          "runnerUp": "newm",
+          "margin": 0.26,
+          "strength": 2
+        },
+        {
+          "symbol": "SP500-USD",
+          "owner": "newm",
+          "runnerUp": "iag",
+          "margin": 0.8,
+          "strength": 1
+        },
+        {
+          "symbol": "SPCX-USD",
+          "owner": "fren",
+          "runnerUp": "cock",
+          "margin": 0.83,
+          "strength": 2
+        },
+        {
+          "symbol": "TSLA-USD",
+          "owner": "strike",
+          "runnerUp": "cock",
+          "margin": 0.65,
+          "strength": 2
+        },
+        {
+          "symbol": "UNITREE-USD",
+          "owner": "strike",
+          "runnerUp": null,
+          "margin": 1,
+          "strength": 1
+        },
+        {
+          "symbol": "WTI-USD",
+          "owner": "strike",
+          "runnerUp": "fren",
+          "margin": 0.19,
+          "strength": 1
+        },
+        {
+          "symbol": "XAG-USD",
+          "owner": "iag",
+          "runnerUp": "book",
+          "margin": 0.98,
+          "strength": 2
+        },
+        {
+          "symbol": "XAU-USD",
+          "owner": "min",
+          "runnerUp": null,
+          "margin": 1,
+          "strength": 1
+        },
+        {
+          "symbol": "XRP-USD",
+          "owner": "drip",
+          "runnerUp": null,
+          "margin": 1,
+          "strength": 1
+        },
+        {
+          "symbol": "ZEC-USD",
+          "owner": "hosky",
+          "runnerUp": "strike",
+          "margin": 0.48,
+          "strength": 3
+        },
+        {
+          "symbol": "ZHIPU-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-10-18",
+      "tiles": [
+        {
+          "symbol": "AAOI-USD",
+          "owner": "strike",
+          "runnerUp": null,
+          "margin": 1,
+          "strength": 1
+        },
+        {
+          "symbol": "ADA-USD",
+          "owner": "hosky",
+          "runnerUp": "night",
+          "margin": 0.33,
+          "strength": 5
+        },
+        {
+          "symbol": "BNB-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        },
+        {
+          "symbol": "BTC-USD",
+          "owner": "strike",
+          "runnerUp": "indy",
+          "margin": 0.7,
+          "strength": 7
+        },
+        {
+          "symbol": "COIN-USD",
+          "owner": "strike",
+          "runnerUp": "hosky",
+          "margin": 0.18,
+          "strength": 1
+        },
+        {
+          "symbol": "CRCL-USD",
+          "owner": "strike",
+          "runnerUp": null,
+          "margin": 1,
+          "strength": 1
+        },
+        {
+          "symbol": "CXMT-USD",
+          "owner": "min",
+          "runnerUp": null,
+          "margin": 1,
+          "strength": 1
+        },
+        {
+          "symbol": "DOGE-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        },
+        {
+          "symbol": "DRAM-USD",
+          "owner": "strike",
+          "runnerUp": "book",
+          "margin": 0.04,
+          "strength": 2
+        },
+        {
+          "symbol": "ETH-USD",
+          "owner": "flow",
+          "runnerUp": "cock",
+          "margin": 0.1,
+          "strength": 1
+        },
+        {
+          "symbol": "GOOGL-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        },
+        {
+          "symbol": "HYPE-USD",
+          "owner": "strike",
+          "runnerUp": "flow",
+          "margin": 0.18,
+          "strength": 5
+        },
+        {
+          "symbol": "LIT-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        },
+        {
+          "symbol": "MINIMAX-USD",
+          "owner": "strike",
+          "runnerUp": "drip",
+          "margin": 0.46,
+          "strength": 1
+        },
+        {
+          "symbol": "MU-USD",
+          "owner": "iag",
+          "runnerUp": "book",
+          "margin": 0.58,
+          "strength": 1
+        },
+        {
+          "symbol": "NAS100-USD",
+          "owner": "min",
+          "runnerUp": "iag",
+          "margin": 0.1,
+          "strength": 1
+        },
+        {
+          "symbol": "NEAR-USD",
+          "owner": "hosky",
+          "runnerUp": "strike",
+          "margin": 0.59,
+          "strength": 1
+        },
+        {
+          "symbol": "NIGHT-USD",
+          "owner": "wmtx",
+          "runnerUp": "book",
+          "margin": 0.63,
+          "strength": 1
+        },
+        {
+          "symbol": "NVDA-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        },
+        {
+          "symbol": "PUMP-USD",
+          "owner": "min",
+          "runnerUp": "strike",
+          "margin": 0.41,
+          "strength": 1
+        },
+        {
+          "symbol": "SKHYNIX-USD",
+          "owner": "strike",
+          "runnerUp": "book",
+          "margin": 0.64,
+          "strength": 2
+        },
+        {
+          "symbol": "SNDK-USD",
+          "owner": "strike",
+          "runnerUp": "drip",
+          "margin": 0.05,
+          "strength": 1
+        },
+        {
+          "symbol": "SOL-USD",
+          "owner": "strike",
+          "runnerUp": "min",
+          "margin": 0.1,
+          "strength": 2
+        },
+        {
+          "symbol": "SP500-USD",
+          "owner": "newm",
+          "runnerUp": "iag",
+          "margin": 0.75,
+          "strength": 1
+        },
+        {
+          "symbol": "SPCX-USD",
+          "owner": "fren",
+          "runnerUp": "cock",
+          "margin": 0.83,
+          "strength": 2
+        },
+        {
+          "symbol": "TSLA-USD",
+          "owner": "strike",
+          "runnerUp": "snek",
+          "margin": 0.39,
+          "strength": 2
+        },
+        {
+          "symbol": "UNITREE-USD",
+          "owner": "strike",
+          "runnerUp": null,
+          "margin": 1,
+          "strength": 1
+        },
+        {
+          "symbol": "WTI-USD",
+          "owner": "strike",
+          "runnerUp": "fren",
+          "margin": 0.36,
+          "strength": 1
+        },
+        {
+          "symbol": "XAG-USD",
+          "owner": "iag",
+          "runnerUp": "book",
+          "margin": 0.95,
+          "strength": 2
+        },
+        {
+          "symbol": "XAU-USD",
+          "owner": "min",
+          "runnerUp": null,
+          "margin": 1,
+          "strength": 1
+        },
+        {
+          "symbol": "XRP-USD",
+          "owner": "min",
+          "runnerUp": "drip",
+          "margin": 0.13,
+          "strength": 1
+        },
+        {
+          "symbol": "ZEC-USD",
+          "owner": "hosky",
+          "runnerUp": "strike",
+          "margin": 0.39,
+          "strength": 3
+        },
+        {
+          "symbol": "ZHIPU-USD",
+          "owner": "min",
+          "runnerUp": "strike",
+          "margin": 0.75,
+          "strength": 1
+        }
+      ]
+    },
+    {
+      "date": "2026-10-19",
+      "tiles": [
+        {
+          "symbol": "AAOI-USD",
+          "owner": "strike",
+          "runnerUp": null,
+          "margin": 1,
+          "strength": 1
+        },
+        {
+          "symbol": "ADA-USD",
+          "owner": "hosky",
+          "runnerUp": "night",
+          "margin": 0.42,
+          "strength": 6
+        },
+        {
+          "symbol": "BNB-USD",
+          "owner": "strike",
+          "runnerUp": null,
+          "margin": 1,
+          "strength": 1
+        },
+        {
+          "symbol": "BTC-USD",
+          "owner": "strike",
+          "runnerUp": "cock",
+          "margin": 0.68,
+          "strength": 8
+        },
+        {
+          "symbol": "COIN-USD",
+          "owner": "strike",
+          "runnerUp": "hosky",
+          "margin": 0.18,
+          "strength": 1
+        },
+        {
+          "symbol": "CRCL-USD",
+          "owner": "strike",
+          "runnerUp": "min",
+          "margin": 0.02,
+          "strength": 1
+        },
+        {
+          "symbol": "CXMT-USD",
+          "owner": "min",
+          "runnerUp": null,
+          "margin": 1,
+          "strength": 1
+        },
+        {
+          "symbol": "DOGE-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        },
+        {
+          "symbol": "DRAM-USD",
+          "owner": "min",
+          "runnerUp": "strike",
+          "margin": 0.6,
+          "strength": 2
+        },
+        {
+          "symbol": "ETH-USD",
+          "owner": "strike",
+          "runnerUp": "min",
+          "margin": 0.19,
+          "strength": 6
+        },
+        {
+          "symbol": "GOOGL-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        },
+        {
+          "symbol": "HYPE-USD",
+          "owner": "flow",
+          "runnerUp": "strike",
+          "margin": 0.1,
+          "strength": 1
+        },
+        {
+          "symbol": "LIT-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        },
+        {
+          "symbol": "MINIMAX-USD",
+          "owner": "strike",
+          "runnerUp": "drip",
+          "margin": 0.55,
+          "strength": 1
+        },
+        {
+          "symbol": "MU-USD",
+          "owner": "iag",
+          "runnerUp": "book",
+          "margin": 0.58,
+          "strength": 1
+        },
+        {
+          "symbol": "NAS100-USD",
+          "owner": "iag",
+          "runnerUp": "newm",
+          "margin": 0.22,
+          "strength": 1
+        },
+        {
+          "symbol": "NEAR-USD",
+          "owner": "hosky",
+          "runnerUp": "strike",
+          "margin": 0.47,
+          "strength": 1
+        },
+        {
+          "symbol": "NIGHT-USD",
+          "owner": "wmtx",
+          "runnerUp": "cock",
+          "margin": 0.62,
+          "strength": 1
+        },
+        {
+          "symbol": "NVDA-USD",
+          "owner": "iag",
+          "runnerUp": "min",
+          "margin": 0.33,
+          "strength": 1
+        },
+        {
+          "symbol": "PUMP-USD",
+          "owner": "min",
+          "runnerUp": "strike",
+          "margin": 0.63,
+          "strength": 2
+        },
+        {
+          "symbol": "SKHYNIX-USD",
+          "owner": "strike",
+          "runnerUp": "book",
+          "margin": 0.76,
+          "strength": 3
+        },
+        {
+          "symbol": "SNDK-USD",
+          "owner": "strike",
+          "runnerUp": "drip",
+          "margin": 0.11,
+          "strength": 1
+        },
+        {
+          "symbol": "SOL-USD",
+          "owner": "strike",
+          "runnerUp": "min",
+          "margin": 0.83,
+          "strength": 4
+        },
+        {
+          "symbol": "SP500-USD",
+          "owner": "newm",
+          "runnerUp": "iag",
+          "margin": 0.67,
+          "strength": 1
+        },
+        {
+          "symbol": "SPCX-USD",
+          "owner": "fren",
+          "runnerUp": "cock",
+          "margin": 0.83,
+          "strength": 2
+        },
+        {
+          "symbol": "TSLA-USD",
+          "owner": "strike",
+          "runnerUp": "snek",
+          "margin": 0.35,
+          "strength": 4
+        },
+        {
+          "symbol": "UNITREE-USD",
+          "owner": "strike",
+          "runnerUp": null,
+          "margin": 1,
+          "strength": 1
+        },
+        {
+          "symbol": "WTI-USD",
+          "owner": "strike",
+          "runnerUp": "fren",
+          "margin": 0.54,
+          "strength": 2
+        },
+        {
+          "symbol": "XAG-USD",
+          "owner": "iag",
+          "runnerUp": "book",
+          "margin": 0.9,
+          "strength": 2
+        },
+        {
+          "symbol": "XAU-USD",
+          "owner": "min",
+          "runnerUp": null,
+          "margin": 1,
+          "strength": 1
+        },
+        {
+          "symbol": "XRP-USD",
+          "owner": "min",
+          "runnerUp": "strike",
+          "margin": 0.09,
+          "strength": 1
+        },
+        {
+          "symbol": "ZEC-USD",
+          "owner": "hosky",
+          "runnerUp": "strike",
+          "margin": 0.19,
+          "strength": 3
+        },
+        {
+          "symbol": "ZHIPU-USD",
+          "owner": "min",
+          "runnerUp": "strike",
+          "margin": 0.56,
+          "strength": 1
+        }
+      ]
+    },
+    {
+      "date": "2026-10-20",
+      "tiles": [
+        {
+          "symbol": "AAOI-USD",
+          "owner": "strike",
+          "runnerUp": "indy",
+          "margin": 0.93,
+          "strength": 2
+        },
+        {
+          "symbol": "ADA-USD",
+          "owner": "hosky",
+          "runnerUp": "night",
+          "margin": 0.4,
+          "strength": 7
+        },
+        {
+          "symbol": "BNB-USD",
+          "owner": "strike",
+          "runnerUp": "fren",
+          "margin": 0.57,
+          "strength": 1
+        },
+        {
+          "symbol": "BTC-USD",
+          "owner": "strike",
+          "runnerUp": "cock",
+          "margin": 0.7,
+          "strength": 10
+        },
+        {
+          "symbol": "COIN-USD",
+          "owner": "strike",
+          "runnerUp": "hosky",
+          "margin": 0.55,
+          "strength": 2
+        },
+        {
+          "symbol": "CRCL-USD",
+          "owner": "strike",
+          "runnerUp": "min",
+          "margin": 0.02,
+          "strength": 1
+        },
+        {
+          "symbol": "CXMT-USD",
+          "owner": "min",
+          "runnerUp": null,
+          "margin": 1,
+          "strength": 1
+        },
+        {
+          "symbol": "DOGE-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        },
+        {
+          "symbol": "DRAM-USD",
+          "owner": "min",
+          "runnerUp": "strike",
+          "margin": 0.35,
+          "strength": 2
+        },
+        {
+          "symbol": "ETH-USD",
+          "owner": "strike",
+          "runnerUp": "cock",
+          "margin": 0.27,
+          "strength": 7
+        },
+        {
+          "symbol": "GOOGL-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        },
+        {
+          "symbol": "HYPE-USD",
+          "owner": "strike",
+          "runnerUp": "min",
+          "margin": 0.03,
+          "strength": 6
+        },
+        {
+          "symbol": "LIT-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        },
+        {
+          "symbol": "MINIMAX-USD",
+          "owner": "strike",
+          "runnerUp": "drip",
+          "margin": 0.66,
+          "strength": 2
+        },
+        {
+          "symbol": "MU-USD",
+          "owner": "iag",
+          "runnerUp": "book",
+          "margin": 0.58,
+          "strength": 1
+        },
+        {
+          "symbol": "NAS100-USD",
+          "owner": "iag",
+          "runnerUp": "newm",
+          "margin": 0.22,
+          "strength": 1
+        },
+        {
+          "symbol": "NEAR-USD",
+          "owner": "hosky",
+          "runnerUp": "strike",
+          "margin": 0.33,
+          "strength": 2
+        },
+        {
+          "symbol": "NIGHT-USD",
+          "owner": "wmtx",
+          "runnerUp": "cock",
+          "margin": 0.64,
+          "strength": 1
+        },
+        {
+          "symbol": "NVDA-USD",
+          "owner": "iag",
+          "runnerUp": "min",
+          "margin": 0.23,
+          "strength": 1
+        },
+        {
+          "symbol": "PUMP-USD",
+          "owner": "min",
+          "runnerUp": "strike",
+          "margin": 0.5,
+          "strength": 3
+        },
+        {
+          "symbol": "SKHYNIX-USD",
+          "owner": "strike",
+          "runnerUp": "indy",
+          "margin": 0.67,
+          "strength": 3
+        },
+        {
+          "symbol": "SNDK-USD",
+          "owner": "strike",
+          "runnerUp": "drip",
+          "margin": 0.11,
+          "strength": 1
+        },
+        {
+          "symbol": "SOL-USD",
+          "owner": "strike",
+          "runnerUp": "hosky",
+          "margin": 0.57,
+          "strength": 4
+        },
+        {
+          "symbol": "SP500-USD",
+          "owner": "newm",
+          "runnerUp": "iag",
+          "margin": 0.67,
+          "strength": 1
+        },
+        {
+          "symbol": "SPCX-USD",
+          "owner": "fren",
+          "runnerUp": "strike",
+          "margin": 0.5,
+          "strength": 2
+        },
+        {
+          "symbol": "TSLA-USD",
+          "owner": "strike",
+          "runnerUp": "snek",
+          "margin": 0.49,
+          "strength": 5
+        },
+        {
+          "symbol": "UNITREE-USD",
+          "owner": "strike",
+          "runnerUp": "newm",
+          "margin": 0.65,
+          "strength": 2
+        },
+        {
+          "symbol": "WTI-USD",
+          "owner": "strike",
+          "runnerUp": "fren",
+          "margin": 0.62,
+          "strength": 2
+        },
+        {
+          "symbol": "XAG-USD",
+          "owner": "iag",
+          "runnerUp": "book",
+          "margin": 0.9,
+          "strength": 2
+        },
+        {
+          "symbol": "XAU-USD",
+          "owner": "min",
+          "runnerUp": null,
+          "margin": 1,
+          "strength": 1
+        },
+        {
+          "symbol": "XRP-USD",
+          "owner": "strike",
+          "runnerUp": "min",
+          "margin": 0.29,
+          "strength": 1
+        },
+        {
+          "symbol": "ZEC-USD",
+          "owner": "strike",
+          "runnerUp": "hosky",
+          "margin": 0.04,
+          "strength": 9
+        },
+        {
+          "symbol": "ZHIPU-USD",
+          "owner": "min",
+          "runnerUp": "strike",
+          "margin": 0.42,
+          "strength": 1
+        }
+      ]
+    },
+    {
+      "date": "2026-10-21",
+      "tiles": [
+        {
+          "symbol": "AAOI-USD",
+          "owner": "strike",
+          "runnerUp": "indy",
+          "margin": 0.93,
+          "strength": 2
+        },
+        {
+          "symbol": "ADA-USD",
+          "owner": "hosky",
+          "runnerUp": "night",
+          "margin": 0.39,
+          "strength": 7
+        },
+        {
+          "symbol": "BNB-USD",
+          "owner": "strike",
+          "runnerUp": "fren",
+          "margin": 0.5,
+          "strength": 1
+        },
+        {
+          "symbol": "BTC-USD",
+          "owner": "strike",
+          "runnerUp": "cock",
+          "margin": 0.81,
+          "strength": 10
+        },
+        {
+          "symbol": "COIN-USD",
+          "owner": "strike",
+          "runnerUp": "newm",
+          "margin": 0.59,
+          "strength": 3
+        },
+        {
+          "symbol": "CRCL-USD",
+          "owner": "strike",
+          "runnerUp": "min",
+          "margin": 0.21,
+          "strength": 1
+        },
+        {
+          "symbol": "CXMT-USD",
+          "owner": "min",
+          "runnerUp": "wmtx",
+          "margin": 0.83,
+          "strength": 1
+        },
+        {
+          "symbol": "DOGE-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        },
+        {
+          "symbol": "DRAM-USD",
+          "owner": "min",
+          "runnerUp": "strike",
+          "margin": 0.35,
+          "strength": 2
+        },
+        {
+          "symbol": "ETH-USD",
+          "owner": "strike",
+          "runnerUp": "cock",
+          "margin": 0.23,
+          "strength": 7
+        },
+        {
+          "symbol": "GOOGL-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        },
+        {
+          "symbol": "HYPE-USD",
+          "owner": "strike",
+          "runnerUp": "min",
+          "margin": 0.05,
+          "strength": 7
+        },
+        {
+          "symbol": "LIT-USD",
+          "owner": null,
+          "runnerUp": null,
+          "margin": 0,
+          "strength": 0
+        },
+        {
+          "symbol": "MINIMAX-USD",
+          "owner": "strike",
+          "runnerUp": "drip",
+          "margin": 0.69,
+          "strength": 2
+        },
+        {
+          "symbol": "MU-USD",
+          "owner": "iag",
+          "runnerUp": "book",
+          "margin": 0.58,
+          "strength": 1
+        },
+        {
+          "symbol": "NAS100-USD",
+          "owner": "iag",
+          "runnerUp": "newm",
+          "margin": 0.22,
+          "strength": 1
+        },
+        {
+          "symbol": "NEAR-USD",
+          "owner": "hosky",
+          "runnerUp": "strike",
+          "margin": 0.29,
+          "strength": 2
+        },
+        {
+          "symbol": "NIGHT-USD",
+          "owner": "wmtx",
+          "runnerUp": "iag",
+          "margin": 0.55,
+          "strength": 1
+        },
+        {
+          "symbol": "NVDA-USD",
+          "owner": "iag",
+          "runnerUp": "min",
+          "margin": 0.2,
+          "strength": 1
+        },
+        {
+          "symbol": "PUMP-USD",
+          "owner": "min",
+          "runnerUp": "strike",
+          "margin": 0.49,
+          "strength": 3
+        },
+        {
+          "symbol": "SKHYNIX-USD",
+          "owner": "strike",
+          "runnerUp": "indy",
+          "margin": 0.69,
+          "strength": 3
+        },
+        {
+          "symbol": "SNDK-USD",
+          "owner": "strike",
+          "runnerUp": "drip",
+          "margin": 0.11,
+          "strength": 1
+        },
+        {
+          "symbol": "SOL-USD",
+          "owner": "strike",
+          "runnerUp": "fren",
+          "margin": 0.53,
+          "strength": 4
+        },
+        {
+          "symbol": "SP500-USD",
+          "owner": "newm",
+          "runnerUp": "iag",
+          "margin": 0.59,
+          "strength": 1
+        },
+        {
+          "symbol": "SPCX-USD",
+          "owner": "fren",
+          "runnerUp": "wmtx",
+          "margin": 0.08,
+          "strength": 2
+        },
+        {
+          "symbol": "TSLA-USD",
+          "owner": "strike",
+          "runnerUp": "snek",
+          "margin": 0.49,
+          "strength": 5
+        },
+        {
+          "symbol": "UNITREE-USD",
+          "owner": "strike",
+          "runnerUp": "newm",
+          "margin": 0.65,
+          "strength": 2
+        },
+        {
+          "symbol": "WTI-USD",
+          "owner": "strike",
+          "runnerUp": "iag",
+          "margin": 0.34,
+          "strength": 2
+        },
+        {
+          "symbol": "XAG-USD",
+          "owner": "iag",
+          "runnerUp": "book",
+          "margin": 0.91,
+          "strength": 3
+        },
+        {
+          "symbol": "XAU-USD",
+          "owner": "min",
+          "runnerUp": null,
+          "margin": 1,
+          "strength": 1
+        },
+        {
+          "symbol": "XRP-USD",
+          "owner": "strike",
+          "runnerUp": "min",
+          "margin": 0.29,
+          "strength": 1
+        },
+        {
+          "symbol": "ZEC-USD",
+          "owner": "strike",
+          "runnerUp": "hosky",
+          "margin": 0.08,
+          "strength": 9
+        },
+        {
+          "symbol": "ZHIPU-USD",
+          "owner": "min",
+          "runnerUp": "strike",
+          "margin": 0.37,
+          "strength": 1
+        }
+      ]
+    },
+    {
+      "date": "2026-10-22",
+      "tiles": [
+        {
+          "symbol": "AAOI-USD",
+          "owner": "strike",
+          "runnerUp": "indy",
+          "margin": 0.93,
+          "strength": 2
+        },
+        {
+          "symbol": "ADA-USD",
+          "owner": "hosky",
+          "runnerUp": "night",
+          "margin": 0.41,
+          "strength": 7
+        },
+        {
+          "symbol": "BNB-USD",
+          "owner": "strike",
+          "runnerUp": "fren",
+          "margin": 0.63,
+          "strength": 2
+        },
+        {
+          "symbol": "BTC-USD",
+          "owner": "strike",
+          "runnerUp": "cock",
+          "margin": 0.78,
+          "strength": 12
+        },
+        {
+          "symbol": "COIN-USD",
+          "owner": "strike",
+          "runnerUp": "newm",
+          "margin": 0.78,
+          "strength": 4
+        },
+        {
+          "symbol": "CRCL-USD",
+          "owner": "strike",
+          "runnerUp": "min",
+          "margin": 0.48,
+          "strength": 2
+        },
+        {
+          "symbol": "CXMT-USD",
+          "owner": "min",
+          "runnerUp": "wmtx",
+          "margin": 0.83,
+          "strength": 1
+        },
+        {
+          "symbol": "DOGE-USD",
+          "owner": "strike",
+          "runnerUp": null,
+          "margin": 1,
+          "strength": 1
+        },
+        {
+          "symbol": "DRAM-USD",
+          "owner": "min",
+          "runnerUp": "strike",
+          "margin": 0.23,
+          "strength": 2
+        },
+        {
+          "symbol": "ETH-USD",
+          "owner": "strike",
+          "runnerUp": "cock",
+          "margin": 0.14,
+          "strength": 8
+        },
+        {
+          "symbol": "GOOGL-USD",
+          "owner": "strike",
+          "runnerUp": null,
+          "margin": 1,
+          "strength": 1
+        },
+        {
+          "symbol": "HYPE-USD",
+          "owner": "strike",
+          "runnerUp": "min",
+          "margin": 0.02,
+          "strength": 8
+        },
+        {
+          "symbol": "LIT-USD",
+          "owner": "strike",
+          "runnerUp": null,
+          "margin": 1,
+          "strength": 1
+        },
+        {
+          "symbol": "MINIMAX-USD",
+          "owner": "strike",
+          "runnerUp": "drip",
+          "margin": 0.71,
+          "strength": 2
+        },
+        {
+          "symbol": "MU-USD",
+          "owner": "iag",
+          "runnerUp": "indy",
+          "margin": 0.36,
+          "strength": 1
+        },
+        {
+          "symbol": "NAS100-USD",
+          "owner": "iag",
+          "runnerUp": "newm",
+          "margin": 0.22,
+          "strength": 1
+        },
+        {
+          "symbol": "NEAR-USD",
+          "owner": "hosky",
+          "runnerUp": "strike",
+          "margin": 0.14,
+          "strength": 2
+        },
+        {
+          "symbol": "NIGHT-USD",
+          "owner": "wmtx",
+          "runnerUp": "book",
+          "margin": 0.52,
+          "strength": 1
+        },
+        {
+          "symbol": "NVDA-USD",
+          "owner": "iag",
+          "runnerUp": "min",
+          "margin": 0.2,
+          "strength": 1
+        },
+        {
+          "symbol": "PUMP-USD",
+          "owner": "min",
+          "runnerUp": "strike",
+          "margin": 0.33,
+          "strength": 3
+        },
+        {
+          "symbol": "SKHYNIX-USD",
+          "owner": "strike",
+          "runnerUp": "indy",
+          "margin": 0.71,
+          "strength": 4
+        },
+        {
+          "symbol": "SNDK-USD",
+          "owner": "strike",
+          "runnerUp": "drip",
+          "margin": 0.15,
+          "strength": 1
+        },
+        {
+          "symbol": "SOL-USD",
+          "owner": "strike",
+          "runnerUp": "fren",
+          "margin": 0.48,
+          "strength": 5
+        },
+        {
+          "symbol": "SP500-USD",
+          "owner": "newm",
+          "runnerUp": "iag",
+          "margin": 0.69,
+          "strength": 1
+        },
+        {
+          "symbol": "SPCX-USD",
+          "owner": "strike",
+          "runnerUp": "fren",
+          "margin": 0.32,
+          "strength": 3
+        },
+        {
+          "symbol": "TSLA-USD",
+          "owner": "strike",
+          "runnerUp": "snek",
+          "margin": 0.49,
+          "strength": 5
+        },
+        {
+          "symbol": "UNITREE-USD",
+          "owner": "strike",
+          "runnerUp": "newm",
+          "margin": 0.68,
+          "strength": 2
+        },
+        {
+          "symbol": "WTI-USD",
+          "owner": "strike",
+          "runnerUp": "iag",
+          "margin": 0.31,
+          "strength": 3
+        },
+        {
+          "symbol": "XAG-USD",
+          "owner": "iag",
+          "runnerUp": "book",
+          "margin": 0.91,
+          "strength": 3
+        },
+        {
+          "symbol": "XAU-USD",
+          "owner": "iag",
+          "runnerUp": "min",
+          "margin": 0.54,
+          "strength": 1
+        },
+        {
+          "symbol": "XRP-USD",
+          "owner": "strike",
+          "runnerUp": "min",
+          "margin": 0.29,
+          "strength": 1
+        },
+        {
+          "symbol": "ZEC-USD",
+          "owner": "strike",
+          "runnerUp": "hosky",
+          "margin": 0.13,
+          "strength": 11
+        },
+        {
+          "symbol": "ZHIPU-USD",
+          "owner": "min",
+          "runnerUp": "strike",
+          "margin": 0.31,
+          "strength": 1
+        }
+      ]
     }
   ],
   "tiles": [
     {
       "symbol": "AAOI-USD",
-      "weight": 2.08,
+      "weight": 2.1,
       "owner": "strike",
       "runnerUp": "indy",
       "scores": {
@@ -197,7 +1881,7 @@
         "fren": 0.032
       },
       "margin": 0.9266528925619835,
-      "volume24h": 62917.2296,
+      "volume24h": 63759.3681,
       "traders": {
         "strike": 2,
         "indy": 1,
@@ -206,7 +1890,7 @@
     },
     {
       "symbol": "ADA-USD",
-      "weight": 1.33,
+      "weight": 1.34,
       "owner": "hosky",
       "runnerUp": "night",
       "scores": {
@@ -227,7 +1911,7 @@
         "wmtx": 8.329
       },
       "margin": 0.41288141470180306,
-      "volume24h": 903517.62178,
+      "volume24h": 892633.01789,
       "traders": {
         "fren": 11,
         "iag": 3,
@@ -248,7 +1932,7 @@
     },
     {
       "symbol": "BNB-USD",
-      "weight": 2.64,
+      "weight": 2.67,
       "owner": "strike",
       "runnerUp": "fren",
       "scores": {
@@ -286,7 +1970,7 @@
         "snek": 1.362
       },
       "margin": 0.7792945508430814,
-      "volume24h": 2869756.73138,
+      "volume24h": 2871576.59475,
       "traders": {
         "iag": 4,
         "cock": 8,
@@ -306,7 +1990,7 @@
     },
     {
       "symbol": "COIN-USD",
-      "weight": 2.21,
+      "weight": 2.24,
       "owner": "strike",
       "runnerUp": "newm",
       "scores": {
@@ -317,7 +2001,7 @@
         "fren": 0.143
       },
       "margin": 0.778723404255319,
-      "volume24h": 39494.2747,
+      "volume24h": 39185.994,
       "traders": {
         "strike": 4,
         "indy": 1,
@@ -328,7 +2012,7 @@
     },
     {
       "symbol": "CRCL-USD",
-      "weight": 2.09,
+      "weight": 2.11,
       "owner": "strike",
       "runnerUp": "min",
       "scores": {
@@ -338,7 +2022,7 @@
         "min": 0.801
       },
       "margin": 0.481888745148771,
-      "volume24h": 62285.4822,
+      "volume24h": 60787.3602,
       "traders": {
         "wmtx": 1,
         "strike": 2,
@@ -348,7 +2032,7 @@
     },
     {
       "symbol": "CXMT-USD",
-      "weight": 1.94,
+      "weight": 1.96,
       "owner": "min",
       "runnerUp": "wmtx",
       "scores": {
@@ -356,7 +2040,7 @@
         "min": 1.681
       },
       "margin": 0.8316478286734087,
-      "volume24h": 103192.68387,
+      "volume24h": 103342.51057,
       "traders": {
         "wmtx": 1,
         "min": 1
@@ -364,7 +2048,7 @@
     },
     {
       "symbol": "DOGE-USD",
-      "weight": 2.87,
+      "weight": 2.9,
       "owner": "strike",
       "runnerUp": null,
       "scores": {
@@ -378,7 +2062,7 @@
     },
     {
       "symbol": "DRAM-USD",
-      "weight": 2.94,
+      "weight": 2.98,
       "owner": "min",
       "runnerUp": "strike",
       "scores": {
@@ -402,7 +2086,7 @@
     },
     {
       "symbol": "ETH-USD",
-      "weight": 1.48,
+      "weight": 1.49,
       "owner": "strike",
       "runnerUp": "cock",
       "scores": {
@@ -418,7 +2102,7 @@
         "flow": 6.351
       },
       "margin": 0.13648139425341504,
-      "volume24h": 524009.9461,
+      "volume24h": 522589.6664,
       "traders": {
         "cock": 7,
         "strike": 8,
@@ -434,7 +2118,7 @@
     },
     {
       "symbol": "GOOGL-USD",
-      "weight": 2.74,
+      "weight": 2.78,
       "owner": "strike",
       "runnerUp": null,
       "scores": {
@@ -448,7 +2132,7 @@
     },
     {
       "symbol": "HYPE-USD",
-      "weight": 1.53,
+      "weight": 1.54,
       "owner": "strike",
       "runnerUp": "min",
       "scores": {
@@ -465,7 +2149,7 @@
         "flow": 3.893
       },
       "margin": 0.01594863297431648,
-      "volume24h": 447727.27026,
+      "volume24h": 446767.43093,
       "traders": {
         "strike": 8,
         "indy": 1,
@@ -482,21 +2166,21 @@
     },
     {
       "symbol": "LIT-USD",
-      "weight": 2.69,
+      "weight": 2.72,
       "owner": "strike",
       "runnerUp": null,
       "scores": {
         "strike": 0.219
       },
       "margin": 1,
-      "volume24h": 7460.27615,
+      "volume24h": 7529.89499,
       "traders": {
         "strike": 1
       }
     },
     {
       "symbol": "MINIMAX-USD",
-      "weight": 1.59,
+      "weight": 1.61,
       "owner": "strike",
       "runnerUp": "drip",
       "scores": {
@@ -505,7 +2189,7 @@
         "drip": 0.593
       },
       "margin": 0.7147667147667148,
-      "volume24h": 354423.81116,
+      "volume24h": 352624.66394,
       "traders": {
         "strike": 2,
         "indy": 1,
@@ -514,7 +2198,7 @@
     },
     {
       "symbol": "MU-USD",
-      "weight": 2.27,
+      "weight": 2.26,
       "owner": "iag",
       "runnerUp": "indy",
       "scores": {
@@ -528,7 +2212,7 @@
         "book": 0.839
       },
       "margin": 0.3593827775012444,
-      "volume24h": 32862.6472,
+      "volume24h": 36020.7093,
       "traders": {
         "strike": 3,
         "indy": 1,
@@ -554,7 +2238,7 @@
         "newm": 1.999
       },
       "margin": 0.22217898832684815,
-      "volume24h": 2473.8753,
+      "volume24h": 2809.9376,
       "traders": {
         "strike": 1,
         "cock": 1,
@@ -566,7 +2250,7 @@
     },
     {
       "symbol": "NEAR-USD",
-      "weight": 1.58,
+      "weight": 1.59,
       "owner": "hosky",
       "runnerUp": "strike",
       "scores": {
@@ -584,7 +2268,7 @@
         "flow": 1.826
       },
       "margin": 0.14044943820224726,
-      "volume24h": 376088.56511,
+      "volume24h": 372814.26302,
       "traders": {
         "cock": 2,
         "strike": 7,
@@ -602,7 +2286,7 @@
     },
     {
       "symbol": "NIGHT-USD",
-      "weight": 2.35,
+      "weight": 2.38,
       "owner": "wmtx",
       "runnerUp": "book",
       "scores": {
@@ -634,7 +2318,7 @@
     },
     {
       "symbol": "NVDA-USD",
-      "weight": 2.68,
+      "weight": 2.71,
       "owner": "iag",
       "runnerUp": "min",
       "scores": {
@@ -644,7 +2328,7 @@
         "min": 1.092
       },
       "margin": 0.20408163265306123,
-      "volume24h": 7700.2179,
+      "volume24h": 7689.1514,
       "traders": {
         "strike": 2,
         "iag": 1,
@@ -654,7 +2338,7 @@
     },
     {
       "symbol": "PUMP-USD",
-      "weight": 1.59,
+      "weight": 1.61,
       "owner": "min",
       "runnerUp": "strike",
       "scores": {
@@ -672,7 +2356,7 @@
         "book": 0.1
       },
       "margin": 0.3278377866211863,
-      "volume24h": 360783.9442217,
+      "volume24h": 349792.7956546,
       "traders": {
         "strike": 5,
         "indy": 1,
@@ -690,7 +2374,7 @@
     },
     {
       "symbol": "SKHYNIX-USD",
-      "weight": 1.9,
+      "weight": 1.91,
       "owner": "strike",
       "runnerUp": "indy",
       "scores": {
@@ -701,7 +2385,7 @@
         "fren": 0.165
       },
       "margin": 0.7141138732959101,
-      "volume24h": 120180.18,
+      "volume24h": 120781.578,
       "traders": {
         "strike": 4,
         "indy": 1,
@@ -712,7 +2396,7 @@
     },
     {
       "symbol": "SNDK-USD",
-      "weight": 2.06,
+      "weight": 2.08,
       "owner": "strike",
       "runnerUp": "drip",
       "scores": {
@@ -722,7 +2406,7 @@
         "drip": 0.585
       },
       "margin": 0.14598540145985414,
-      "volume24h": 68283.892,
+      "volume24h": 67701.037,
       "traders": {
         "strike": 1,
         "newm": 1,
@@ -732,7 +2416,7 @@
     },
     {
       "symbol": "SOL-USD",
-      "weight": 2.07,
+      "weight": 2.09,
       "owner": "strike",
       "runnerUp": "fren",
       "scores": {
@@ -748,7 +2432,7 @@
         "flow": 0.104
       },
       "margin": 0.48258910282671036,
-      "volume24h": 65310.1183,
+      "volume24h": 65913.7,
       "traders": {
         "strike": 5,
         "fren": 3,
@@ -764,7 +2448,7 @@
     },
     {
       "symbol": "SP500-USD",
-      "weight": 2.49,
+      "weight": 2.52,
       "owner": "newm",
       "runnerUp": "iag",
       "scores": {
@@ -786,7 +2470,7 @@
     },
     {
       "symbol": "SPCX-USD",
-      "weight": 2.27,
+      "weight": 2.29,
       "owner": "strike",
       "runnerUp": "fren",
       "scores": {
@@ -799,7 +2483,7 @@
         "cock": 0.273
       },
       "margin": 0.32379325074754384,
-      "volume24h": 32999.8416,
+      "volume24h": 33184.8197,
       "traders": {
         "strike": 3,
         "indy": 1,
@@ -812,7 +2496,7 @@
     },
     {
       "symbol": "TSLA-USD",
-      "weight": 1.96,
+      "weight": 1.98,
       "owner": "strike",
       "runnerUp": "snek",
       "scores": {
@@ -836,7 +2520,7 @@
     },
     {
       "symbol": "UNITREE-USD",
-      "weight": 1.67,
+      "weight": 1.68,
       "owner": "strike",
       "runnerUp": "newm",
       "scores": {
@@ -845,7 +2529,7 @@
         "newm": 0.605
       },
       "margin": 0.6798941798941799,
-      "volume24h": 270155.60098,
+      "volume24h": 270255.10428,
       "traders": {
         "strike": 2,
         "indy": 1,
@@ -854,7 +2538,7 @@
     },
     {
       "symbol": "WTI-USD",
-      "weight": 2.09,
+      "weight": 2.15,
       "owner": "strike",
       "runnerUp": "iag",
       "scores": {
@@ -869,7 +2553,7 @@
         "snek": 0.69
       },
       "margin": 0.3101830126701079,
-      "volume24h": 61288.70622,
+      "volume24h": 53800.37999,
       "traders": {
         "strike": 3,
         "indy": 1,
@@ -884,7 +2568,7 @@
     },
     {
       "symbol": "XAG-USD",
-      "weight": 2.72,
+      "weight": 2.75,
       "owner": "iag",
       "runnerUp": "book",
       "scores": {
@@ -894,7 +2578,7 @@
         "book": 0.653
       },
       "margin": 0.9051423590935502,
-      "volume24h": 6721.877291,
+      "volume24h": 6685.684552,
       "traders": {
         "iag": 3,
         "indy": 1,
@@ -904,7 +2588,7 @@
     },
     {
       "symbol": "XAU-USD",
-      "weight": 1.92,
+      "weight": 1.94,
       "owner": "iag",
       "runnerUp": "min",
       "scores": {
@@ -914,7 +2598,7 @@
         "strike": 1.16
       },
       "margin": 0.5361650485436893,
-      "volume24h": 109959.8549,
+      "volume24h": 110043.5387,
       "traders": {
         "iag": 1,
         "sundae": 1,
@@ -924,7 +2608,7 @@
     },
     {
       "symbol": "XRP-USD",
-      "weight": 1.86,
+      "weight": 1.87,
       "owner": "strike",
       "runnerUp": "min",
       "scores": {
@@ -936,7 +2620,7 @@
         "min": 0.795
       },
       "margin": 0.2908117752007136,
-      "volume24h": 138637.57503,
+      "volume24h": 138649.53019,
       "traders": {
         "strike": 1,
         "indy": 1,
@@ -948,7 +2632,7 @@
     },
     {
       "symbol": "ZEC-USD",
-      "weight": 1.38,
+      "weight": 1.39,
       "owner": "strike",
       "runnerUp": "hosky",
       "scores": {
@@ -967,7 +2651,7 @@
         "night": 2.929
       },
       "margin": 0.13365104203712921,
-      "volume24h": 746465.1653,
+      "volume24h": 741932.8315,
       "traders": {
         "iag": 2,
         "strike": 11,
@@ -986,7 +2670,7 @@
     },
     {
       "symbol": "ZHIPU-USD",
-      "weight": 1.45,
+      "weight": 1.46,
       "owner": "min",
       "runnerUp": "strike",
       "scores": {
@@ -997,7 +2681,7 @@
         "strike": 0.967
       },
       "margin": 0.3141843971631206,
-      "volume24h": 583318.2579,
+      "volume24h": 583326.6789,
       "traders": {
         "newm": 1,
         "cock": 1,

@@ -168,25 +168,41 @@ async function main() {
   });
   const { kept, dropped } = dropInternalTrades(fillsPer.flat());
 
-  // Tile scores: per market, per army, sqrt(fees) per distinct member, weight split across armies.
+  // Tile scores: per market, per army, sqrt(fees) per distinct member. Each member fights for one army.
   const armiesByAccount = new Map(members.map((m) => [m.e.account_id, m.armies]));
-  const tiles = symbols.map((sym) => {
-    const byArmy: Record<string, Map<string, number>> = {};
-    const shares = new Map<string, number>();
-    for (const f of kept) {
-      if (f.symbol !== sym) continue;
-      const armies = armiesByAccount.get(f.account_id) ?? [];
-      shares.set(f.account_id, 1 / armies.length);
-      for (const a of armies) {
-        const mm = (byArmy[a] ??= new Map());
-        mm.set(f.account_id, (mm.get(f.account_id) ?? 0) + Math.max(0, Number(f.fee)));
+  function tilesFor(fills: Fill[]) {
+    return symbols.map((sym) => {
+      const byArmy: Record<string, Map<string, number>> = {};
+      for (const f of fills) {
+        if (f.symbol !== sym) continue;
+        for (const a of armiesByAccount.get(f.account_id) ?? []) {
+          const mm = (byArmy[a] ??= new Map());
+          mm.set(f.account_id, (mm.get(f.account_id) ?? 0) + Math.max(0, Number(f.fee)));
+        }
       }
-    }
-    const scores = Object.fromEntries(Object.entries(byArmy).map(([a, mm]) => [a, Math.round(flowScore(mm, shares) * 1000) / 1000]));
-    const traders = Object.fromEntries(Object.entries(byArmy).map(([a, mm]) => [a, mm.size]));
-    return { ...claimTile(sym, weights[sym], scores), volume24h: vol24[sym], traders };
+      const scores = Object.fromEntries(Object.entries(byArmy).map(([a, mm]) => [a, Math.round(flowScore(mm) * 1000) / 1000]));
+      const traders = Object.fromEntries(Object.entries(byArmy).map(([a, mm]) => [a, mm.size]));
+      return { ...claimTile(sym, weights[sym], scores), volume24h: vol24[sym], traders };
+    });
+  }
+  const tiles = tilesFor(kept);
+
+  // Daily frames for the replay: the board as it stood at the end of each day, counting that day's window so far.
+  const days = Array.from({ length: WINDOW_DAYS }, (_, i) => {
+    const end = since + (i + 1) * 86_400_000;
+    const frame = tilesFor(kept.filter((f) => f.timestamp < end));
+    return {
+      date: new Date(end - 1).toISOString().slice(0, 10),
+      tiles: frame.map((t) => ({ symbol: t.symbol, owner: t.owner, runnerUp: t.runnerUp, margin: Math.round(t.margin * 100) / 100, strength: t.owner ? t.traders[t.owner] ?? 0 : 0 })),
+    };
   });
 
+  const armyVolume7d = Object.fromEntries(
+    ARMIES.map((a) => [a.slug, kept.filter((f) => armiesByAccount.get(f.account_id)?.includes(a.slug)).reduce((s, f) => s + Number(f.price) * Number(f.size), 0)]),
+  );
+  const armyTraders7d = Object.fromEntries(
+    ARMIES.map((a) => [a.slug, new Set(kept.filter((f) => armiesByAccount.get(f.account_id)?.includes(a.slug)).map((f) => f.account_id)).size]),
+  );
   const armyFees7d = Object.fromEntries(
     ARMIES.map((a) => [a.slug, feesPaid(kept.filter((f) => armiesByAccount.get(f.account_id)?.includes(a.slug)))]),
   );
@@ -211,7 +227,8 @@ async function main() {
       fillsScanned: kept.length + dropped.length,
       internalFillsDropped: dropped.length,
     },
-    armies: armyRows.map((r) => ({ ...r, fees7d: armyFees7d[r.slug] })),
+    armies: armyRows.map((r) => ({ ...r, fees7d: armyFees7d[r.slug], volume7d: armyVolume7d[r.slug], traders7d: armyTraders7d[r.slug] })),
+    days,
     tiles,
   };
   fs.writeFileSync(OUT, JSON.stringify(out, null, 2));

@@ -19,6 +19,9 @@ const MAX_POINTS_LEVERAGE = 3;
 const DAILY_LOSS_CAP = 50;
 const STRIKE_TAKER_BPS = 5;
 
+/** A real recruit's account, shown read-only to visitors without a key so the ticket and its guardrails are visible. */
+const PREVIEW_ACCOUNT = process.env.NEXT_PUBLIC_RAID_PREVIEW_ACCOUNT ?? "";
+
 export function Terminal({ army, isRecruit }: { army?: string; isRecruit?: boolean }) {
   const [session, setSession] = useState<Session | null | undefined>(undefined);
   const [markets, setMarkets] = useState<Record<string, MarketConfig>>({});
@@ -36,7 +39,7 @@ export function Terminal({ army, isRecruit }: { army?: string; isRecruit?: boole
   const pub = useMemo(() => publicApi(LIVE_NETWORK), []);
 
   const refresh = useCallback(
-    async (s: Session) => {
+    async (s: { accountId: string }) => {
       const [f, p] = await Promise.all([pub.fills(s.accountId, 200).catch(() => ({ fills: [] })), pub.positions(s.accountId).catch(() => ({ positions: [] }))]);
       setFills(f.fills ?? []);
       setPositions((p.positions ?? []).filter((x) => Number(x.size) !== 0));
@@ -48,6 +51,7 @@ export function Terminal({ army, isRecruit }: { army?: string; isRecruit?: boole
     loadSession().then((s) => {
       setSession(s);
       if (s) refresh(s);
+      else if (PREVIEW_ACCOUNT) refresh({ accountId: PREVIEW_ACCOUNT });
     });
     pub.markets().then((m) => {
       setMarkets(m.markets);
@@ -122,24 +126,26 @@ export function Terminal({ army, isRecruit }: { army?: string; isRecruit?: boole
   }
 
   if (session === undefined) return <p className="num text-ink-2">Loading your key…</p>;
-  if (!session)
-    return (
-      <div className="border-2 border-ink p-5">
-        <p className="display text-[28px]">No trading key in this browser</p>
-        <p className="mt-2 text-ink-2">Enlist first. Your key is created on enlistment and never leaves this browser.</p>
-        <Link href="/join" className="btn mt-4">
-          Enlist
+  const preview = !session;
+  const a = army ? ARMY_BY_SLUG[army] : preview ? ARMY_BY_SLUG.snek : undefined;
+  return (
+    <>
+    {preview && (
+      <div className="mb-6 flex flex-wrap items-center gap-4 border-l-4 border-ink pl-4">
+        <p className="max-w-[70ch] text-[15px] text-ink-2">
+          You have no trading key in this browser yet, so this is a read-only view of a real SNEK recruit on Strike {LIVE_NETWORK}. The ticket shows what
+          you would see before every order: margin, fees, liquidation price and the most you can lose.
+        </p>
+        <Link href="/join" className="btn">
+          Enlist to trade
         </Link>
       </div>
-    );
-
-  const a = army ? ARMY_BY_SLUG[army] : undefined;
-  return (
+    )}
     <div className="grid gap-6 lg:grid-cols-[1fr_420px]">
       <section>
         <div className="flex items-baseline justify-between rule-b pb-2">
           <h2 className="display text-[26px]">Positions</h2>
-          <span className="num text-[12px] text-ink-3">{session.accountId}</span>
+          <span className="num text-[12px] text-ink-3">{session?.accountId ?? `${PREVIEW_ACCOUNT} · read-only`}</span>
         </div>
         {positions.length === 0 ? (
           <p className="py-6 text-ink-2">No open positions.</p>
@@ -160,7 +166,7 @@ export function Terminal({ army, isRecruit }: { army?: string; isRecruit?: boole
                   <td className="py-2">{p.symbol}</td>
                   <td className="text-right">{Number(p.size)}</td>
                   <td className="text-right">{Number(p.entry_price).toFixed(2)}</td>
-                  <td className="text-right">{p.liquidation_price ? Number(p.liquidation_price).toFixed(2) : "—"}</td>
+                  <td className="text-right">{Number(p.liquidation_price) > 0 ? Number(p.liquidation_price).toFixed(2) : "—"}</td>
                   <td className="text-right" style={{ color: Number(p.unrealized_pnl) >= 0 ? "var(--gain)" : "var(--loss)" }}>
                     {Number(p.unrealized_pnl) >= 0 ? "+" : "−"}${Math.abs(Number(p.unrealized_pnl ?? 0)).toFixed(2)}
                   </td>
@@ -244,8 +250,8 @@ export function Terminal({ army, isRecruit }: { army?: string; isRecruit?: boole
         </div>
 
         {blocked && <p className="mt-3 text-[13px] text-[#f3a08f]">{blocked}</p>}
-        <button className="btn mt-4 w-full" style={{ background: "#ece4d2", color: "#1b1a17", borderColor: "#ece4d2" }} disabled={busy || !army || !!blocked || !size} onClick={placeOrder}>
-          {busy ? "Sending…" : `${side === "buy" ? "Long" : "Short"} ${symbol.replace("-USD", "")}`}
+        <button className="btn mt-4 w-full" style={{ background: "#ece4d2", color: "#1b1a17", borderColor: "#ece4d2" }} disabled={preview || busy || !army || !!blocked || !size} onClick={placeOrder}>
+          {preview ? "Enlist to place orders" : busy ? "Sending…" : `${side === "buy" ? "Long" : "Short"} ${symbol.replace("-USD", "")}`}
         </button>
 
         <div className="mt-6 border-t border-[#5b5547] pt-4">
@@ -253,7 +259,7 @@ export function Terminal({ army, isRecruit }: { army?: string; isRecruit?: boole
           <div className="mt-2 flex gap-2">
             <input type="number" min={25} value={depositAda} onChange={(e) => setDepositAda(Number(e.target.value))} className="num w-28 border border-[#5b5547] bg-transparent p-2" />
             <span className="num self-center text-[13px]">ADA</span>
-            <button className="btn ghost ml-auto" style={{ color: "#ece4d2", borderColor: "#ece4d2" }} onClick={deposit} disabled={busy}>
+            <button className="btn ghost ml-auto" style={{ color: "#ece4d2", borderColor: "#ece4d2" }} onClick={deposit} disabled={preview || busy}>
               Deposit
             </button>
           </div>
@@ -267,5 +273,6 @@ export function Terminal({ army, isRecruit }: { army?: string; isRecruit?: boole
         )}
       </aside>
     </div>
+    </>
   );
 }
