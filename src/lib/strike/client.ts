@@ -13,12 +13,29 @@ export class StrikeError extends Error {
 
 const isServer = typeof window === "undefined";
 
+const RETRYABLE = new Set([429, 502, 503, 504]);
+
+/** Reads are retried with backoff (Strike rate-limits bursts); writes are never retried. */
 async function call<T>(url: string, init: RequestInit = {}): Promise<T> {
   const headers = { ...(isServer ? SERVER_HEADERS : {}), ...(init.headers as Record<string, string>) };
-  const res = await fetch(url, { ...init, headers, cache: "no-store" });
-  const text = await res.text();
-  if (!res.ok) throw new StrikeError(res.status, text, new URL(url).pathname);
-  return (text ? JSON.parse(text) : {}) as T;
+  const idempotent = !init.method || init.method === "GET";
+  for (let attempt = 0; ; attempt++) {
+    let res: Response;
+    try {
+      res = await fetch(url, { ...init, headers, cache: "no-store" });
+    } catch (e) {
+      if (!idempotent || attempt >= 3) throw e;
+      await new Promise((r) => setTimeout(r, 400 * 2 ** attempt));
+      continue;
+    }
+    const text = await res.text();
+    if (res.ok) return (text ? JSON.parse(text) : {}) as T;
+    if (idempotent && RETRYABLE.has(res.status) && attempt < 3) {
+      await new Promise((r) => setTimeout(r, 400 * 2 ** attempt));
+      continue;
+    }
+    throw new StrikeError(res.status, text, new URL(url).pathname);
+  }
 }
 
 export type Chain = "cardano" | "ethereum" | "solana";

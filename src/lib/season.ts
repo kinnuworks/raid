@@ -45,9 +45,24 @@ export interface LiveSeason {
 
 let cache: { at: number; value: LiveSeason } | null = null;
 
+/** Runs `fn` over `items` with at most `n` in flight, so Strike's rate limit is respected. */
+async function pool<T, R>(items: T[], n: number, fn: (t: T) => Promise<R>): Promise<R[]> {
+  const out: R[] = new Array(items.length);
+  let next = 0;
+  await Promise.all(
+    Array.from({ length: Math.min(n, items.length) }, async () => {
+      while (next < items.length) {
+        const i = next++;
+        out[i] = await fn(items[i]);
+      }
+    }),
+  );
+  return out;
+}
+
 function depositsUsd(txs: { type?: string; status?: string; amount?: string; timestamp?: number }[]) {
   return txs
-    .filter((t) => t.type === "deposit" && ["completed", "pending_settlement"].includes(t.status ?? "completed"))
+    .filter((t) => t.type === "deposit" && !["failed", "rejected", "cancelled", "canceled", "expired"].includes(t.status ?? ""))
     .reduce((s, t) => s + Math.max(0, Number(t.amount ?? 0)), 0);
 }
 
@@ -56,16 +71,14 @@ export async function liveSeason(force = false): Promise<LiveSeason> {
   const strike = publicApi(LIVE_NETWORK);
   const members = await listMembers();
 
-  const perMember = await Promise.all(
-    members.map(async (m) => {
+  const perMember = await pool(members, 4, async (m) => {
       const [f, t] = await Promise.all([
         strike.fills(m.account_id, 500).catch(() => ({ fills: [] as PublicFill[] })),
         strike.transactions(m.account_id).catch(() => ({ transactions: [] })),
       ]);
       const fills = (f.fills ?? []).filter((x) => x.timestamp >= SEASON_START) as Fill[];
       return { m, fills, deposited: depositsUsd((t.transactions ?? []) as never) };
-    }),
-  );
+  });
 
   const { kept, dropped } = dropInternalTrades(perMember.flatMap((p) => p.fills));
   const keptBy = new Map<string, Fill[]>();
