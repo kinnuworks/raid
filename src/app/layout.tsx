@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Big_Shoulders, IBM_Plex_Mono, Schibsted_Grotesk } from "next/font/google";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SeasonBar } from "@/components/SeasonBar";
+import { Chrome } from "@/components/Chrome";
 import "./globals.css";
 
 const display = Big_Shoulders({ variable: "--font-display", subsets: ["latin"], weight: ["700", "800", "900"] });
@@ -19,8 +20,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${display.variable} ${text.variable} ${num.variable}`}>
       <body className="min-h-dvh">
-        <SiteHeader />
-        <SeasonBar />
+        <Chrome>
+          <SiteHeader />
+          <SeasonBar />
+        </Chrome>
         {children}
       </body>
     </html>

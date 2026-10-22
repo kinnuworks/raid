@@ -10,6 +10,7 @@ import { Loading } from "@/components/Loading";
 import { Swatch } from "@/components/Swatch";
 import { WarMap } from "@/components/WarMap";
 import { ShareButton } from "@/components/ShareButton";
+import { EmbedSnippet } from "@/components/EmbedSnippet";
 
 export function generateStaticParams() {
   return ARMIES.map((a) => ({ slug: a.slug }));
@@ -114,6 +115,7 @@ async function ArmyPageContent(props: PageProps<"/army/[slug]">) {
             </Link>
             <ShareButton army={army.slug} text={`${army.ticker} on Raid: ${plural(held.length, "market")} held on Strike this week, ${plural(s0.traders7d, "trader")} in the field. Come take ground.`} />
           </div>
+          <EmbedSnippet army={army.slug} />
           <p className="mt-6 text-[13px] text-ink-3">
             Net PnL is shown as it is, losses included. It never affects the score: armies rank on traders who pay fees to outsiders and on new traders who stay.
           </p>
