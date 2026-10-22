@@ -1,0 +1,112 @@
+[
+  {
+    "account_id": "01a1650c-2aad-71ae-9c07-f7d578e20b62",
+    "address": "addr_test1qq54n6zdu0gdcjzvgntphm3w0gqyj8f8sw8ax8f82fqx0j82685vmdmd73zpxsljwsk6cgyxk9rufun3790ylgya55fqpmt9d0",
+    "chain": "cardano",
+    "stake_key": "stake_test1ur4dr6xdkaklg3qng0e8gtdvyzrtz37y7fclzhj05zw62ysg2f5uu",
+    "army": "snek",
+    "invite_code": "6byy9gw",
+    "recruited_by": null,
+    "is_recruit": false,
+    "joined_at": "2026-10-22T19:18:55.285Z"
+  },
+  {
+    "account_id": "01a1650d-cc6f-7e8a-a53f-9248d3bd857e",
+    "address": "addr_test1qrmly60hlv5vtweakqhmwkm7hfl07qehu6nd4jfpks8fak9yn02rkqv6yzz2tdyfwzhgdgw3m4a6cnxas0psar72gpyssm0yhp",
+    "chain": "cardano",
+    "stake_key": "stake_test1uzjfh4pmqxdzpp99kjyhpt5x58ga67avfnwc8scw3l9yqjgfap67a",
+    "army": "snek",
+    "invite_code": "jzuqheu",
+    "recruited_by": null,
+    "is_recruit": false,
+    "joined_at": "2026-10-22T19:19:31.000Z"
+  },
+  {
+    "account_id": "01a1650e-06af-79ce-ae61-56a92f38c0fc",
+    "address": "addr_test1qrf2acwekap87970rz4rkneqd4xmw6u90r77649al8pkzfm83ruvw4f7dpfrg4ah3kek0mruz70m5r0y8add0rkdycjq7qt6va",
+    "chain": "cardano",
+    "stake_key": "stake_test1upnc37x825lxs53527mcmvm8a37p08a6phjr7kkh3mxjvfq8t3nv3",
+    "army": "hosky",
+    "invite_code": "cevpmjs",
+    "recruited_by": null,
+    "is_recruit": false,
+    "joined_at": "2026-10-22T19:19:43.413Z"
+  },
+  {
+    "account_id": "01a1650e-3c10-73aa-a6d0-13879de24798",
+    "address": "addr_test1qpe3r0cpun4256e3fde4sqcwx3khgu0lwsryuyenzqpf74r7vu46gayurk67dvfccvg7wkvnhuu2huphsxhg4nnxrpxspvn0ax",
+    "chain": "cardano",
+    "stake_key": "stake_test1uplxw2aywjwpmd0xkyuvxy08txfm7w9t7qmcrt52eenpsnguxsy35",
+    "army": "hosky",
+    "invite_code": "hdsptgu",
+    "recruited_by": null,
+    "is_recruit": false,
+    "joined_at": "2026-10-22T19:19:57.229Z"
+  },
+  {
+    "account_id": "01a1650e-638d-78fc-83fc-294f956a4783",
+    "address": "addr_test1qrd7q0l98h3cktqwwxl6glkm6azv0zj03nejjduc92luy5fsl77vh2he5v4mzdhznye4wdawnxcc6ukvalumsswysluq2yfewu",
+    "chain": "cardano",
+    "stake_key": "stake_test1uqc0l0xt4tu6x2a3xm3fjv6hx7hfnvvdwtxwl7dcg8zg07qascl5k",
+    "army": "night",
+    "invite_code": "7dz7th8",
+    "recruited_by": null,
+    "is_recruit": false,
+    "joined_at": "2026-10-22T19:20:06.360Z"
+  },
+  {
+    "account_id": "01a1650e-9976-7513-82c3-0e2e107549f3",
+    "address": "addr_test1qqeent45ny7hzrlrszk0w4munlhltnsccs2hng9e0majpn8wpnggvv4td3vfvllkuhe9tp6p3cwejy0xtn27appl2dtslqeyax",
+    "chain": "cardano",
+    "stake_key": "stake_test1urhqe5yxx24kckyk0lmwtuj4saqcu8vez8n9e40wssl4x4cq8880d",
+    "army": "snek",
+    "invite_code": "bhykb7a",
+    "recruited_by": "01a1650c-2aad-71ae-9c07-f7d578e20b62",
+    "is_recruit": true,
+    "joined_at": "2026-10-22T19:20:20.578Z"
+  },
+  {
+    "account_id": "01a1650e-b33b-77bf-9a9d-1873483312af",
+    "address": "addr_test1qpucj99rdqvd464fm03jmeuarvmql0ulwk7wpev0lthu8kcmng0h2umqkylxhyklp3pw4jjp2pyhjyh36p7aqpfu3ssq49puvz",
+    "chain": "cardano",
+    "stake_key": "stake_test1uqde58m4wdstz0ntjt0scsh2efq4qjteztcaqlwsq57gcgq02xdyf",
+    "army": "snek",
+    "invite_code": "ter8ad8",
+    "recruited_by": "01a1650c-2aad-71ae-9c07-f7d578e20b62",
+    "is_recruit": true,
+    "joined_at": "2026-10-22T19:20:26.155Z"
+  },
+  {
+    "account_id": "01a1650e-be07-783f-ad6c-b0323b329101",
+    "address": "addr_test1qp3qzeyz96v8a8mv7xl5tfh3fxj0xpddjdzr9agw2p9hkn9w9ctmw7zmym7ecqnh7vdxqrppy80egvlujswqtqtf095qeqcyr6",
+    "chain": "cardano",
+    "stake_key": "stake_test1uzhzu9ah0pdjdlvuqfmlxxnqpssjrhu5x07fg8q9s95hj6qpq3kns",
+    "army": "snek",
+    "invite_code": "u3s7caf",
+    "recruited_by": "01a1650c-2aad-71ae-9c07-f7d578e20b62",
+    "is_recruit": true,
+    "joined_at": "2026-10-22T19:20:29.073Z"
+  },
+  {
+    "account_id": "01a1650e-ccc0-7980-8e11-a22fb6d35d52",
+    "address": "addr_test1qr3rtqgwkm0ljfjwvefdhh74t9mhp07l6ynt8ammf088g3thszznl8skngqswzhuzagjfchqurf3nwek4e46t2zn0q5qwc7whg",
+    "chain": "cardano",
+    "stake_key": "stake_test1upmcppflnctf5qg8pt7pw5fyutswp5cehvm2u6a94pfhs2q8sygk5",
+    "army": "snek",
+    "invite_code": "sz3uuf9",
+    "recruited_by": "01a1650c-2aad-71ae-9c07-f7d578e20b62",
+    "is_recruit": true,
+    "joined_at": "2026-10-22T19:20:33.221Z"
+  },
+  {
+    "account_id": "01a16510-c09c-7772-b0ae-d79d439ff0dd",
+    "address": "addr_test1qqx0w2h2y5g7c34d4a3jycevl92kkh9q74wnn8z2hcagrfvvrk4xcgakmgh80g55dj97x3hz7828kajw2lhdlwus2y2qwatkqs",
+    "chain": "cardano",
+    "stake_key": "stake_test1uzxpm2nvywmd5tnh522xezlrgm30r4rmwe890mklhwg9z9qhywwkj",
+    "army": "snek",
+    "invite_code": "3dadmuz",
+    "recruited_by": "01a1650c-2aad-71ae-9c07-f7d578e20b62",
+    "is_recruit": true,
+    "joined_at": "2026-10-22T19:22:41.778Z"
+  }
+]

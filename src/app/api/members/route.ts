@@ -65,7 +65,9 @@ async function enlist(req: Request) {
   return NextResponse.json({ member });
 }
 
-export async function GET() {
+export async function GET(req: Request) {
   const members = await listMembers();
+  // Full rows (wallet addresses are public on Strike anyway) for exporting a seed file in development.
+  if (new URL(req.url).searchParams.get("full") === "1" && process.env.NODE_ENV === "development") return NextResponse.json({ members });
   return NextResponse.json({ members: members.map(({ account_id, army, invite_code, is_recruit, joined_at }) => ({ account_id, army, invite_code, is_recruit, joined_at })) });
 }

@@ -34,9 +34,22 @@ async function connect(): Promise<Query> {
   }
   const { PGlite } = await import("@electric-sql/pglite");
   const { mkdirSync } = await import("node:fs");
-  mkdirSync(".data", { recursive: true });
-  const db = new PGlite(".data/raid");
+  // On a serverless host without DATABASE_URL, run from /tmp and start from the committed season seed.
+  // New enlistments in that mode last until the instance restarts; set DATABASE_URL for real persistence.
+  const ephemeral = !!process.env.VERCEL;
+  const dir = ephemeral ? "/tmp/raid-db" : ".data/raid";
+  mkdirSync(ephemeral ? "/tmp" : ".data", { recursive: true });
+  const db = new PGlite(dir);
   await db.exec(SCHEMA);
+  if (ephemeral) {
+    const seed = (await import("@/data/seed-members.json")).default as Member[];
+    for (const m of seed)
+      await db.query(
+        `insert into members (account_id, address, chain, stake_key, army, invite_code, recruited_by, is_recruit, joined_at)
+         values ($1,$2,$3,$4,$5,$6,$7,$8,$9) on conflict do nothing`,
+        [m.account_id, m.address, m.chain, m.stake_key, m.army, m.invite_code, m.recruited_by, m.is_recruit, m.joined_at],
+      );
+  }
   return async (text, params = []) => (await db.query(text, params)).rows as never;
 }
 

@@ -7,7 +7,10 @@ import { LIVE_NETWORK } from "@/lib/strike/config";
 /** Two seasons, always labelled, so no number on the page can be mistaken for the other. */
 export function SeasonBar() {
   const path = usePathname();
-  const live = ["/recruits", "/proof", "/trade", "/join"].some((p) => path.startsWith(p));
+  return <SeasonBarStatic live={["/recruits", "/proof", "/trade", "/join"].some((p) => path.startsWith(p))} />;
+}
+
+export function SeasonBarStatic({ live = false }: { live?: boolean }) {
   const seg = (on: boolean) => `flex min-h-11 items-center gap-2 px-3 ${on ? "bg-[var(--ink)] text-[var(--paper)]" : "hover:bg-[var(--paper-2)]"}`;
   return (
     <div className="rule-b">
