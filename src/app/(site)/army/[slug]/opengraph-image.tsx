@@ -16,6 +16,11 @@ export default async function Image({ params }: { params: Promise<{ slug: string
   const a = ARMY_BY_SLUG[slug] ?? ARMY_BY_SLUG.snek;
   const s = season0.armies.find((x) => x.slug === a.slug)!;
   const held = season0.tiles.filter((t) => t.owner === a.slug).length;
+  // The closest fight: a market where this army is runner-up, else the community-held market with the thinnest lead.
+  const target =
+    season0.tiles.find((t) => t.runnerUp === a.slug && t.owner && t.owner !== a.slug) ??
+    [...season0.tiles].filter((t) => t.owner && t.owner !== a.slug && !ARMY_BY_SLUG[t.owner].garrison).sort((x, y) => x.margin - y.margin)[0];
+  const rival = target?.owner ? ARMY_BY_SLUG[target.owner] : undefined;
   return new ImageResponse(
     (
       <CardFrame footer={`Season 0 · read from Strike mainnet ${season0.generatedAt.slice(0, 10)} · every number checks against public data`}>
@@ -25,10 +30,15 @@ export default async function Image({ params }: { params: Promise<{ slug: string
             <div style={{ fontFamily: "Display", fontSize: 168, lineHeight: 0.9 }}>{a.ticker}</div>
           </div>
           <div style={{ fontFamily: "Display", fontSize: 54, marginTop: 22, lineHeight: 1 }}>
-            {held === 0 ? `Holds no ground yet` : `Holds ${held} of ${season0.tiles.length} markets`}
+            {held === 0 ? `${s.holders} soldiers. 0 markets.` : `Holds ${held} of ${season0.tiles.length} markets`}
           </div>
-          <div style={{ fontFamily: "Mono", fontSize: 24, marginTop: 16, color: "#4A4639" }}>
-            {`${s.holders} holders on Strike · ${s.traders7d} traders this week`}
+          {target && rival ? (
+            <div style={{ fontFamily: "Display", fontSize: 40, marginTop: 14, color: a.garrison ? "#1B1A17" : a.ink }}>
+              {`Next: take ${target.symbol.replace("-USD", "")} from ${rival.garrison ? "the garrison" : rival.ticker}.`}
+            </div>
+          ) : null}
+          <div style={{ fontFamily: "Mono", fontSize: 24, marginTop: 12, color: "#4A4639" }}>
+            {`${s.holders} holders on Strike · ${s.traders7d} ${s.traders7d === 1 ? "trader" : "traders"} this week`}
           </div>
         </div>
         <div style={{ display: "flex", alignItems: "flex-end" }}>

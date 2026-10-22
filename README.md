@@ -9,6 +9,7 @@ Built for the first Strike Hackathon (Oct 21 to 23, 2026) by Dhiraj Kavuri ([@he
 - Live app: https://raid-armies.vercel.app
 - Demo video: _link added after recording_
 - Every claim, with evidence and the command that re-checks it: [CLAIMS.md](CLAIMS.md)
+- What was built when: [BUILDLOG.md](BUILDLOG.md)
 
 ## Why it exists
 

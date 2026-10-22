@@ -24,7 +24,9 @@ export default function Home() {
     <main className="mx-auto max-w-[1400px] px-4 pb-24 md:px-8">
       <section className="grid gap-8 pt-8 lg:grid-cols-[1fr_380px] lg:pt-12">
         <div>
-          <p className="kicker">Season 0 · read from Strike mainnet · last {season0.windowDays} days</p>
+          <p className="kicker">
+            Season 0 · computed from Strike mainnet public data, last {season0.windowDays} days, {tiles.length} markets listed today
+          </p>
           <h1 className="display mt-3 text-[clamp(40px,7vw,96px)]">
             <span className="block max-w-[15ch]">Your token is your army.</span>
             <span className="block max-w-[15ch]">Take Strike&apos;s markets.</span>
@@ -93,8 +95,7 @@ export default function Home() {
               <tr>
                 <th>Rank</th>
                 <th>Army</th>
-                <th>Volume, 7 days</th>
-                <th>Gap to the army above</th>
+                <th>Markets held and volume, 7 days</th>
               </tr>
             </thead>
             <tbody>
@@ -166,8 +167,11 @@ function Legend() {
         <dd>Each army has its own ink and pattern</dd>
       </div>
       <div className="flex items-center gap-2">
-        <dt className="num border border-ink bg-[var(--field)] px-1.5 text-[11px] font-semibold text-[var(--paper)]">SNK 12</dt>
-        <dd>Counter: army and its traders on that market this week</dd>
+        <dt className="flex flex-col items-center border border-ink bg-[var(--vermilion)] px-1.5 leading-tight text-[var(--paper)]">
+          <span className="display text-[12px]">IAG</span>
+          <span className="num text-[10px] font-semibold">3</span>
+        </dt>
+        <dd>Counter: the army holding the market, and how many of its traders paid fees there this week</dd>
       </div>
       <div className="flex items-center gap-2">
         <dt className="flex items-end gap-[3px]" aria-hidden>

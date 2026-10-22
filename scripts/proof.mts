@@ -30,7 +30,7 @@ type Member = (typeof seed)[number];
 const members = seed as Member[];
 
 // 1. Every enlisted account is linked by Strike to the wallet Raid says it is.
-const links = [];
+const links: { account_id: string; address: string; army: string; strike_says?: string; match: boolean }[] = [];
 for (const m of members) {
   const a = (await strike.accountByAddress(m.address)) as { account_id?: string };
   links.push({ account_id: m.account_id, address: m.address, army: m.army, strike_says: a.account_id, match: a.account_id === m.account_id });

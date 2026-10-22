@@ -31,7 +31,7 @@ export function Terminal({ army, isRecruit }: { army?: string; isRecruit?: boole
   const [symbol, setSymbol] = useState("SOL-USD");
   const [side, setSide] = useState<"buy" | "sell">("buy");
   const [usd, setUsd] = useState(25);
-  const [lev, setLev] = useState(2);
+  const [lev, setLev] = useState(1); // first trades default to no leverage
   const [msg, setMsg] = useState<{ kind: "ok" | "err"; text: string } | null>(null);
   const [busy, setBusy] = useState(false);
   const [depositAda, setDepositAda] = useState(150);
