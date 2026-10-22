@@ -6,7 +6,7 @@ Raid turns Cardano token communities (SNEK, HOSKY, NIGHT and eleven more) into t
 
 Built for the first Strike Hackathon (Oct 21 to 23, 2026) by Dhiraj Kavuri ([@heykinnu](https://x.com/heykinnu)).
 
-- Live app: _link added at deploy_
+- Live app: https://raid-armies.vercel.app
 - Demo video: _link added after recording_
 
 ## Why it exists
