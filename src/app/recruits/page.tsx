@@ -9,7 +9,7 @@ import { Provenance } from "@/components/Provenance";
 import { Swatch } from "@/components/Swatch";
 import { NextDayCountdown } from "@/components/Countdown";
 
-const short = (id: string) => `…${id.slice(-8)}`;
+const short = (id: string) => `…${id.slice(-6)}`;
 
 async function RecruitsPageContent() {
   await connection();
@@ -48,17 +48,17 @@ async function RecruitsPageContent() {
         <table className="mt-2 w-full text-[14px]">
           <thead>
             <tr className="label text-left">
-              <th className="w-[130px] py-2 font-medium">Account</th>
+              <th className="w-[90px] py-2 font-medium">Account</th>
               <th className="w-[100px] font-medium">Army</th>
               <th className="w-[100px] pr-6 text-right font-medium">Deposit</th>
-              <th className="w-[90px] font-medium">Days traded</th>
+              <th className="w-[70px] font-medium">Days</th>
               <th className="pl-2 font-medium">Status</th>
             </tr>
           </thead>
           <tbody>
             {recruits.map((r) => (
               <tr key={r.account_id} className="rule-t align-top">
-                <td className="num py-3">{short(r.account_id)}</td>
+                <td className="num whitespace-nowrap py-3" title={r.account_id}>{short(r.account_id)}</td>
                 <td className="py-3">
                   <span className="flex items-center gap-2">
                     <Swatch army={ARMY_BY_SLUG[r.army]} className="h-3.5 w-3.5" />

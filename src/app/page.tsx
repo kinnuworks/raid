@@ -24,9 +24,8 @@ export default function Home() {
         <div>
           <p className="kicker">Season 0 · read from Strike mainnet · last {season0.windowDays} days</p>
           <h1 className="display mt-3 text-[clamp(40px,7vw,96px)]">
-            Your token is your army.
-            <br />
-            Take Strike&apos;s markets.
+            <span className="block max-w-[15ch]">Your token is your army.</span>
+            <span className="block max-w-[15ch]">Take Strike&apos;s markets.</span>
           </h1>
           <p className="mt-5 max-w-[60ch] text-[17px] leading-relaxed text-ink-2">
             Raid turns Cardano communities (SNEK, HOSKY, NIGHT and eleven more) into trading armies on Strike. Hold the token, enlist with one
@@ -53,7 +52,7 @@ export default function Home() {
         <aside className="self-end border-l-4 border-ink pl-5">
           <p className="label">Dispatch from the front</p>
           <p className="display mt-2 text-[34px]">
-            The garrison holds {garrisonHeld} of {tiles.length}. Your move.
+            The garrison holds {garrisonHeld}&nbsp;of&nbsp;{tiles.length}. Your&nbsp;move.
           </p>
           <p className="mt-3 text-[15px] text-ink-2">
             Community armies hold {communityHeld}

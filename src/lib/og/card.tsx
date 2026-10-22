@@ -25,7 +25,7 @@ const INK = "#1B1A17";
 /** A strip of every market as a small square, inked by its owner: the board at thumbnail size. */
 export function MiniBoard({ highlight }: { highlight?: string }) {
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", width: 420, gap: 6 }}>
+    <div style={{ display: "flex", flexWrap: "wrap", width: 444, gap: 6, marginBottom: 8 }}>
       {season0.tiles.map((t) => {
         const a = t.owner ? ARMY_BY_SLUG[t.owner] : undefined;
         const on = !highlight || t.owner === highlight;
@@ -33,8 +33,8 @@ export function MiniBoard({ highlight }: { highlight?: string }) {
           <div
             key={t.symbol}
             style={{
-              width: 54,
-              height: 34,
+              width: 58,
+              height: 32,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -43,10 +43,10 @@ export function MiniBoard({ highlight }: { highlight?: string }) {
               opacity: on ? 1 : 0.25,
               color: a && !a.garrison ? PAPER : INK,
               fontFamily: "Mono",
-              fontSize: 11,
+              fontSize: t.symbol.length > 10 ? 9 : 11,
             }}
           >
-            {t.symbol.replace("-USD", "").slice(0, 6)}
+            {t.symbol.replace("-USD", "")}
           </div>
         );
       })}
@@ -58,7 +58,10 @@ export function CardFrame({ children, footer }: { children: React.ReactNode; foo
   return (
     <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", background: PAPER, color: INK, padding: "48px 60px", fontFamily: "Text" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-        <div style={{ width: 34, height: 34, background: INK, display: "flex", alignItems: "center", justifyContent: "center", color: PAPER, fontFamily: "Display", fontSize: 26 }}>R</div>
+        <svg width="34" height="34" viewBox="0 0 30 30">
+          <rect x="1" y="1" width="28" height="28" fill={INK} />
+          <path d="M9 23V7l12 4.5L11 16" fill="none" stroke={PAPER} strokeWidth="2.6" />
+        </svg>
         <div style={{ fontFamily: "Display", fontSize: 38, letterSpacing: 1 }}>RAID</div>
         <div style={{ marginLeft: "auto", fontFamily: "Mono", fontSize: 18, color: "#4A4639" }}>token armies on Strike</div>
       </div>

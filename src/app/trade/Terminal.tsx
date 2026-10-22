@@ -168,7 +168,7 @@ export function Terminal({ army, isRecruit }: { army?: string; isRecruit?: boole
                   <td className="text-right">{Number(p.entry_price).toFixed(2)}</td>
                   <td className="text-right">{Number(p.liquidation_price) > 0 ? Number(p.liquidation_price).toFixed(2) : "—"}</td>
                   <td className="text-right" style={{ color: Number(p.unrealized_pnl) >= 0 ? "var(--gain)" : "var(--loss)" }}>
-                    {Number(p.unrealized_pnl) >= 0 ? "+" : "−"}${Math.abs(Number(p.unrealized_pnl ?? 0)).toFixed(2)}
+                    {Math.abs(Number(p.unrealized_pnl ?? 0)) < 0.005 ? "$0.00" : `${Number(p.unrealized_pnl) > 0 ? "+" : "−"}$${Math.abs(Number(p.unrealized_pnl)).toFixed(2)}`}
                   </td>
                 </tr>
               ))}
@@ -235,7 +235,10 @@ export function Terminal({ army, isRecruit }: { army?: string; isRecruit?: boole
           <dd className="text-right">{size ? `${size} ${symbol.replace("-USD", "")}` : "…"}</dd>
           <dt className="text-[#a59d88]">Margin</dt>
           <dd className="text-right">${margin.toFixed(2)}</dd>
-          <dt className="text-[#a59d88]">Fees (Strike {STRIKE_TAKER_BPS} + Raid {BUILDER_FEE_BPS} bps)</dt>
+          <dt className="text-[#a59d88]">
+            Fees
+            <span className="block text-[11px]">Strike {STRIKE_TAKER_BPS} + Raid {BUILDER_FEE_BPS} bps</span>
+          </dt>
           <dd className="text-right">${fees.toFixed(4)}</dd>
           <dt className="text-[#a59d88]">Est. liquidation</dt>
           <dd className="text-right">{mark ? liq.toFixed(2) : "…"}</dd>

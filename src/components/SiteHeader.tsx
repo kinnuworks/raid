@@ -18,7 +18,7 @@ export function SiteHeader() {
         </Link>
         <nav className="hidden items-stretch md:flex">
           {NAV.map((n) => (
-            <Link key={n.href} href={n.href} className="flex items-center px-3 text-[14px] font-semibold hover:bg-[var(--paper-2)]">
+            <Link key={n.href} href={n.href} className="flex min-h-11 items-center px-3 text-[14px] font-semibold hover:bg-[var(--paper-2)]">
               {n.label}
             </Link>
           ))}

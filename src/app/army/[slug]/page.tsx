@@ -42,8 +42,8 @@ async function ArmyPageContent(props: PageProps<"/army/[slug]">) {
 
   const facts: [string, string][] = [
     [fmtInt(s0.holders), "wallets on Strike hold the token"],
-    [fmtInt(s0.members), `fight for ${army.ticker} (it is their rarest army token)`],
-    [plural(s0.traders7d, "trader"), "active this week"],
+    [fmtInt(s0.members), `hold ${army.ticker} as their rarest army token`],
+    [fmtInt(s0.traders7d), s0.traders7d === 1 ? "trader active this week" : "traders active this week"],
     [fmtUsd(s0.volume7d), "volume this week"],
     [fmtSignedUsd(s0.pnl), `net PnL all time, ${fmtInt(s0.inProfit)} of ${fmtInt(s0.traded)} in profit`],
   ];
@@ -103,7 +103,11 @@ async function ArmyPageContent(props: PageProps<"/army/[slug]">) {
             <dt className="text-ink-2">Markets held</dt>
             <dd className="num">{liveHeld.length ? liveHeld.join(", ") : "none"}</dd>
             <dt className="text-ink-2">Builder fees from this army</dt>
-            <dd className="num">${(fees?.builderFee ?? 0).toFixed(2)}</dd>
+            <dd className="num">
+              <Link href="/proof" className="link">
+                ${(fees?.builderFee ?? 0).toFixed(4)}
+              </Link>
+            </dd>
           </dl>
           <p className="mt-3 text-[13px] text-ink-2">
             Builder fees are paid to Raid&apos;s builder account by Strike on every fill. At the end of the season each army&apos;s share goes to the

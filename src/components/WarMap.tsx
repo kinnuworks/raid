@@ -57,26 +57,32 @@ interface Placed {
   index: number;
 }
 
-function layout(tiles: MapTile[]) {
+function layout(tiles: MapTile[], mode: "wide" | "stacked") {
   const bySym = new Map(tiles.map((t) => [base(t.symbol), t]));
   const placed: Placed[] = [];
   const used = new Set<string>();
-  for (const r of REGIONS) {
+  // Phones get the regions stacked in one column, sized to fit the screen without panning.
+  let stackRow = 0;
+  const order = mode === "stacked" ? ["A", "C", "B", "D"].map((c) => REGIONS.find((r) => r.code === c)!) : REGIONS;
+  for (const r of order) {
     let i = 0;
+    const origin = mode === "stacked" ? { col: 0, row: stackRow } : { col: r.col, row: r.row };
+    const count = r.symbols.filter((x) => bySym.has(x)).length;
     for (const s of r.symbols) {
       const t = bySym.get(s);
       if (!t) continue;
-      const { x, y } = center(r.col + (i % r.cols), r.row + Math.floor(i / r.cols));
+      const { x, y } = center(origin.col + (i % r.cols), origin.row + Math.floor(i / r.cols));
       placed.push({ tile: t, cx: x, cy: y, region: r.code, index: i + 1 });
       used.add(s);
       i++;
     }
+    stackRow += Math.ceil(count / r.cols) + 1.1;
   }
   // Markets listed after the map was drawn join a frontier column.
   let extra = 0;
   for (const t of tiles) {
     if (used.has(base(t.symbol))) continue;
-    const { x, y } = center(8.5, extra++);
+    const { x, y } = mode === "stacked" ? center(extra++ % 4, stackRow + 0.2) : center(8.5, extra++);
     placed.push({ tile: t, cx: x, cy: y, region: "E", index: extra });
   }
 
@@ -112,6 +118,7 @@ function layout(tiles: MapTile[]) {
 }
 
 function fillFor(a: Army) {
+  if (a.garrison) return "var(--paper-2)"; // flat: stripes are reserved for contested ground
   return a.pattern === "solid" ? a.ink : `url(#pat-${a.slug})`;
 }
 
@@ -163,7 +170,6 @@ export function WarMap({
   /** When set, tiles whose owner changed replay the ink-in wipe. */
   animateKey?: string;
 }) {
-  const { placed, outlines, labels, box } = layout(tiles);
   const armies = [...new Set(tiles.flatMap((t) => [t.owner, t.runnerUp]).filter(Boolean) as string[])].map((s) => ARMY_BY_SLUG[s]).filter(Boolean);
   const contests = tiles
     .filter((t) => t.owner && t.runnerUp && t.margin < contestedBelow)
@@ -171,12 +177,40 @@ export function WarMap({
     .filter(([a, b]) => a && b);
 
   return (
-    <div className="-mx-4 overflow-x-auto px-4 md:mx-0 md:overflow-visible md:px-0">
-      <svg viewBox={`${box.x} ${box.y} ${box.w} ${box.h}`} className="h-auto w-full min-w-[720px] md:min-w-0" role="img" aria-label="Map of Strike markets and the armies that hold them">
+    <>
+      <Board mode="wide" className="hidden md:block" {...{ tiles, highlight, contestedBelow, animateKey, armies, contests }} />
+      <Board mode="stacked" className="md:hidden" {...{ tiles, highlight, contestedBelow, animateKey, armies, contests }} />
+    </>
+  );
+}
+
+function Board({
+  mode,
+  className,
+  tiles,
+  highlight,
+  contestedBelow,
+  animateKey,
+  armies,
+  contests,
+}: {
+  mode: "wide" | "stacked";
+  className: string;
+  tiles: MapTile[];
+  highlight?: string;
+  contestedBelow: number;
+  animateKey?: string;
+  armies: Army[];
+  contests: [Army, Army][];
+}) {
+  const { placed, outlines, labels, box } = layout(tiles, mode);
+  return (
+    <div className={className}>
+      <svg viewBox={`${box.x} ${box.y} ${box.w} ${box.h}`} className="h-auto w-full" role="img" aria-label="Map of Strike markets and the armies that hold them">
         <Patterns armies={armies} contests={contests} />
 
         {/* contour lines through the open ground between regions */}
-        <g fill="none" stroke="var(--contour)" strokeWidth="1" opacity="0.8">
+        <g display={mode === "wide" ? undefined : "none"} fill="none" stroke="var(--contour)" strokeWidth="1" opacity="0.8">
           {[0, 1, 2, 3].map((i) => (
             <path
               key={`h${i}`}
@@ -226,16 +260,16 @@ export function WarMap({
               <text x={cx} y={cy - H / 2 + 15} textAnchor="middle" className="num" style={{ fontSize: 11, fontWeight: 600 }} fill={lightLabel ? "var(--paper)" : "var(--ink)"}>
                 {base(tile.symbol)}
               </text>
-              <text x={cx - R + 13} y={cy + 4} className="num" style={{ fontSize: 7 }} fill={lightLabel ? "var(--paper)" : "var(--ink)"} opacity="0.6">
+              <text x={cx - R + 9} y={cy + 4} className="num" style={{ fontSize: 9.5 }} fill={lightLabel ? "var(--paper)" : "var(--ink)"} opacity="0.6">
                 {region}
                 {String(index).padStart(2, "0")}
               </text>
               {owner && (
                 <g transform={`translate(${cx - 16},${cy - 8})`} opacity={faded ? 0.45 : 1} filter="url(#chit-shadow)">
                   {Array.from({ length: ticks }).map((_, i) => (
-                    <rect key={i} x={16 - ticks * 3 + i * 6} y={-6} width="3" height="4" fill="var(--ink)" />
+                    <rect key={i} x={16 - ticks * 3 + i * 6} y={-7} width="4" height="4" fill="var(--ink)" />
                   ))}
-                  <rect width="32" height="30" fill={owner.garrison ? "var(--paper)" : owner.ink} stroke="var(--ink)" strokeWidth="1.2" />
+                  <rect width="32" height="30" fill={owner.garrison ? "var(--paper)" : owner.ink} stroke="var(--ink)" strokeOpacity={owner.garrison ? 0.6 : 1} strokeWidth="1.2" opacity={owner.garrison ? 0.85 : 1} />
                   <text x="16" y="13" textAnchor="middle" className="display" style={{ fontSize: 12 }} fill={owner.garrison ? "var(--ink)" : "var(--paper)"}>
                     {owner.code}
                   </text>
