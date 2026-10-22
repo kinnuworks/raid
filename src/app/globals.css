@@ -1,26 +1,197 @@
 @import "tailwindcss";
 
+/* Campaign Map: printed wargame board. Square corners, hairline rules, ink on paper. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper: #ede6d6;
+  --paper-2: #e2d9c4;
+  --paper-3: #d6cbb2;
+  --ink: #1b1a17;
+  --ink-2: #4a4639;
+  --ink-3: #7a735f;
+  --contour: #b9ae97;
+  --rule: rgb(27 26 23 / 0.22);
+  --rule-strong: rgb(27 26 23 / 0.55);
+  --verified: #1f5c4a;
+  --gain: #1f5c4a;
+  --loss: #a8321d;
+  --alert: #d2361f;
+
+  --vermilion: #d2361f;
+  --ultramarine: #2347a6;
+  --ochre: #c8901c;
+  --field: #3f6b3a;
+  --plum: #6b2e5f;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-paper-3: var(--paper-3);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-contour: var(--contour);
+  --color-verified: var(--verified);
+  --color-gain: var(--gain);
+  --color-loss: var(--loss);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-text);
+  --font-mono: var(--font-num);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--paper);
+  color: var(--ink);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at 1px 1px, rgb(27 26 23 / 0.07) 1px, transparent 0) 0 0 / 24px 24px,
+    var(--paper);
+  font-family: var(--font-text), ui-sans-serif, system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* Numbers always tabular, always mono. */
+.num {
+  font-family: var(--font-num), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums slashed-zero;
+  font-feature-settings: "tnum" 1, "zero" 1;
+}
+
+.display {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 850;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  line-height: 0.88;
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.rule-b {
+  border-bottom: 1px solid var(--rule);
+}
+.rule-t {
+  border-top: 1px solid var(--rule);
+}
+
+/* A printed stamp for verified states. Used sparingly. */
+.stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 2px solid var(--verified);
+  color: var(--verified);
+  padding: 2px 8px;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transform: rotate(-2deg);
+}
+.stamp.reject {
+  border-color: var(--loss);
+  color: var(--loss);
+}
+
+/* Field terminal: the order ticket and receipts. Dark ink inset on paper. */
+.terminal {
+  background: var(--ink);
+  color: #ece4d2;
+}
+.terminal .label {
+  color: #a59d88;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 2px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-display), sans-serif;
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 120ms ease, background 120ms ease;
+}
+.btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--ink-3);
+}
+.btn:active {
+  transform: none;
+  box-shadow: none;
+}
+.btn.ghost {
+  background: transparent;
+  color: var(--ink);
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+a.link {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+a.link:hover {
+  text-decoration-thickness: 2px;
+}
+
+@keyframes ink-in {
+  from {
+    clip-path: circle(0% at 50% 50%);
+  }
+  to {
+    clip-path: circle(75% at 50% 50%);
+  }
+}
+.ink-in {
+  animation: ink-in 420ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes cell-flash {
+  from {
+    background: rgb(200 144 28 / 0.35);
+  }
+  to {
+    background: transparent;
+  }
+}
+.flash {
+  animation: cell-flash 600ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ink-in,
+  .flash {
+    animation: none;
+  }
+  .btn {
+    transition: none;
+  }
 }

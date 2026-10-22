@@ -1,0 +1,1010 @@
+{
+  "season": 0,
+  "network": "mainnet",
+  "generatedAt": "2026-10-22T19:15:23.244Z",
+  "windowDays": 7,
+  "sources": {
+    "leaderboard": "https://api.strikefinance.org/stat/v1/stats/leaderboard?limit=500&offset=0&time_range=all_time",
+    "holdings": "https://api.koios.rest/api/v1/address_info -> https://api.koios.rest/api/v1/account_assets",
+    "fills": "https://api.strikefinance.org/v2/history/fill?account_id={id}&limit=500",
+    "volume": "https://api.strikefinance.org/price/v2/ticker/24hr"
+  },
+  "totals": {
+    "leaderboardAccounts": 2997,
+    "cardanoAccounts": 2008,
+    "resolvedStakeKeys": 1998,
+    "armyMembers": 1538,
+    "assignment": "rarest held army token among Strike traders",
+    "fillsScanned": 13254,
+    "internalFillsDropped": 70
+  },
+  "armies": [
+    {
+      "slug": "snek",
+      "members": 69,
+      "holders": 501,
+      "traded": 31,
+      "volume": 5692777.384207862,
+      "pnl": 5074.245740478008,
+      "inProfit": 7,
+      "equity": 3967.0706221925375,
+      "fees7d": 7.07256405
+    },
+    {
+      "slug": "hosky",
+      "members": 61,
+      "holders": 538,
+      "traded": 30,
+      "volume": 12068368.565976337,
+      "pnl": -20329.76730805898,
+      "inProfit": 11,
+      "equity": 13866.37892854215,
+      "fees7d": 416.0017327900003
+    },
+    {
+      "slug": "night",
+      "members": 119,
+      "holders": 1009,
+      "traded": 59,
+      "volume": 10302918.988162914,
+      "pnl": -16238.584089286367,
+      "inProfit": 12,
+      "equity": 13234.945468676093,
+      "fees7d": 91.76664305
+    },
+    {
+      "slug": "strike",
+      "members": 222,
+      "holders": 943,
+      "traded": 64,
+      "volume": 35980644.36864263,
+      "pnl": -171572.16305992144,
+      "inProfit": 21,
+      "equity": 93200.47270897,
+      "fees7d": 812.2032364500001
+    },
+    {
+      "slug": "min",
+      "members": 106,
+      "holders": 480,
+      "traded": 49,
+      "volume": 11181842.575822255,
+      "pnl": -32234.537735303427,
+      "inProfit": 10,
+      "equity": 12574.99176219582,
+      "fees7d": 108.99917425000001
+    },
+    {
+      "slug": "iag",
+      "members": 72,
+      "holders": 451,
+      "traded": 36,
+      "volume": 14163953.99966349,
+      "pnl": -33672.0183745999,
+      "inProfit": 5,
+      "equity": 70189.02692237045,
+      "fees7d": 115.31053953000007
+    },
+    {
+      "slug": "wmtx",
+      "members": 64,
+      "holders": 317,
+      "traded": 22,
+      "volume": 10460334.242262244,
+      "pnl": -8555.746288263099,
+      "inProfit": 7,
+      "equity": 2905.8049129748624,
+      "fees7d": 110.43258857000004
+    },
+    {
+      "slug": "sundae",
+      "members": 69,
+      "holders": 293,
+      "traded": 30,
+      "volume": 6195734.240272699,
+      "pnl": -17200.297063619153,
+      "inProfit": 7,
+      "equity": 15812.710977579409,
+      "fees7d": 33.53758432999995
+    },
+    {
+      "slug": "indy",
+      "members": 93,
+      "holders": 219,
+      "traded": 35,
+      "volume": 3048560.8825451345,
+      "pnl": 940.444174439075,
+      "inProfit": 10,
+      "equity": 8859.71857146811,
+      "fees7d": 52.19497974000007
+    },
+    {
+      "slug": "cock",
+      "members": 121,
+      "holders": 204,
+      "traded": 63,
+      "volume": 9459997.712140577,
+      "pnl": -16106.074124372222,
+      "inProfit": 17,
+      "equity": 27272.50172914787,
+      "fees7d": 96.25448113000039
+    },
+    {
+      "slug": "fren",
+      "members": 193,
+      "holders": 193,
+      "traded": 84,
+      "volume": 9576224.358315188,
+      "pnl": 26721.624324438206,
+      "inProfit": 22,
+      "equity": 83763.36102609156,
+      "fees7d": 41.48501596999991
+    },
+    {
+      "slug": "newm",
+      "members": 117,
+      "holders": 197,
+      "traded": 32,
+      "volume": 1804083.5881044,
+      "pnl": -6259.56793967064,
+      "inProfit": 8,
+      "equity": 13026.80852461439,
+      "fees7d": 42.65817591999999
+    },
+    {
+      "slug": "book",
+      "members": 69,
+      "holders": 214,
+      "traded": 22,
+      "volume": 4075961.1978455638,
+      "pnl": -6111.088351615225,
+      "inProfit": 6,
+      "equity": 7333.620229946094,
+      "fees7d": 23.51992864
+    },
+    {
+      "slug": "drip",
+      "members": 46,
+      "holders": 303,
+      "traded": 19,
+      "volume": 1788120.16343937,
+      "pnl": -7246.63794505111,
+      "inProfit": 4,
+      "equity": 2173.1024484820737,
+      "fees7d": 55.321202830000026
+    },
+    {
+      "slug": "flow",
+      "members": 117,
+      "holders": 258,
+      "traded": 33,
+      "volume": 9833887.08088932,
+      "pnl": -18585.711918848196,
+      "inProfit": 6,
+      "equity": 9218.053349465921,
+      "fees7d": 129.73509412000004
+    }
+  ],
+  "tiles": [
+    {
+      "symbol": "AAOI-USD",
+      "weight": 2.08,
+      "owner": "strike",
+      "runnerUp": "indy",
+      "scores": {
+        "strike": 0.968,
+        "indy": 0.071,
+        "fren": 0.032
+      },
+      "margin": 0.9266528925619835,
+      "volume24h": 62917.2296,
+      "traders": {
+        "strike": 2,
+        "indy": 1,
+        "fren": 1
+      }
+    },
+    {
+      "symbol": "ADA-USD",
+      "weight": 1.33,
+      "owner": "hosky",
+      "runnerUp": "night",
+      "scores": {
+        "fren": 8.607,
+        "iag": 6.271,
+        "indy": 5.486,
+        "strike": 6.997,
+        "snek": 1.755,
+        "newm": 3.419,
+        "cock": 9.898,
+        "hosky": 23.072,
+        "min": 9.078,
+        "sundae": 0.629,
+        "book": 5.2,
+        "night": 13.546,
+        "drip": 4.76,
+        "flow": 8.464,
+        "wmtx": 8.329
+      },
+      "margin": 0.41288141470180306,
+      "volume24h": 903517.62178,
+      "traders": {
+        "fren": 11,
+        "iag": 3,
+        "indy": 3,
+        "strike": 9,
+        "snek": 3,
+        "newm": 3,
+        "cock": 6,
+        "hosky": 7,
+        "min": 5,
+        "sundae": 2,
+        "book": 3,
+        "night": 5,
+        "drip": 2,
+        "flow": 1,
+        "wmtx": 1
+      }
+    },
+    {
+      "symbol": "BNB-USD",
+      "weight": 2.64,
+      "owner": "strike",
+      "runnerUp": "fren",
+      "scores": {
+        "strike": 0.314,
+        "cock": 0.061,
+        "fren": 0.115
+      },
+      "margin": 0.6337579617834396,
+      "volume24h": 8762.4613,
+      "traders": {
+        "strike": 2,
+        "cock": 1,
+        "fren": 1
+      }
+    },
+    {
+      "symbol": "BTC-USD",
+      "weight": 1,
+      "owner": "strike",
+      "runnerUp": "cock",
+      "scores": {
+        "iag": 4.403,
+        "cock": 9.83,
+        "strike": 44.539,
+        "indy": 8.049,
+        "fren": 5.946,
+        "sundae": 4.85,
+        "hosky": 2.309,
+        "min": 3.783,
+        "book": 1.077,
+        "newm": 5.961,
+        "flow": 1.347,
+        "night": 6.345,
+        "drip": 4.471,
+        "snek": 1.362
+      },
+      "margin": 0.7792945508430814,
+      "volume24h": 2869756.73138,
+      "traders": {
+        "iag": 4,
+        "cock": 8,
+        "strike": 12,
+        "indy": 3,
+        "fren": 10,
+        "sundae": 3,
+        "hosky": 3,
+        "min": 5,
+        "book": 2,
+        "newm": 4,
+        "flow": 2,
+        "night": 3,
+        "drip": 1,
+        "snek": 1
+      }
+    },
+    {
+      "symbol": "COIN-USD",
+      "weight": 2.21,
+      "owner": "strike",
+      "runnerUp": "newm",
+      "scores": {
+        "strike": 0.705,
+        "indy": 0.109,
+        "newm": 0.156,
+        "hosky": 0.131,
+        "fren": 0.143
+      },
+      "margin": 0.778723404255319,
+      "volume24h": 39494.2747,
+      "traders": {
+        "strike": 4,
+        "indy": 1,
+        "newm": 1,
+        "hosky": 1,
+        "fren": 1
+      }
+    },
+    {
+      "symbol": "CRCL-USD",
+      "weight": 2.09,
+      "owner": "strike",
+      "runnerUp": "min",
+      "scores": {
+        "wmtx": 0.398,
+        "strike": 1.546,
+        "fren": 0.284,
+        "min": 0.801
+      },
+      "margin": 0.481888745148771,
+      "volume24h": 62285.4822,
+      "traders": {
+        "wmtx": 1,
+        "strike": 2,
+        "fren": 1,
+        "min": 1
+      }
+    },
+    {
+      "symbol": "CXMT-USD",
+      "weight": 1.94,
+      "owner": "min",
+      "runnerUp": "wmtx",
+      "scores": {
+        "wmtx": 0.283,
+        "min": 1.681
+      },
+      "margin": 0.8316478286734087,
+      "volume24h": 103192.68387,
+      "traders": {
+        "wmtx": 1,
+        "min": 1
+      }
+    },
+    {
+      "symbol": "DOGE-USD",
+      "weight": 2.87,
+      "owner": "strike",
+      "runnerUp": null,
+      "scores": {
+        "strike": 0.937
+      },
+      "margin": 1,
+      "volume24h": 3934.83899,
+      "traders": {
+        "strike": 1
+      }
+    },
+    {
+      "symbol": "DRAM-USD",
+      "weight": 2.94,
+      "owner": "min",
+      "runnerUp": "strike",
+      "scores": {
+        "strike": 1.002,
+        "indy": 0.287,
+        "hosky": 0.124,
+        "fren": 0.109,
+        "min": 1.294,
+        "book": 0.477
+      },
+      "margin": 0.22565687789799074,
+      "volume24h": 3032.62415,
+      "traders": {
+        "strike": 4,
+        "indy": 1,
+        "hosky": 1,
+        "fren": 1,
+        "min": 2,
+        "book": 1
+      }
+    },
+    {
+      "symbol": "ETH-USD",
+      "weight": 1.48,
+      "owner": "strike",
+      "runnerUp": "cock",
+      "scores": {
+        "cock": 7.333,
+        "strike": 8.492,
+        "indy": 1.098,
+        "fren": 4.317,
+        "hosky": 2.853,
+        "min": 6.096,
+        "newm": 0.986,
+        "night": 0.361,
+        "drip": 2.904,
+        "flow": 6.351
+      },
+      "margin": 0.13648139425341504,
+      "volume24h": 524009.9461,
+      "traders": {
+        "cock": 7,
+        "strike": 8,
+        "indy": 1,
+        "fren": 6,
+        "hosky": 3,
+        "min": 5,
+        "newm": 1,
+        "night": 1,
+        "drip": 1,
+        "flow": 2
+      }
+    },
+    {
+      "symbol": "GOOGL-USD",
+      "weight": 2.74,
+      "owner": "strike",
+      "runnerUp": null,
+      "scores": {
+        "strike": 1.006
+      },
+      "margin": 1,
+      "volume24h": 6096.0937,
+      "traders": {
+        "strike": 1
+      }
+    },
+    {
+      "symbol": "HYPE-USD",
+      "weight": 1.53,
+      "owner": "strike",
+      "runnerUp": "min",
+      "scores": {
+        "strike": 4.828,
+        "indy": 0.6,
+        "fren": 4.274,
+        "min": 4.751,
+        "sundae": 0,
+        "cock": 1.892,
+        "newm": 0.766,
+        "wmtx": 0.346,
+        "hosky": 1.725,
+        "book": 0.07,
+        "flow": 3.893
+      },
+      "margin": 0.01594863297431648,
+      "volume24h": 447727.27026,
+      "traders": {
+        "strike": 8,
+        "indy": 1,
+        "fren": 6,
+        "min": 4,
+        "sundae": 1,
+        "cock": 3,
+        "newm": 1,
+        "wmtx": 1,
+        "hosky": 2,
+        "book": 1,
+        "flow": 1
+      }
+    },
+    {
+      "symbol": "LIT-USD",
+      "weight": 2.69,
+      "owner": "strike",
+      "runnerUp": null,
+      "scores": {
+        "strike": 0.219
+      },
+      "margin": 1,
+      "volume24h": 7460.27615,
+      "traders": {
+        "strike": 1
+      }
+    },
+    {
+      "symbol": "MINIMAX-USD",
+      "weight": 1.59,
+      "owner": "strike",
+      "runnerUp": "drip",
+      "scores": {
+        "strike": 2.079,
+        "indy": 0.252,
+        "drip": 0.593
+      },
+      "margin": 0.7147667147667148,
+      "volume24h": 354423.81116,
+      "traders": {
+        "strike": 2,
+        "indy": 1,
+        "drip": 1
+      }
+    },
+    {
+      "symbol": "MU-USD",
+      "weight": 2.27,
+      "owner": "iag",
+      "runnerUp": "indy",
+      "scores": {
+        "strike": 1.109,
+        "indy": 1.287,
+        "sundae": 1.044,
+        "cock": 0.096,
+        "iag": 2.009,
+        "fren": 0.562,
+        "min": 0.393,
+        "book": 0.839
+      },
+      "margin": 0.3593827775012444,
+      "volume24h": 32862.6472,
+      "traders": {
+        "strike": 3,
+        "indy": 1,
+        "sundae": 1,
+        "cock": 1,
+        "iag": 1,
+        "fren": 2,
+        "min": 1,
+        "book": 1
+      }
+    },
+    {
+      "symbol": "NAS100-USD",
+      "weight": 3,
+      "owner": "iag",
+      "runnerUp": "newm",
+      "scores": {
+        "strike": 1.003,
+        "cock": 1.295,
+        "iag": 2.57,
+        "min": 1.477,
+        "book": 1.055,
+        "newm": 1.999
+      },
+      "margin": 0.22217898832684815,
+      "volume24h": 2473.8753,
+      "traders": {
+        "strike": 1,
+        "cock": 1,
+        "iag": 1,
+        "min": 1,
+        "book": 1,
+        "newm": 1
+      }
+    },
+    {
+      "symbol": "NEAR-USD",
+      "weight": 1.58,
+      "owner": "hosky",
+      "runnerUp": "strike",
+      "scores": {
+        "cock": 1.248,
+        "strike": 8.721,
+        "indy": 0.539,
+        "fren": 1.266,
+        "sundae": 0.724,
+        "hosky": 10.146,
+        "min": 3.471,
+        "drip": 1.032,
+        "iag": 1.343,
+        "book": 0.108,
+        "newm": 0.913,
+        "flow": 1.826
+      },
+      "margin": 0.14044943820224726,
+      "volume24h": 376088.56511,
+      "traders": {
+        "cock": 2,
+        "strike": 7,
+        "indy": 1,
+        "fren": 5,
+        "sundae": 1,
+        "hosky": 2,
+        "min": 2,
+        "drip": 1,
+        "iag": 1,
+        "book": 1,
+        "newm": 1,
+        "flow": 1
+      }
+    },
+    {
+      "symbol": "NIGHT-USD",
+      "weight": 2.35,
+      "owner": "wmtx",
+      "runnerUp": "book",
+      "scores": {
+        "iag": 2.753,
+        "hosky": 2.141,
+        "newm": 1.641,
+        "min": 1.01,
+        "fren": 1.045,
+        "strike": 1.583,
+        "cock": 2.209,
+        "flow": 2.094,
+        "book": 2.923,
+        "wmtx": 6.128
+      },
+      "margin": 0.523009138381201,
+      "volume24h": 24473.90078,
+      "traders": {
+        "iag": 4,
+        "hosky": 3,
+        "newm": 2,
+        "min": 2,
+        "fren": 2,
+        "strike": 2,
+        "cock": 4,
+        "flow": 3,
+        "book": 2,
+        "wmtx": 1
+      }
+    },
+    {
+      "symbol": "NVDA-USD",
+      "weight": 2.68,
+      "owner": "iag",
+      "runnerUp": "min",
+      "scores": {
+        "strike": 0.985,
+        "iag": 1.372,
+        "fren": 0.08,
+        "min": 1.092
+      },
+      "margin": 0.20408163265306123,
+      "volume24h": 7700.2179,
+      "traders": {
+        "strike": 2,
+        "iag": 1,
+        "fren": 1,
+        "min": 1
+      }
+    },
+    {
+      "symbol": "PUMP-USD",
+      "weight": 1.59,
+      "owner": "min",
+      "runnerUp": "strike",
+      "scores": {
+        "strike": 3.547,
+        "indy": 0.384,
+        "min": 5.277,
+        "drip": 0.962,
+        "wmtx": 0.4,
+        "newm": 0.275,
+        "cock": 2.01,
+        "hosky": 0.222,
+        "iag": 0.232,
+        "fren": 0.678,
+        "sundae": 0.493,
+        "book": 0.1
+      },
+      "margin": 0.3278377866211863,
+      "volume24h": 360783.9442217,
+      "traders": {
+        "strike": 5,
+        "indy": 1,
+        "min": 3,
+        "drip": 1,
+        "wmtx": 1,
+        "newm": 1,
+        "cock": 3,
+        "hosky": 1,
+        "iag": 1,
+        "fren": 2,
+        "sundae": 1,
+        "book": 1
+      }
+    },
+    {
+      "symbol": "SKHYNIX-USD",
+      "weight": 1.9,
+      "owner": "strike",
+      "runnerUp": "indy",
+      "scores": {
+        "strike": 2.494,
+        "indy": 0.713,
+        "book": 0.317,
+        "wmtx": 0.489,
+        "fren": 0.165
+      },
+      "margin": 0.7141138732959101,
+      "volume24h": 120180.18,
+      "traders": {
+        "strike": 4,
+        "indy": 1,
+        "book": 1,
+        "wmtx": 1,
+        "fren": 1
+      }
+    },
+    {
+      "symbol": "SNDK-USD",
+      "weight": 2.06,
+      "owner": "strike",
+      "runnerUp": "drip",
+      "scores": {
+        "strike": 0.685,
+        "newm": 0.232,
+        "wmtx": 0.368,
+        "drip": 0.585
+      },
+      "margin": 0.14598540145985414,
+      "volume24h": 68283.892,
+      "traders": {
+        "strike": 1,
+        "newm": 1,
+        "wmtx": 1,
+        "drip": 1
+      }
+    },
+    {
+      "symbol": "SOL-USD",
+      "weight": 2.07,
+      "owner": "strike",
+      "runnerUp": "fren",
+      "scores": {
+        "strike": 4.882,
+        "fren": 2.526,
+        "newm": 2.104,
+        "hosky": 2.049,
+        "cock": 0.553,
+        "snek": 0.1,
+        "indy": 0,
+        "drip": 0.583,
+        "min": 0.793,
+        "flow": 0.104
+      },
+      "margin": 0.48258910282671036,
+      "volume24h": 65310.1183,
+      "traders": {
+        "strike": 5,
+        "fren": 3,
+        "newm": 2,
+        "hosky": 2,
+        "cock": 2,
+        "snek": 1,
+        "indy": 1,
+        "drip": 1,
+        "min": 1,
+        "flow": 1
+      }
+    },
+    {
+      "symbol": "SP500-USD",
+      "weight": 2.49,
+      "owner": "newm",
+      "runnerUp": "iag",
+      "scores": {
+        "strike": 0.36,
+        "newm": 3.764,
+        "iag": 1.178,
+        "cock": 0.086,
+        "book": 0.282
+      },
+      "margin": 0.6870350690754516,
+      "volume24h": 14899.4298,
+      "traders": {
+        "strike": 1,
+        "newm": 1,
+        "iag": 2,
+        "cock": 1,
+        "book": 1
+      }
+    },
+    {
+      "symbol": "SPCX-USD",
+      "weight": 2.27,
+      "owner": "strike",
+      "runnerUp": "fren",
+      "scores": {
+        "strike": 2.341,
+        "indy": 0.57,
+        "fren": 1.583,
+        "snek": 0.786,
+        "wmtx": 1.461,
+        "hosky": 0.117,
+        "cock": 0.273
+      },
+      "margin": 0.32379325074754384,
+      "volume24h": 32999.8416,
+      "traders": {
+        "strike": 3,
+        "indy": 1,
+        "fren": 2,
+        "snek": 1,
+        "wmtx": 1,
+        "hosky": 1,
+        "cock": 1
+      }
+    },
+    {
+      "symbol": "TSLA-USD",
+      "weight": 1.96,
+      "owner": "strike",
+      "runnerUp": "snek",
+      "scores": {
+        "strike": 3.285,
+        "snek": 1.676,
+        "min": 0.085,
+        "newm": 0.225,
+        "cock": 0.677,
+        "hosky": 0.528
+      },
+      "margin": 0.4898021308980213,
+      "volume24h": 95490.2988,
+      "traders": {
+        "strike": 5,
+        "snek": 1,
+        "min": 1,
+        "newm": 1,
+        "cock": 1,
+        "hosky": 1
+      }
+    },
+    {
+      "symbol": "UNITREE-USD",
+      "weight": 1.67,
+      "owner": "strike",
+      "runnerUp": "newm",
+      "scores": {
+        "strike": 1.89,
+        "indy": 0.148,
+        "newm": 0.605
+      },
+      "margin": 0.6798941798941799,
+      "volume24h": 270155.60098,
+      "traders": {
+        "strike": 2,
+        "indy": 1,
+        "newm": 1
+      }
+    },
+    {
+      "symbol": "WTI-USD",
+      "weight": 2.09,
+      "owner": "strike",
+      "runnerUp": "iag",
+      "scores": {
+        "strike": 4.262,
+        "indy": 0.695,
+        "hosky": 1.218,
+        "min": 0.812,
+        "fren": 1.717,
+        "wmtx": 0.688,
+        "iag": 2.94,
+        "book": 0.676,
+        "snek": 0.69
+      },
+      "margin": 0.3101830126701079,
+      "volume24h": 61288.70622,
+      "traders": {
+        "strike": 3,
+        "indy": 1,
+        "hosky": 1,
+        "min": 2,
+        "fren": 4,
+        "wmtx": 1,
+        "iag": 2,
+        "book": 1,
+        "snek": 1
+      }
+    },
+    {
+      "symbol": "XAG-USD",
+      "weight": 2.72,
+      "owner": "iag",
+      "runnerUp": "book",
+      "scores": {
+        "iag": 6.884,
+        "indy": 0,
+        "fren": 0.235,
+        "book": 0.653
+      },
+      "margin": 0.9051423590935502,
+      "volume24h": 6721.877291,
+      "traders": {
+        "iag": 3,
+        "indy": 1,
+        "fren": 1,
+        "book": 1
+      }
+    },
+    {
+      "symbol": "XAU-USD",
+      "weight": 1.92,
+      "owner": "iag",
+      "runnerUp": "min",
+      "scores": {
+        "iag": 4.12,
+        "sundae": 1.514,
+        "min": 1.911,
+        "strike": 1.16
+      },
+      "margin": 0.5361650485436893,
+      "volume24h": 109959.8549,
+      "traders": {
+        "iag": 1,
+        "sundae": 1,
+        "min": 1,
+        "strike": 1
+      }
+    },
+    {
+      "symbol": "XRP-USD",
+      "weight": 1.86,
+      "owner": "strike",
+      "runnerUp": "min",
+      "scores": {
+        "strike": 1.121,
+        "indy": 0.746,
+        "iag": 0.542,
+        "drip": 0.592,
+        "fren": 0.41,
+        "min": 0.795
+      },
+      "margin": 0.2908117752007136,
+      "volume24h": 138637.57503,
+      "traders": {
+        "strike": 1,
+        "indy": 1,
+        "iag": 1,
+        "drip": 1,
+        "fren": 2,
+        "min": 1
+      }
+    },
+    {
+      "symbol": "ZEC-USD",
+      "weight": 1.38,
+      "owner": "strike",
+      "runnerUp": "hosky",
+      "scores": {
+        "iag": 5.772,
+        "strike": 14.059,
+        "indy": 2.55,
+        "sundae": 3.546,
+        "hosky": 12.18,
+        "fren": 4.578,
+        "min": 5.016,
+        "drip": 5.176,
+        "newm": 1.296,
+        "cock": 5.15,
+        "flow": 4.253,
+        "book": 0.326,
+        "night": 2.929
+      },
+      "margin": 0.13365104203712921,
+      "volume24h": 746465.1653,
+      "traders": {
+        "iag": 2,
+        "strike": 11,
+        "indy": 1,
+        "sundae": 1,
+        "hosky": 4,
+        "fren": 6,
+        "min": 2,
+        "drip": 3,
+        "newm": 1,
+        "cock": 3,
+        "flow": 2,
+        "book": 1,
+        "night": 1
+      }
+    },
+    {
+      "symbol": "ZHIPU-USD",
+      "weight": 1.45,
+      "owner": "min",
+      "runnerUp": "strike",
+      "scores": {
+        "newm": 0.219,
+        "cock": 0.08,
+        "fren": 0.107,
+        "min": 1.41,
+        "strike": 0.967
+      },
+      "margin": 0.3141843971631206,
+      "volume24h": 583318.2579,
+      "traders": {
+        "newm": 1,
+        "cock": 1,
+        "fren": 1,
+        "min": 1,
+        "strike": 1
+      }
+    }
+  ]
+}

@@ -1,69 +1,108 @@
-import Image from "next/image";
+import Link from "next/link";
+import season0 from "@/data/season0.json";
+import { ARMY_BY_SLUG } from "@/lib/armies";
+import { fmtInt, fmtUsd } from "@/lib/format";
+import { Tower } from "@/components/Tower";
+import { WarMap } from "@/components/WarMap";
+import { Provenance } from "@/components/Provenance";
 
 export default function Home() {
+  const tiles = season0.tiles;
+  const held = new Map<string, number>();
+  for (const t of tiles) if (t.owner) held.set(t.owner, (held.get(t.owner) ?? 0) + 1);
+
+  const byVolume = [...season0.armies].sort((a, b) => b.volume - a.volume);
+  const towerRows = byVolume.map((a) => ({
+    slug: a.slug,
+    primary: a.volume,
+    primaryLabel: "volume, all time",
+    secondary: `${fmtInt(a.holders)} holders · ${fmtInt(a.members)} fight here · ${held.get(a.slug) ?? 0} tiles`,
+  }));
+
+  const snek = season0.armies.find((a) => a.slug === "snek")!;
+  const leaderTiles = [...held.entries()].sort((a, b) => b[1] - a[1])[0];
+  const leaderArmy = leaderTiles ? ARMY_BY_SLUG[leaderTiles[0]] : undefined;
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+    <main className="mx-auto max-w-[1400px] px-4 pb-24 md:px-8">
+      <section className="grid gap-8 pt-8 lg:grid-cols-[1fr_360px]">
+        <div>
+          <p className="label">Season 0 · Strike mainnet · last {season0.windowDays} days</p>
+          <h1 className="display mt-2 max-w-[18ch] text-[clamp(44px,7vw,92px)]">
+            {leaderArmy ? `${leaderArmy.ticker === "STRIKE" ? "The home army" : leaderArmy.ticker} holds ${leaderTiles![1]} of ${tiles.length} markets` : `${tiles.length} markets, no owner yet`}
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="mt-4 max-w-[62ch] text-[17px] text-ink-2">
+            {fmtInt(season0.totals.armyMembers)} of Strike&apos;s traders already hold a community token. Raid groups them into armies and
+            maps who trades where. Armies claim a market by bringing it traders who pay real fees, never by trading with each other.
           </p>
+          <div className="mt-5 flex flex-wrap gap-3">
+            <Link href="/join" className="btn">
+              Enlist your wallet
+            </Link>
+            <Link href="/rules" className="btn ghost">
+              How a market is claimed
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <aside className="self-end border-2 border-ink p-4">
+          <p className="label">Dispatch</p>
+          <p className="display mt-1 text-[30px]">{fmtInt(snek.holders)} SNEK holders already trade on Strike</p>
+          <p className="num mt-2 text-[14px] text-ink-2">
+            {fmtInt(snek.members)} fight for SNEK · {held.get("snek") ?? 0} markets held
+          </p>
+          <Link href="/army/snek" className="link mt-3 inline-block text-[14px] font-semibold">
+            The Snek army needs ground →
+          </Link>
+        </aside>
+      </section>
+
+      <section className="mt-10 grid gap-10 lg:grid-cols-[1fr_360px]">
+        <div>
+          <div className="flex items-baseline justify-between rule-b pb-2">
+            <h2 className="display text-[26px]">The board</h2>
+            <span className="label">Pips = frontier weight, up to 3x on quiet markets</span>
+          </div>
+          <div className="mt-4">
+            <WarMap tiles={tiles} />
+          </div>
+          <Legend />
         </div>
-      </main>
+        <Tower rows={towerRows} unit="usd" title="Armies" note="volume of members, all time" />
+      </section>
+
+      <Provenance
+        className="mt-12"
+        generatedAt={season0.generatedAt}
+        rows={[
+          ["Leaderboard", season0.sources.leaderboard],
+          ["Holdings", season0.sources.holdings],
+          ["Fills", season0.sources.fills],
+          ["24h volume", season0.sources.volume],
+        ]}
+        footnote={`${fmtInt(season0.totals.leaderboardAccounts)} accounts read, ${fmtInt(season0.totals.resolvedStakeKeys)} Cardano stake keys resolved, ${fmtInt(
+          season0.totals.fillsScanned,
+        )} fills scanned, ${fmtInt(season0.totals.internalFillsDropped)} fills dropped as trades between army members.`}
+      />
+    </main>
+  );
+}
+
+function Legend() {
+  return (
+    <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-[13px] text-ink-2">
+      <span className="flex items-center gap-2">
+        <span className="inline-block h-4 w-4 border-2 border-ink" style={{ background: "var(--field)" }} /> Held
+      </span>
+      <span className="flex items-center gap-2">
+        <span
+          className="inline-block h-4 w-4 border-2 border-ink"
+          style={{ background: "repeating-linear-gradient(45deg,var(--field) 0 4px,var(--ochre) 4px 8px)" }}
+        />
+        Contested: lead under 15%
+      </span>
+      <span className="flex items-center gap-2">
+        <span className="inline-block h-4 w-4 border border-dashed border-ink bg-[var(--paper-2)]" /> Unclaimed
+      </span>
     </div>
   );
 }
