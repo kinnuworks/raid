@@ -4,7 +4,7 @@ import { Loading } from "@/components/Loading";
 import Link from "next/link";
 import { ARMY_BY_SLUG } from "@/lib/armies";
 import { RECRUIT_RULES } from "@/lib/score";
-import { liveSeason } from "@/lib/season";
+import { seasonSnapshot } from "@/lib/season";
 import { Provenance } from "@/components/Provenance";
 import { Swatch } from "@/components/Swatch";
 import { NextDayCountdown } from "@/components/Countdown";
@@ -13,7 +13,7 @@ const short = (id: string) => `…${id.slice(-6)}`;
 
 async function RecruitsPageContent() {
   await connection();
-  const s = await liveSeason();
+  const s = await seasonSnapshot();
   const order = { confirmed: 0, pending: 1, rejected: 2 } as const;
   const recruits = [...s.recruits].sort((a, b) => order[a.check.status] - order[b.check.status]);
   return (

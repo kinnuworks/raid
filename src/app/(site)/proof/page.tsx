@@ -1,14 +1,14 @@
 import { Suspense } from "react";
 import { connection } from "next/server";
 import { Loading } from "@/components/Loading";
-import { liveSeason } from "@/lib/season";
+import { seasonSnapshot } from "@/lib/season";
 import { BUILDER_FEE_BPS } from "@/lib/strike/config";
 import { Provenance } from "@/components/Provenance";
 import { Recompute } from "./Recompute";
 
 async function ProofPageContent() {
   await connection();
-  const s = await liveSeason();
+  const s = await seasonSnapshot();
   return (
     <main className="mx-auto max-w-[1100px] px-4 pb-24 pt-8 md:px-8">
       <p className="kicker">Proof of Fees</p>

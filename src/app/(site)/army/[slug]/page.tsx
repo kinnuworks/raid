@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import season0 from "@/data/season0.json";
 import { ARMIES, ARMY_BY_SLUG } from "@/lib/armies";
 import { fmtInt, fmtSignedUsd, fmtUsd, plural } from "@/lib/format";
-import { liveSeason } from "@/lib/season";
+import { seasonSnapshot } from "@/lib/season";
 import { Loading } from "@/components/Loading";
 import { Swatch } from "@/components/Swatch";
 import { WarMap } from "@/components/WarMap";
@@ -34,7 +34,7 @@ async function ArmyPageContent(props: PageProps<"/army/[slug]">) {
   const ranked = [...season0.armies].filter((a) => !ARMY_BY_SLUG[a.slug].garrison).sort((a, b) => b.volume7d - a.volume7d);
   const rank = ranked.findIndex((a) => a.slug === slug) + 1;
 
-  const live = await liveSeason();
+  const live = await seasonSnapshot();
   const liveMembers = live.members.filter((m) => m.army === slug);
   const board = live.recruitBoard.find((r) => r.army === slug);
   const fees = live.fees[slug];

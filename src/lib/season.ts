@@ -1,4 +1,5 @@
 import "server-only";
+import { cacheLife } from "next/cache";
 import { ARMY_BY_SLUG } from "./armies";
 import { TESTNET_FAUCETS } from "./armyAssets";
 import { listMembers, type Member } from "./db";
@@ -163,4 +164,11 @@ export async function liveSeason(force = false): Promise<LiveSeason> {
   };
   cache = { at: Date.now(), value };
   return value;
+}
+
+/** Pages read the season through this cache: one recompute per minute per instance, not per visit. */
+export async function seasonSnapshot(): Promise<LiveSeason> {
+  "use cache";
+  cacheLife({ stale: 30, revalidate: 60, expire: 300 });
+  return liveSeason(true);
 }
