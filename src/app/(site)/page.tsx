@@ -5,6 +5,7 @@ import { fmtInt, fmtUsd, plural } from "@/lib/format";
 import { Provenance } from "@/components/Provenance";
 import { Replay } from "@/components/Replay";
 import { Swatch } from "@/components/Swatch";
+import { LiveStrip } from "@/components/LiveStrip";
 
 export default function Home() {
   const tiles = season0.tiles;
@@ -73,7 +74,9 @@ export default function Home() {
         </aside>
       </section>
 
-      <section className="mt-12 grid gap-10 xl:grid-cols-[1fr_380px]">
+      <LiveStrip />
+
+      <section className="mt-10 grid gap-10 xl:grid-cols-[1fr_380px]">
         <div>
           <div className="rule-b flex flex-wrap items-baseline justify-between gap-2 pb-2">
             <h2 className="display text-[30px]">The board</h2>

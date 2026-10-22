@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
-import { liveSeason } from "@/lib/season";
+import { liveSeason, seasonSnapshot } from "@/lib/season";
 
-/** The live season, recomputed from Strike's public data at most every 20 seconds. */
+/** The live season from Strike's public data. Cached for a minute; ?fresh=1 recomputes now. */
 export async function GET(req: Request) {
-  const force = new URL(req.url).searchParams.get("fresh") === "1";
-  return NextResponse.json(await liveSeason(force));
+  const fresh = new URL(req.url).searchParams.get("fresh") === "1";
+  return NextResponse.json(fresh ? await liveSeason(true) : await seasonSnapshot());
 }
