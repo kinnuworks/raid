@@ -1,0 +1,79 @@
+{
+  "checkedAt": "2026-10-22T21:56:41.247Z",
+  "claim": "Every demo wallet deposited through Strike's deposit flow (quote, build-tx, wallet signature, confirm)",
+  "source": "GET /v2/history/transaction?account_id={id}",
+  "count": 10,
+  "totalUsd": 327.75,
+  "deposits": [
+    {
+      "account_id": "01a1650c-2aad-71ae-9c07-f7d578e20b62",
+      "usd": 42.353017,
+      "status": "settled",
+      "asset": "ADA",
+      "tx_hash": "c702cf904b242d9803d531eac3ba9b2154c37c03eb15bc72c01a3ace879444a9#0"
+    },
+    {
+      "account_id": "01a1650d-cc6f-7e8a-a53f-9248d3bd857e",
+      "usd": 31.710906,
+      "status": "settled",
+      "asset": "ADA",
+      "tx_hash": "4b5cdf2581b2bdd2ab355e536debcb52104a83b71b88f433638979f42ed2000d#0"
+    },
+    {
+      "account_id": "01a1650e-06af-79ce-ae61-56a92f38c0fc",
+      "usd": 31.712293,
+      "status": "settled",
+      "asset": "ADA",
+      "tx_hash": "d6ddcf44d3359183a53f6d7ce7e61d339b094ac4d2dc938904cc99a3836be3b7#0"
+    },
+    {
+      "account_id": "01a1650e-3c10-73aa-a6d0-13879de24798",
+      "usd": 31.711907,
+      "status": "settled",
+      "asset": "ADA",
+      "tx_hash": "8a3de4f3fe5259f43cbea802941713d51372277fefb3197d13d54390949bd801#0"
+    },
+    {
+      "account_id": "01a1650e-638d-78fc-83fc-294f956a4783",
+      "usd": 31.711309,
+      "status": "settled",
+      "asset": "ADA",
+      "tx_hash": "1b46725eaf3b30d24901d5c23ffd707f9273551dafc9bd14d884eed0a66fb526#0"
+    },
+    {
+      "account_id": "01a1650e-9976-7513-82c3-0e2e107549f3",
+      "usd": 31.71233,
+      "status": "settled",
+      "asset": "ADA",
+      "tx_hash": "9c16ee3499a99daf1911f40b0b16724af5d9984bed15b75c6bc2c738b823b440#0"
+    },
+    {
+      "account_id": "01a1650e-b33b-77bf-9a9d-1873483312af",
+      "usd": 31.711309,
+      "status": "settled",
+      "asset": "ADA",
+      "tx_hash": "8cd6164890c67c4bbd9496c0da15b9020397fcc80c2d1271c2da8f24d7175826#0"
+    },
+    {
+      "account_id": "01a1650e-be07-783f-ad6c-b0323b329101",
+      "usd": 31.711567,
+      "status": "settled",
+      "asset": "ADA",
+      "tx_hash": "89763599fea2cb36ba4203774722c4a40217c4c3a0459b82ccf371349753b6d8#0"
+    },
+    {
+      "account_id": "01a1650e-ccc0-7980-8e11-a22fb6d35d52",
+      "usd": 31.711555,
+      "status": "settled",
+      "asset": "ADA",
+      "tx_hash": "9d4b95d33847dbee00fe0c9816e5eec3a6cef617235bf726b55b08c35b2e54c2#0"
+    },
+    {
+      "account_id": "01a16510-c09c-7772-b0ae-d79d439ff0dd",
+      "usd": 31.700218,
+      "status": "settled",
+      "asset": "ADA",
+      "tx_hash": "005f2eebeedaa2a25d0d7006cc07b267df7bea5ba4d564ded2e45ac270bbd759#0"
+    }
+  ]
+}

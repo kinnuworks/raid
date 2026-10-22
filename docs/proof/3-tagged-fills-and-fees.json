@@ -1,0 +1,60 @@
+{
+  "checkedAt": "2026-10-22T21:56:41.247Z",
+  "claim": "Orders placed through Raid carry a public raid:v1 tag and a 10 bps builder fee",
+  "source": "GET /v2/history/fill?account_id={id}",
+  "taggedFills": 11,
+  "feesByArmy": {
+    "snek": {
+      "fills": 7,
+      "notional": 137.88206,
+      "builderFee": 0.13788206
+    },
+    "hosky": {
+      "fills": 2,
+      "notional": 52.47646,
+      "builderFee": 0.05247646
+    },
+    "night": {
+      "fills": 1,
+      "notional": 23.9145,
+      "builderFee": 0.0239145
+    }
+  },
+  "sample": [
+    {
+      "account_id": "01a1650c-2aad-71ae-9c07-f7d578e20b62",
+      "trade_id": 18492,
+      "symbol": "SOL-USD",
+      "role": "taker",
+      "client_order_id": "raid:v1:snek:10:9a83af86-8d3"
+    },
+    {
+      "account_id": "01a1650d-cc6f-7e8a-a53f-9248d3bd857e",
+      "trade_id": 18498,
+      "symbol": "ETH-USD",
+      "role": "maker",
+      "client_order_id": "raid:v1:snek:0:wash-m1792697112574"
+    },
+    {
+      "account_id": "01a1650d-cc6f-7e8a-a53f-9248d3bd857e",
+      "trade_id": 18491,
+      "symbol": "SOL-USD",
+      "role": "taker",
+      "client_order_id": "raid:v1:snek:10:6135e7c4-06d"
+    },
+    {
+      "account_id": "01a1650e-06af-79ce-ae61-56a92f38c0fc",
+      "trade_id": 18493,
+      "symbol": "ETH-USD",
+      "role": "taker",
+      "client_order_id": "raid:v1:hosky:10:fe0a7d3e-e6d"
+    },
+    {
+      "account_id": "01a1650e-3c10-73aa-a6d0-13879de24798",
+      "trade_id": 18494,
+      "symbol": "ETH-USD",
+      "role": "taker",
+      "client_order_id": "raid:v1:hosky:10:a5b7196a-b5f"
+    }
+  ]
+}

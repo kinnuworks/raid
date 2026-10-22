@@ -1,0 +1,12 @@
+{
+  "checkedAt": "2026-10-22T21:56:41.247Z",
+  "claim": "A recruit funded on-chain by its recruiter is rejected",
+  "source": "POST https://preprod.koios.rest/api/v1/address_txs and tx_info",
+  "recruiter": "addr_test1qq54n6zdu0gdcjzvgntphm3w0gqyj8f8sw8ax8f82fqx0j82685vmdmd73zpxsljwsk6cgyxk9rufun3790ylgya55fqpmt9d0",
+  "fundedByRecruiter": [
+    {
+      "recruit": "01a16510-c09c-7772-b0ae-d79d439ff0dd",
+      "tx_hash": "05ecb8701c20274df9b916f2ccb18cb4530384baf063ba7213c3e8bfc507a96b"
+    }
+  ]
+}

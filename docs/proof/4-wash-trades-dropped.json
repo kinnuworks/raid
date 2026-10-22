@@ -1,0 +1,28 @@
+{
+  "checkedAt": "2026-10-22T21:56:41.247Z",
+  "claim": "Trades with a Raid account on both sides are detected by their shared public trade_id and never score",
+  "source": "Same fills as proof 3",
+  "droppedTrades": [
+    {
+      "trade": "ETH-USD:18498",
+      "sides": [
+        {
+          "account_id": "01a1650d-cc6f-7e8a-a53f-9248d3bd857e",
+          "army": "snek",
+          "role": "maker",
+          "side": "sell",
+          "price": "2386.680000000000000000",
+          "size": "0.012000000000000000"
+        },
+        {
+          "account_id": "01a1650e-ccc0-7980-8e11-a22fb6d35d52",
+          "army": "snek",
+          "role": "taker",
+          "side": "buy",
+          "price": "2386.680000000000000000",
+          "size": "0.012000000000000000"
+        }
+      ]
+    }
+  ]
+}

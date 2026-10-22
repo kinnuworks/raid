@@ -10,7 +10,8 @@
     "season0": "tsx scripts/season0.mts",
     "test": "vitest run",
     "testnet": "tsx scripts/testnet.mts",
-    "demo": "tsx scripts/demo.mts"
+    "demo": "tsx scripts/demo.mts",
+    "proof": "tsx scripts/proof.mts"
   },
   "dependencies": {
     "@noble/ed25519": "^3.2.0",
