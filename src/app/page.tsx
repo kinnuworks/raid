@@ -41,6 +41,13 @@ export default function Home() {
               How a market is claimed
             </Link>
           </div>
+          <p className="mt-4 flex flex-wrap gap-x-3 gap-y-1 text-[13px] text-ink-2">
+            <span>Live on Strike testnet</span>
+            <span aria-hidden>·</span>
+            <span>No wallet needed to look around</span>
+            <span aria-hidden>·</span>
+            <span>Your trading key never leaves your browser</span>
+          </p>
         </div>
 
         <aside className="self-end border-l-4 border-ink pl-5">
@@ -122,6 +129,8 @@ export default function Home() {
         </section>
       </section>
 
+      <Faq />
+
       <Provenance
         className="mt-14"
         generatedAt={season0.generatedAt}
@@ -168,5 +177,53 @@ function Legend() {
         <dd>Two inks striped: contested, lead under 15%</dd>
       </div>
     </dl>
+  );
+}
+
+const FAQ: [string, string][] = [
+  [
+    "Is this real money?",
+    "Not yet. Season 0 reads Strike's real mainnet data, but every trade, deposit and fee in Season 1 runs on Strike testnet, which uses test funds. Mainnet is a single setting in the code; the team runs on testnet because it is based in a country on Strike's restricted list, with Strike's permission.",
+  ],
+  [
+    "Can an army farm the board?",
+    "Trading between Raid accounts never counts, in the same army or across armies, because both sides of a Strike trade share a public trade_id. A recruit funded by any member is rejected. Each member's weight is the square root of the fees they paid, so splitting one wallet into many costs more than it earns.",
+  ],
+  [
+    "Who gets the fees?",
+    "Orders that take liquidity carry a 0.1% builder fee on top of Strike's own fee. Strike pays it to Raid's builder account on every fill. Each army's share is tracked on the Proof of Fees page, where you can recompute it from Strike's data in your browser.",
+  ],
+  [
+    "Why is STRIKE grey on the map?",
+    "Wallets that hold only the STRIKE token are Strike's home crowd, and they trade the most. Shown in full colour they would cover the board, so they appear as a grey garrison and the community armies stay readable.",
+  ],
+  [
+    "Can Raid move my funds?",
+    "No. Your trading key is created in your browser and can't be exported, and Strike's API keys can trade but cannot withdraw. Withdrawals always go back to the wallet you enlisted with and need that wallet's signature.",
+  ],
+  [
+    "How is my army decided?",
+    "By the tokens your wallet holds, read from the chain. If you hold several, you pick one for the season. Season 0 assigns each wallet to its rarest army token, the clearest sign of which community it belongs to.",
+  ],
+];
+
+function Faq() {
+  return (
+    <section className="mt-16 max-w-[860px]" aria-labelledby="faq">
+      <h2 id="faq" className="display rule-b pb-2 text-[30px]">
+        Before you enlist
+      </h2>
+      {FAQ.map(([q, a]) => (
+        <details key={q} className="rule-b group">
+          <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-6 py-3 text-[17px] font-semibold">
+            {q}
+            <span aria-hidden className="num text-[20px] text-ink-2 transition-transform group-open:rotate-45">
+              +
+            </span>
+          </summary>
+          <p className="max-w-[68ch] pb-4 text-[15px] leading-relaxed text-ink-2">{a}</p>
+        </details>
+      ))}
+    </section>
   );
 }
