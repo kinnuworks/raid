@@ -93,6 +93,12 @@ async function ArmyPageContent(props: PageProps<"/army/[slug]">) {
             <h2 className="display text-[28px]">Season 1 · live</h2>
             <span className="label">Strike {live.network}</span>
           </div>
+          {live.network === "testnet" && (
+            <p className="mt-2 text-[13px] text-ink-2">
+              Testnet wallets can&apos;t hold the real {army.ticker}, so membership here is checked against t{army.ticker}, a labelled stand-in Raid minted on
+              Cardano preprod. On mainnet the same check reads the real token.
+            </p>
+          )}
           <dl className="mt-2 grid grid-cols-[1fr_auto] gap-y-2 text-[15px]">
             <dt className="text-ink-2">Enlisted through Raid</dt>
             <dd className="num">{liveMembers.length}</dd>
@@ -100,7 +106,9 @@ async function ArmyPageContent(props: PageProps<"/army/[slug]">) {
             <dd className="num">{board?.confirmed ?? 0}</dd>
             <dt className="text-ink-2">Recruits waiting on day two</dt>
             <dd className="num">{board?.pending ?? 0}</dd>
-            <dt className="text-ink-2">Markets held</dt>
+            <dt className="text-ink-2">Flagged or rejected</dt>
+            <dd className="num">{(board?.flagged ?? 0) + (board?.rejected ?? 0)}</dd>
+            <dt className="text-ink-2">Testnet markets held</dt>
             <dd className="num">{liveHeld.length ? liveHeld.join(", ") : "none"}</dd>
             <dt className="text-ink-2">Builder fees from this army</dt>
             <dd className="num">

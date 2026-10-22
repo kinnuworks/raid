@@ -20,9 +20,9 @@ const RULES: { h: string; body: React.ReactNode; formula?: string }[] = [
     body: "Both sides of a Strike trade carry the same public trade_id. When a trade has a Raid account on both sides, in the same army or in rival armies, both fills are dropped before anything is scored.",
   },
   {
-    h: "Quiet markets are worth more",
-    body: "A market's weight comes from Strike's own 24-hour volume on a log scale: the busiest market counts 1x, the quietest 3x. Pre-IPO names, equities and commodities are where Strike most needs traders.",
-    formula: "weight = 3 − 2 × (log volume − log min) ÷ (log max − log min)",
+    h: "No wallet can buy ground",
+    body: "Fees count toward a market up to $5 per wallet per UTC day. Past that, more trading adds nothing to the army's score, so overtrading is never rewarded.",
+    formula: "counted fees = Σ over days min($5, fees that wallet paid on that market that day)",
   },
   {
     h: "Recruits are the headline",
@@ -31,7 +31,15 @@ const RULES: { h: string; body: React.ReactNode; formula?: string }[] = [
   },
   {
     h: "Guardrails",
-    body: `The order ticket shows the most you can lose before you confirm and refuses orders past your daily cap. Recruits have a $${RECRUIT_RULES.seasonLossCapUsd} season cap. Points only count at 3x leverage or less. There is no wagering and no token buyback.`,
+    body: `The order ticket shows the most you can lose before you confirm and refuses orders past your daily cap. Recruits have a $${RECRUIT_RULES.seasonLossCapUsd} season cap. Orders above 3x leverage never score. There is no wagering and no token buyback.`,
+  },
+  {
+    h: "Spoils",
+    body: "Each army's share of builder fees goes to a treasury wallet its community names, paid at the end of the season through a claim anyone can verify against the Proof of Fees ledger. The army holding the most markets flies its banner over the next season's map.",
+  },
+  {
+    h: "Known limits",
+    body: "Public data shows when two Raid accounts trade with each other, but not who sits on the other side of a trade with an outside wallet. A wallet that colludes with an unenlisted account is held back by cost (deposits, fees on both sides, two trading days, the daily cap and ten credited recruits per recruiter), not by detection. Funding is traced two hops back. With maker identity shared with builders, Raid would require every recruit to trade against a known market maker.",
   },
   {
     h: "Fees",

@@ -136,3 +136,19 @@ describe("Proof of Fees", () => {
     expect(rows.snek.builderFee).toBeCloseTo(0.024);
   });
 });
+
+describe("cappedFeesByMember", () => {
+  it("caps each wallet's counted fees per UTC day", async () => {
+    const { cappedFeesByMember } = await import("./index");
+    const m = cappedFeesByMember(
+      [
+        fill({ account_id: "whale", fee: "40", timestamp: T0 }),
+        fill({ account_id: "whale", fee: "40", timestamp: T0 + DAY }),
+        fill({ account_id: "small", fee: "2", timestamp: T0 }),
+      ],
+      5,
+    );
+    expect(m.get("whale")).toBe(10);
+    expect(m.get("small")).toBe(2);
+  });
+});

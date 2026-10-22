@@ -9,7 +9,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { ARMIES, ARMY_BY_ASSET } from "../src/lib/armies";
 import { api, SERVER_HEADERS } from "../src/lib/strike/config";
-import { claimTile, dropInternalTrades, feesPaid, flowScore, frontierWeights, type Fill } from "../src/lib/score";
+import { cappedFeesByMember, claimTile, dropInternalTrades, feesPaid, flowScore, frontierWeights, type Fill } from "../src/lib/score";
 
 const MAIN = api("mainnet");
 const KOIOS = "https://api.koios.rest/api/v1";
@@ -173,12 +173,9 @@ async function main() {
   function tilesFor(fills: Fill[]) {
     return symbols.map((sym) => {
       const byArmy: Record<string, Map<string, number>> = {};
-      for (const f of fills) {
-        if (f.symbol !== sym) continue;
-        for (const a of armiesByAccount.get(f.account_id) ?? []) {
-          const mm = (byArmy[a] ??= new Map());
-          mm.set(f.account_id, (mm.get(f.account_id) ?? 0) + Math.max(0, Number(f.fee)));
-        }
+      // Same rule as the live season: fees count up to a daily cap per wallet.
+      for (const [member, fee] of cappedFeesByMember(fills.filter((f) => f.symbol === sym))) {
+        for (const a of armiesByAccount.get(member) ?? []) (byArmy[a] ??= new Map()).set(member, fee);
       }
       const scores = Object.fromEntries(Object.entries(byArmy).map(([a, mm]) => [a, Math.round(flowScore(mm) * 1000) / 1000]));
       const traders = Object.fromEntries(Object.entries(byArmy).map(([a, mm]) => [a, mm.size]));

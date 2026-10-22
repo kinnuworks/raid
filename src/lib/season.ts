@@ -7,6 +7,7 @@ import { fundingSources } from "./koios";
 import { publicApi, type PublicFill } from "./strike/client";
 import { LIVE_NETWORK } from "./strike/config";
 import {
+  cappedFeesByMember,
   checkRecruit,
   claimTile,
   creditedRecruitScore,
@@ -38,7 +39,7 @@ export interface LiveSeason {
   members: { account_id: string; army: string; is_recruit: boolean; qualified: boolean; depositedUsd: number; feesPaid: number; fills: number }[];
   tiles: (TileResult & { traders: Record<string, number> })[];
   recruits: RecruitRow[];
-  recruitBoard: { army: string; confirmed: number; pending: number; rejected: number; score: number }[];
+  recruitBoard: { army: string; confirmed: number; pending: number; flagged: number; rejected: number; score: number }[];
   fees: ReturnType<typeof feesByArmy>;
   internalFillsDropped: number;
   sources: Record<string, string>;
@@ -96,10 +97,13 @@ export async function liveSeason(force = false): Promise<LiveSeason> {
     perMember
       .filter((p) => p.m.is_recruit)
       .map(async (p) => {
-        const sources = await fundingSources(LIVE_NETWORK, p.m.address, p.m.stake_key).catch(() => []);
+        const sources = await fundingSources(LIVE_NETWORK, p.m.address, p.m.stake_key, 2, ignored).catch(() => []);
         const check = checkRecruit({ depositedUsd: p.deposited, outsideFills: keptBy.get(p.m.account_id) ?? [], fundingSources: sources }, memberSources(p.m), ignored);
         const ownTrades = p.fills.length > 0 && (keptBy.get(p.m.account_id) ?? []).length === 0;
-        if (check.status === "pending" && ownTrades) check.reasons.unshift("every trade so far was against another Raid account");
+        if (check.status === "pending" && ownTrades) {
+          check.status = "flagged";
+          check.reasons.unshift("every trade so far was against another Raid account");
+        }
         return { account_id: p.m.account_id, army: p.m.army, recruited_by: p.m.recruited_by, depositedUsd: p.deposited, check };
       }),
   );
@@ -114,11 +118,12 @@ export async function liveSeason(force = false): Promise<LiveSeason> {
         army,
         confirmed: rs.filter((r) => r.check.status === "confirmed").length,
         pending: rs.filter((r) => r.check.status === "pending").length,
+        flagged: rs.filter((r) => r.check.status === "flagged").length,
         rejected: rs.filter((r) => r.check.status === "rejected").length,
         score,
       };
     })
-    .filter((r) => r.confirmed + r.pending + r.rejected > 0)
+    .filter((r) => r.confirmed + r.pending + r.flagged + r.rejected > 0)
     .sort((a, b) => b.score - a.score || b.confirmed - a.confirmed);
 
   // Tiles: the live network's markets, claimed by fees from distinct qualified members.
@@ -127,11 +132,10 @@ export async function liveSeason(force = false): Promise<LiveSeason> {
   const weights = frontierWeights(Object.fromEntries(symbols.map((s) => [s, Number(tick.find((t) => t.symbol === s)?.quoteVolume ?? 0)])));
   const tiles = symbols.map((sym) => {
     const byArmy: Record<string, Map<string, number>> = {};
-    for (const f of kept) {
-      if (f.symbol !== sym || !qualified.has(f.account_id)) continue;
-      const army = armyOf.get(f.account_id)!;
-      const mm = (byArmy[army] ??= new Map());
-      mm.set(f.account_id, (mm.get(f.account_id) ?? 0) + Math.max(0, Number(f.fee)));
+    const capped = cappedFeesByMember(kept.filter((f) => f.symbol === sym && qualified.has(f.account_id)));
+    for (const [member, fee] of capped) {
+      const army = armyOf.get(member)!;
+      (byArmy[army] ??= new Map()).set(member, fee);
     }
     const scores = Object.fromEntries(Object.entries(byArmy).map(([a, mm]) => [a, Math.round(flowScore(mm) * 10000) / 10000]));
     return { ...claimTile(sym, weights[sym], scores), traders: Object.fromEntries(Object.entries(byArmy).map(([a, mm]) => [a, mm.size])) };

@@ -25,7 +25,7 @@ const INK = "#1B1A17";
 /** A strip of every market as a small square, inked by its owner: the board at thumbnail size. */
 export function MiniBoard({ highlight }: { highlight?: string }) {
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", width: 444, gap: 6, marginBottom: 8 }}>
+    <div style={{ display: "flex", flexWrap: "wrap", width: 444, gap: 5, marginBottom: 8 }}>
       {season0.tiles.map((t) => {
         const a = t.owner ? ARMY_BY_SLUG[t.owner] : undefined;
         const on = !highlight || t.owner === highlight;
@@ -34,8 +34,9 @@ export function MiniBoard({ highlight }: { highlight?: string }) {
             key={t.symbol}
             style={{
               width: 58,
-              height: 32,
+              height: 36,
               display: "flex",
+              flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
               border: `2px solid ${INK}`,
@@ -46,7 +47,8 @@ export function MiniBoard({ highlight }: { highlight?: string }) {
               fontSize: t.symbol.length > 10 ? 9 : 11,
             }}
           >
-            {t.symbol.replace("-USD", "")}
+            <div style={{ display: "flex" }}>{t.symbol.replace("-USD", "")}</div>
+            {a && !a.garrison ? <div style={{ display: "flex", fontFamily: "Display", fontSize: 13 }}>{a.code}</div> : null}
           </div>
         );
       })}

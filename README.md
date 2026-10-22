@@ -30,7 +30,7 @@ Meanwhile 1,538 of the wallets on Strike's leaderboard already hold a Cardano co
 | Proof of Fees recomputed in the browser | Live; it matches the server to 8 decimals |
 | Share cards for X, embeddable army card | Live |
 | Mainnet trading | One env var away (`NEXT_PUBLIC_RAID_NETWORK=mainnet`). Not run, because the team is in a country on Strike's restricted list |
-| Treasury payouts to communities | Accrued and shown per army; the end-of-season payout is not built yet |
+| Treasury payouts to communities | Accrued and shown per army. The end-of-season claim (below) is specified, not built |
 
 ### Why testnet
 
@@ -53,7 +53,7 @@ All scoring lives in `src/lib/score` as pure functions with unit tests.
 
 - **Trades between Raid accounts are dropped.** Both sides of a Strike trade carry the same public `trade_id`. If a trade has a Raid account on both sides, in the same army or in rival armies, both fills are removed before anything is scored. We checked this on 252 testnet trades.
 - **Markets.** Each day a market goes to the army whose distinct members paid the most fees there, scored as the sum of √fees per member. Ten traders beat one whale paying the same total.
-- **Frontier weight.** Quiet markets count up to 3x, based on Strike's own 24-hour volume on a log scale.
+- **Daily cap.** Fees count toward a market up to $5 per wallet per UTC day, so overtrading never buys ground.
 - **Recruits.** A wallet that had never traded on Strike joins through a member's link. It counts once it has:
   - deposited at least $20
   - paid fees against a counterparty outside every army
@@ -61,11 +61,32 @@ All scoring lives in `src/lib/score` as pure functions with unit tests.
   - traded on two separate UTC days
 
   A confirmed recruit scores √(fees paid). Each recruiter is credited for at most 10.
-- **Guardrails.** The order ticket shows the most you can lose and refuses orders past a daily cap. Recruits have a $50 season cap. Points only count at 3x leverage or less. There is no wagering and no token buyback.
+- **Guardrails.** The order ticket shows the most you can lose and refuses orders past a daily cap. Recruits have a $50 season cap. Orders above 3x leverage never score. There is no wagering and no token buyback.
+
+## Known limits
+
+These are written down so nobody has to discover them.
+
+- **Collusion with outside wallets.** Strike's public data shows when two Raid accounts trade with each other, and those trades are dropped. It does not show who sits on the other side of a trade with an account outside Raid. A recruit that trades only with an unenlisted colluding wallet is held back by cost, not by detection. The costs are:
+  - a $20 deposit
+  - fees on both sides
+  - trades on two separate days
+  - a $5-per-wallet daily fee cap
+  - at most ten credited recruits per recruiter
+- **Funding is traced two hops back** through Cardano transactions. Money routed through an exchange breaks the trail.
+- **The fix needs Strike.** If Strike shared maker identity with builders, or published a market-maker allow-list, Raid would require every recruit to trade at least once against a known market maker. That closes the collusion path.
+- **Testnet membership uses stand-in tokens** (tSNEK and others) that Raid minted, so on testnet the token check proves the mechanism, not real community membership. Mainnet reads the real tokens.
+
+## Payouts (specified, not built)
+
+1. At season end, Raid publishes a ledger: each army's builder-fee share, recomputed from tagged public fills, plus its root hash.
+2. Each community names a treasury wallet by signing with a wallet that holds its token.
+3. Raid withdraws its builder balance and sends each share in one transaction that references the ledger root.
+4. Anyone can recompute the ledger from public fills and check the transaction.
 
 ## Proof of Fees
 
-`/proof` lists builder fees by army. The **Recompute in my browser** button fetches every member's fills straight from Strike and recomputes `floor(price × size × bps ÷ 10,000)` in integer arithmetic. It then compares the result with Raid's server and stamps the outcome.
+`/proof` lists builder fees by army. The **Recompute in my browser** button fetches every member's fills straight from Strike and recomputes `floor(price × size × bps ÷ 10,000)` in integer arithmetic. It then compares the result with Raid's server and stamps whether the browser and server agree. Both come from Strike's public fills. Strike's own builder ledger is visible to the code owner on Strike's builder dashboard.
 
 Floating point gets this wrong. For example, 2443.07 × 0.01 × 10 ÷ 10,000 floors to 0.02443069 instead of 0.0244307. One of the unit tests caught that bug before it shipped.
 
@@ -102,7 +123,7 @@ pnpm demo wash snek-2 cheat-wash ETH-USD   # should be dropped by the wash filte
 
 ## Business case
 
-Raid earns its builder fee of 10 bps on orders that take liquidity. Suppose armies bring $1M of daily taker volume, which is about an eighth of Strike's current daily volume. That pays $1,000 a day in builder fees, of which each army's share goes to its community treasury. It also means about $500 a day in Strike's own taker fees, from traders Strike did not have before.
+Raid earns its builder fee of 10 bps on orders that take liquidity. Strike did about $8M a day over the last two weeks (`/stat/v1/dashboard/volumes`, $123M for October 1 to 21). Suppose armies bring $1M of daily taker volume. That pays $1,000 a day in builder fees, of which each army's share goes to its community treasury. It also means about $500 a day in Strike's own taker fees, from traders Strike did not have before.
 
 Season 0 also gives Strike a ranked list of which communities already trade there and how many of their holders have not yet.
 

@@ -13,7 +13,9 @@ export default function Home() {
   const garrisonHeld = held.get("strike") ?? 0;
   const communityHeld = tiles.length - garrisonHeld - tiles.filter((t) => !t.owner).length;
 
-  const armies = [...season0.armies].filter((a) => !ARMY_BY_SLUG[a.slug].garrison).sort((a, b) => b.volume7d - a.volume7d);
+  const armies = [...season0.armies]
+    .filter((a) => !ARMY_BY_SLUG[a.slug].garrison)
+    .sort((a, b) => (held.get(b.slug) ?? 0) - (held.get(a.slug) ?? 0) || b.volume7d - a.volume7d);
   const garrison = season0.armies.find((a) => ARMY_BY_SLUG[a.slug].garrison)!;
   const snek = season0.armies.find((a) => a.slug === "snek")!;
   const topCommunity = [...held.entries()].filter(([s]) => !ARMY_BY_SLUG[s].garrison).sort((a, b) => b[1] - a[1])[0];
@@ -62,6 +64,10 @@ export default function Home() {
           <Link href="/army/snek" className="link mt-3 inline-block text-[15px] font-semibold">
             The Snek army needs ground
           </Link>
+          <p className="mt-4 border-t border-[var(--rule)] pt-3 text-[13px] text-ink-2">
+            Spoils: each army&apos;s share of builder fees goes to its community treasury at season end, and the army holding the most markets flies its
+            banner over next season&apos;s map.
+          </p>
         </aside>
       </section>
 
@@ -80,7 +86,7 @@ export default function Home() {
         <section aria-label="Armies">
           <div className="rule-b flex items-baseline justify-between pb-2">
             <h2 className="display text-[30px]">Armies</h2>
-            <span className="label">volume, last 7 days</span>
+            <span className="label">markets held, then volume</span>
           </div>
           <table className="w-full text-[14px]">
             <thead className="sr-only">
@@ -104,14 +110,14 @@ export default function Home() {
                         <span>
                           <span className="display block text-[22px]">{army.ticker}</span>
                           <span className="block text-[12px] text-ink-2">
-                            {plural(a.traders7d, "trader")} · {plural(held.get(a.slug) ?? 0, "market")}
+                            {plural(a.traders7d, "trader")} this week · {fmtInt(a.holders)} holders
                           </span>
                         </span>
                       </Link>
                     </td>
                     <td className="num py-2 text-right align-top">
-                      <span className="block text-[15px] font-semibold">{fmtUsd(a.volume7d)}</span>
-                      <span className="block text-[11px] text-ink-3">{above ? `${fmtUsd(above.volume7d - a.volume7d)} behind #${i}` : "leader"}</span>
+                      <span className="block text-[15px] font-semibold">{plural(held.get(a.slug) ?? 0, "market")}</span>
+                      <span className="block text-[12px] text-ink-2">{fmtUsd(a.volume7d)} volume</span>
                     </td>
                   </tr>
                 );
@@ -169,7 +175,7 @@ function Legend() {
             <span key={i} className="inline-block h-[5px] w-[3px] bg-ink" />
           ))}
         </dt>
-        <dd>Ticks over a counter: quiet market, worth up to 3x</dd>
+        <dd>Ticks over a counter: quiet market, low 24h volume</dd>
       </div>
       <div className="flex items-center gap-2">
         <dt className="inline-block h-4 w-4 border border-ink" style={{ background: "repeating-linear-gradient(45deg,var(--field) 0 4px,var(--ochre) 4px 8px)" }} />
@@ -202,7 +208,7 @@ const FAQ: [string, string][] = [
   ],
   [
     "How is my army decided?",
-    "By the tokens your wallet holds, read from the chain. If you hold several, you pick one for the season. Season 0 assigns each wallet to its rarest army token, the clearest sign of which community it belongs to.",
+    "When you enlist, by you: Raid reads the tokens your wallet holds and you pick one of those armies for the season. The Season 0 map has no enlistments, so there each wallet is placed in its rarest army token, the clearest sign of which community it belongs to.",
   ],
 ];
 

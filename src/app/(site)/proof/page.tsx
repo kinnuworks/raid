@@ -20,7 +20,8 @@ async function ProofPageContent() {
         </p>
         <p>
           The builder fee on a fill is floor(price × size × {BUILDER_FEE_BPS} ÷ 10,000), counted on orders that take liquidity. Press the button and your browser
-          fetches the fills from Strike and adds them up without asking Raid.
+          fetches the fills from Strike and adds them up without asking Raid. Both columns come from Strike&apos;s public fills; Strike&apos;s own builder ledger is
+          shown to the code owner on Strike&apos;s builder dashboard and should match.
         </p>
       </div>
       <p className="mt-8 border-l-4 border-ink pl-4 text-[18px]">

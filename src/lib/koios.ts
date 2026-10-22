@@ -43,7 +43,17 @@ export async function assetsOf(network: Network, address: string, stakeKey: stri
  * Where a wallet's money came from: the addresses (and their stake keys) on the input side of
  * every transaction that paid into it, excluding the wallet itself.
  */
-export async function fundingSources(network: Network, address: string, stakeKey: string | null): Promise<string[]> {
+export async function fundingSources(network: Network, address: string, stakeKey: string | null, hops = 1, stopAt: Set<string> = new Set()): Promise<string[]> {
+  const direct = await directFunding(network, address, stakeKey);
+  if (hops <= 1) return direct;
+  // Second hop: who funded the funders. Faucets and other known shared sources end the trace.
+  const out = new Set(direct);
+  const next = direct.filter((s) => s.startsWith("addr") && !stopAt.has(s)).slice(0, 4);
+  for (const a of next) for (const s of await directFunding(network, a, null).catch(() => [])) out.add(s);
+  return [...out];
+}
+
+async function directFunding(network: Network, address: string, stakeKey: string | null): Promise<string[]> {
   const txs = await post<{ tx_hash: string }[]>(network, "address_txs", { _addresses: [address] });
   if (!txs.length) return [];
   const info = await post<{ inputs: { payment_addr: { bech32: string }; stake_addr: string | null }[] }[]>(network, "tx_info", {

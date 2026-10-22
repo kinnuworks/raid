@@ -109,10 +109,28 @@ export interface RecruitEvidence {
 }
 
 export interface RecruitCheck {
-  status: "confirmed" | "pending" | "rejected";
+  status: "confirmed" | "pending" | "flagged" | "rejected";
   reasons: string[];
   tradingDays: number;
   score: number;
+}
+
+/** Most fees one wallet can count toward a market in one UTC day, so nobody buys ground by overtrading. */
+export const DAILY_FEE_CAP_USD = 5;
+
+/** Fees per member on one market, with each member's fees capped per UTC day. */
+export function cappedFeesByMember(fills: Fill[], cap = DAILY_FEE_CAP_USD): Map<string, number> {
+  const perDay = new Map<string, number>();
+  for (const f of fills) {
+    const key = `${f.account_id}|${utcDay(f.timestamp)}`;
+    perDay.set(key, (perDay.get(key) ?? 0) + Math.max(0, Number(f.fee)));
+  }
+  const out = new Map<string, number>();
+  for (const [key, fee] of perDay) {
+    const member = key.split("|")[0];
+    out.set(member, (out.get(member) ?? 0) + Math.min(cap, fee));
+  }
+  return out;
 }
 
 export const RECRUIT_RULES = {

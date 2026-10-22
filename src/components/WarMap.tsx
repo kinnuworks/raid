@@ -264,7 +264,12 @@ function Board({
                 {region}
                 {String(index).padStart(2, "0")}
               </text>
-              {owner && (
+              {owner?.garrison && (
+                <text x={cx} y={cy + 12} textAnchor="middle" className="num" style={{ fontSize: 12, fontWeight: 600 }} fill="var(--ink-2)" opacity={faded ? 0.45 : 0.8}>
+                  {strength}
+                </text>
+              )}
+              {owner && !owner.garrison && (
                 <g transform={`translate(${cx - 16},${cy - 8})`} opacity={faded ? 0.45 : 1} filter="url(#chit-shadow)">
                   {Array.from({ length: ticks }).map((_, i) => (
                     <rect key={i} x={16 - ticks * 3 + i * 6} y={-7} width="4" height="4" fill="var(--ink)" />

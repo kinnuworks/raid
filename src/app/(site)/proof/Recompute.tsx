@@ -91,7 +91,7 @@ export function Recompute({ server, accounts, seasonStart }: { server: Rows; acc
       {state === "done" && (
         <p className="mt-4">
           <span className={`stamp ${match ? "" : "reject"}`} style={match ? { color: "#9fd3b8", borderColor: "#9fd3b8" } : undefined}>
-            {match ? "Matches Strike" : "Mismatch"}
+            {match ? "Browser matches server" : "Mismatch"}
           </span>
         </p>
       )}

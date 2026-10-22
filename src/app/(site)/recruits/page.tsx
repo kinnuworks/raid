@@ -14,7 +14,7 @@ const short = (id: string) => `…${id.slice(-6)}`;
 async function RecruitsPageContent() {
   await connection();
   const s = await seasonSnapshot();
-  const order = { confirmed: 0, pending: 1, rejected: 2 } as const;
+  const order = { confirmed: 0, pending: 1, flagged: 2, rejected: 3 } as const;
   const recruits = [...s.recruits].sort((a, b) => order[a.check.status] - order[b.check.status]);
   return (
     <main className="mx-auto max-w-[1300px] px-4 pb-24 pt-8 md:px-8">
@@ -36,7 +36,7 @@ async function RecruitsPageContent() {
               <Swatch army={ARMY_BY_SLUG[r.army]} className="h-3.5 w-3.5 self-center" />
               <span className="display text-[22px]">{ARMY_BY_SLUG[r.army].ticker}</span>
               <span className="num text-[13px] text-ink-2">
-                {r.confirmed} confirmed · {r.pending} on day one · {r.rejected} rejected · score {r.score.toFixed(3)}
+                {r.confirmed} confirmed · {r.pending} waiting on day two · {r.flagged} flagged · {r.rejected} rejected · score {r.score.toFixed(3)}
               </span>
             </Link>
           ))}
@@ -76,6 +76,7 @@ async function RecruitsPageContent() {
                 <td className="py-3 pl-2">
                   {r.check.status === "confirmed" && <span className="stamp text-[14px]">Confirmed</span>}
                   {r.check.status === "pending" && <span className="display text-[17px] text-ink-2">Waiting</span>}
+                  {r.check.status === "flagged" && <span className="display text-[17px]">Flagged</span>}
                   {r.check.status === "rejected" && <span className="display text-[17px] line-through decoration-2">Rejected</span>}
                   {r.check.reasons.length > 0 && <p className="mt-1 text-[13px] text-ink-2">{r.check.reasons.join(" · ")}</p>}
                 </td>

@@ -223,7 +223,7 @@ export function Terminal({ army, isRecruit }: { army?: string; isRecruit?: boole
           <input type="number" min={5} value={usd} onChange={(e) => setUsd(Number(e.target.value))} className="num mt-1 w-full border border-[#5b5547] bg-transparent p-2 text-[18px]" />
         </label>
         <label className="mt-3 block">
-          <span className="label">Leverage · points count up to {MAX_POINTS_LEVERAGE}x</span>
+          <span className="label">Leverage · orders above {MAX_POINTS_LEVERAGE}x never score</span>
           <input type="range" min={1} max={MAX_POINTS_LEVERAGE} value={lev} onChange={(e) => setLev(Number(e.target.value))} className="mt-2 w-full accent-[#ece4d2]" />
           <span className="num text-[14px]">{lev}x</span>
         </label>
