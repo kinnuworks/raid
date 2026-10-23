@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-22T21:56:41.247Z",
+  "checkedAt": "2026-10-23T00:05:15.024Z",
   "claim": "Trades with a Raid account on both sides are detected by their shared public trade_id and never score",
   "source": "Same fills as proof 3",
   "droppedTrades": [

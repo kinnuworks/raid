@@ -53,3 +53,11 @@ Times are UTC. The hackathon ran from Oct 21 14:00 to Oct 23 14:00.
 ## Oct 23
 
 **00:03 Second UTC trading day for the three recruits.** This is the first day they can confirm under the two-day rule.
+- rec-1 and rec-2 confirmed.
+- rec-3's sell found no bids within its slippage limit, so Strike cancelled it unfilled. Its retry as a buy filled, and rec-3 confirmed too.
+
+**00:10 The live season stands as follows:**
+- 3 recruits confirmed.
+- 1 wallet flagged, because every trade it made was against another Raid account.
+- 1 wallet rejected, because its recruiter funded it on-chain.
+- SNEK's recruit score is 0.391, and $0.34 in builder fees have been collected.

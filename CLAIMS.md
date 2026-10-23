@@ -13,6 +13,6 @@ Each claim Raid makes is listed here with its evidence file and the command that
 | 7 | The Season 0 map is built from Strike mainnet: 2,997 leaderboard accounts, 1,998 Cardano stake keys and 13,000+ fills, with trades between army members dropped | [`src/data/season0.json`](src/data/season0.json) (`totals`, `sources`) | `pnpm season0` |
 | 8 | Builder fees match `floor(price × size × bps ÷ 10,000)` to 8 decimals, computed in integers | [`src/lib/score/score.test.ts`](src/lib/score/score.test.ts) | `pnpm test` |
 | 9 | The trading key can't be exported from the browser and never reaches Raid's server | [`src/lib/wallet/apiKey.ts`](src/lib/wallet/apiKey.ts) (`extractable: false`), [`src/lib/strike/client.ts`](src/lib/strike/client.ts) (calls go to Strike directly) | Read the code; Strike's API allows browser calls |
-| 10 | Recruits confirm only after trading on two separate UTC days | [`src/lib/score/index.ts`](src/lib/score/index.ts) `checkRecruit`, and the tests | `pnpm test`, then `/recruits` after 00:00 UTC |
+| 10 | Recruits confirm only after trading on two separate UTC days. All three honest recruits confirmed on Oct 23 after their second trading day; the two cheaters did not | [`src/lib/score/index.ts`](src/lib/score/index.ts) `checkRecruit`, and the tests | `pnpm test`, then `/recruits` after 00:00 UTC |
 
 What is not claimed is listed under "Known limits" and "What is live and what is not" in the [README](README.md).
