@@ -42,7 +42,7 @@ export const ARMIES: Army[] = [
   { slug: "cock", ticker: "COCK", code: "CCK", name: "Cock", chain: "cardano", asset: "49e423161ef818adc475c783571cb479d5f15ad52a01a240eacc0d3b.434f434b", ink: INK.ochre, pattern: "dots" },
   { slug: "newm", ticker: "NEWM", code: "NWM", name: "Newm", chain: "cardano", asset: "682fe60c9918842b3323c43b5144bc3d52a23bd2fb81345560d73f63.4e45574d", ink: INK.ultramarine, pattern: "dots" },
   { slug: "drip", ticker: "DRIP", code: "DRP", name: "Drip", chain: "cardano", asset: "af2e27f580f7f08e93190a81f72462f153026d06450924726645891b.44524950", ink: INK.plum, pattern: "dots" },
-  { slug: "strike", ticker: "STRIKE", code: "GAR", name: "Strike garrison", chain: "cardano", asset: "f13ac4d66b3ee19a6aa0f2a22298737bd907cc95121662fc971b5275.535452494b45", ink: "#7a735f", pattern: "diagonal", garrison: true },
+  { slug: "strike", ticker: "STRIKE", code: "GAR", name: "Strike garrison", chain: "cardano", asset: "f13ac4d66b3ee19a6aa0f2a22298737bd907cc95121662fc971b5275.535452494b45", ink: "#77777a", pattern: "diagonal", garrison: true },
 ];
 
 export const ARMY_BY_SLUG = Object.fromEntries(ARMIES.map((a) => [a.slug, a]));

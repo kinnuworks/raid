@@ -2,13 +2,16 @@
 
 /* Campaign Map: printed wargame board. Square corners, hairline rules, ink on paper. */
 :root {
-  --paper: #ede6d6;
-  --paper-2: #e2d9c4;
-  --paper-3: #d6cbb2;
+  --paper: #ffffff;
+  --paper-2: #f3f3f1;
+  --paper-3: #e5e5e2;
   --ink: #1b1a17;
-  --ink-2: #4a4639;
-  --ink-3: #7a735f;
-  --contour: #b9ae97;
+  --ink-2: #4a4a48;
+  --ink-3: #77777a;
+  --contour: #d9d9d5;
+  /* STRIKE-only wallets: a flat neutral grey that still reads against white paper. */
+  --garrison: #e2e2df;
+  --garrison-strong: #b9b9b5;
   --rule: rgb(27 26 23 / 0.22);
   --rule-strong: rgb(27 26 23 / 0.55);
   --verified: #1f5c4a;
@@ -46,7 +49,7 @@ html {
 
 body {
   background:
-    radial-gradient(circle at 1px 1px, rgb(27 26 23 / 0.07) 1px, transparent 0) 0 0 / 24px 24px,
+    radial-gradient(circle at 1px 1px, rgb(27 26 23 / 0.05) 1px, transparent 0) 0 0 / 24px 24px,
     var(--paper);
   font-family: var(--font-text), ui-sans-serif, system-ui, sans-serif;
   font-size: 15px;
@@ -121,10 +124,11 @@ body {
 /* Field terminal: the order ticket and receipts. Dark ink inset on paper. */
 .terminal {
   background: var(--ink);
-  color: #ece4d2;
+  color: #ededeb;
+  border: 1px solid var(--ink);
 }
 .terminal .label {
-  color: #a59d88;
+  color: #a3a3a0;
 }
 
 .btn {

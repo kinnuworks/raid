@@ -14,6 +14,6 @@
   f.title = "Raid: " + army.toUpperCase() + " army on Strike";
   f.loading = "lazy";
   f.setAttribute("sandbox", "allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox");
-  f.style.cssText = "width:100%;max-width:960px;height:" + (s.getAttribute("data-height") || "640") + "px;border:2px solid #1b1a17;background:#ede6d6;display:block";
+  f.style.cssText = "width:100%;max-width:960px;height:" + (s.getAttribute("data-height") || "640") + "px;border:2px solid #1b1a17;background:#ffffff;display:block";
   s.parentNode.insertBefore(f, s.nextSibling);
 })();

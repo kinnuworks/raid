@@ -118,7 +118,7 @@ function layout(tiles: MapTile[], mode: "wide" | "stacked") {
 }
 
 function fillFor(a: Army) {
-  if (a.garrison) return "var(--paper-2)"; // flat: stripes are reserved for contested ground
+  if (a.garrison) return "var(--garrison)"; // flat: stripes are reserved for contested ground
   return a.pattern === "solid" ? a.ink : `url(#pat-${a.slug})`;
 }
 
@@ -128,7 +128,7 @@ function Patterns({ armies, contests }: { armies: Army[]; contests: [Army, Army]
       {armies.map((a) =>
         a.pattern === "diagonal" ? (
           <pattern key={a.slug} id={`pat-${a.slug}`} width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-            <rect width="7" height="7" fill={a.garrison ? "var(--paper-2)" : a.ink} opacity={a.garrison ? 1 : 0.35} />
+            <rect width="7" height="7" fill={a.garrison ? "var(--garrison)" : a.ink} opacity={a.garrison ? 1 : 0.35} />
             <rect width={a.garrison ? 1.2 : 3.2} height="7" fill={a.ink} opacity={a.garrison ? 0.45 : 1} />
           </pattern>
         ) : a.pattern === "dots" ? (
@@ -140,8 +140,8 @@ function Patterns({ armies, contests }: { armies: Army[]; contests: [Army, Army]
       )}
       {contests.map(([a, b]) => (
         <pattern key={`${a.slug}-${b.slug}`} id={`contest-${a.slug}-${b.slug}`} width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-          <rect width="6" height="12" fill={a.garrison ? "var(--paper-3)" : a.ink} />
-          <rect x="6" width="6" height="12" fill={b.garrison ? "var(--paper-3)" : b.ink} />
+          <rect width="6" height="12" fill={a.garrison ? "var(--garrison-strong)" : a.ink} />
+          <rect x="6" width="6" height="12" fill={b.garrison ? "var(--garrison-strong)" : b.ink} />
         </pattern>
       ))}
       <filter id="chit-shadow" x="-20%" y="-20%" width="160%" height="160%">
@@ -174,7 +174,8 @@ export function WarMap({
   const contests = tiles
     .filter((t) => t.owner && t.runnerUp && t.margin < contestedBelow)
     .map((t) => [ARMY_BY_SLUG[t.owner!], ARMY_BY_SLUG[t.runnerUp!]] as [Army, Army])
-    .filter(([a, b]) => a && b);
+    .filter(([a, b]) => a && b)
+    .filter(([a, b], i, all) => all.findIndex(([c, d]) => c.slug === a.slug && d.slug === b.slug) === i);
 
   return (
     <>
@@ -253,7 +254,7 @@ function Board({
                 opacity={faded ? 0.35 : 0.94}
                 className={animateKey ? "ink-in" : undefined}
               />
-              <polygon points={pts} fill="none" stroke="var(--ink)" strokeOpacity="0.35" strokeWidth="1" strokeDasharray={owner ? undefined : "3 3"} />
+              <polygon points={pts} fill="none" stroke="var(--ink)" strokeOpacity="0.45" strokeWidth="1" strokeDasharray={owner ? undefined : "3 3"} />
               {fought && (
                 <polygon points={hexPoints(cx, cy, R - 5).map((p) => p.join(",")).join(" ")} fill="none" stroke={ARMY_BY_SLUG[highlight!].ink} strokeWidth="2.5" strokeDasharray="5 4" />
               )}

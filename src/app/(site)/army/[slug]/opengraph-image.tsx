@@ -26,7 +26,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
       <CardFrame footer={`Season 0 · read from Strike mainnet ${season0.generatedAt.slice(0, 10)} · every number checks against public data`}>
         <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-            <div style={{ width: 26, height: 150, background: a.garrison ? "#B9AE97" : a.ink, border: "2px solid #1B1A17" }} />
+            <div style={{ width: 26, height: 150, background: a.garrison ? "#D9D9D5" : a.ink, border: "2px solid #1B1A17" }} />
             <div style={{ fontFamily: "Display", fontSize: 168, lineHeight: 0.9 }}>{a.ticker}</div>
           </div>
           <div style={{ fontFamily: "Display", fontSize: 54, marginTop: 22, lineHeight: 1 }}>
@@ -37,7 +37,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
               {`Next: take ${target.symbol.replace("-USD", "")} from ${rival.garrison ? "the garrison" : rival.ticker}.`}
             </div>
           ) : null}
-          <div style={{ fontFamily: "Mono", fontSize: 24, marginTop: 12, color: "#4A4639" }}>
+          <div style={{ fontFamily: "Mono", fontSize: 24, marginTop: 12, color: "#4A4A48" }}>
             {`${s.traders7d} ${s.traders7d === 1 ? "trader" : "traders"} this week${target && target.runnerUp === a.slug ? ` · runner-up in ${target.symbol.replace("-USD", "")}` : ""}`}
           </div>
         </div>

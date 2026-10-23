@@ -52,7 +52,7 @@ export function Recompute({ server, accounts, seasonStart }: { server: Rows; acc
     <div className="terminal p-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <p className="label">Receipt · builder fees by army · {LIVE_NETWORK}</p>
-        <button className="btn" style={{ background: "#ece4d2", color: "#1b1a17", borderColor: "#ece4d2" }} onClick={run} disabled={state === "running"}>
+        <button className="btn" style={{ background: "#ededeb", color: "#1b1a17", borderColor: "#ededeb" }} onClick={run} disabled={state === "running"}>
           {state === "running" ? "Fetching from Strike…" : "Recompute in my browser"}
         </button>
       </div>
@@ -68,7 +68,7 @@ export function Recompute({ server, accounts, seasonStart }: { server: Rows; acc
         </thead>
         <tbody>
           {armies.map((a) => (
-            <tr key={a} className="border-t border-[#3a362d]">
+            <tr key={a} className="border-t border-[#3a3a38]">
               <td className="py-1.5">
                 <span className="mr-2 inline-block h-3 w-3 align-middle" style={{ background: ARMY_BY_SLUG[a]?.ink }} />
                 {ARMY_BY_SLUG[a]?.ticker ?? a}
@@ -79,7 +79,7 @@ export function Recompute({ server, accounts, seasonStart }: { server: Rows; acc
               <td className="text-right">{rows ? fmtExact(rows[a]?.builderFee ?? 0) : "—"}</td>
             </tr>
           ))}
-          <tr className="border-t-2 border-[#ece4d2]">
+          <tr className="border-t-2 border-[#ededeb]">
             <td className="py-2 font-semibold">Total</td>
             <td />
             <td />
@@ -101,10 +101,10 @@ export function Recompute({ server, accounts, seasonStart }: { server: Rows; acc
           <p className="label">Line items, newest first: floor(price × size × bps ÷ 10,000)</p>
           <ul className="num mt-2 max-h-80 overflow-auto text-[12px]">
             {lines.map(({ f, fee }) => (
-              <li key={`${f.account_id}-${f.trade_id}`} className="grid grid-cols-[70px_80px_1fr_110px] gap-2 border-t border-[#3a362d] py-1 text-[12px] text-[#d9d0bb]">
+              <li key={`${f.account_id}-${f.trade_id}`} className="grid grid-cols-[70px_80px_1fr_110px] gap-2 border-t border-[#3a3a38] py-1 text-[12px] text-[#d9d9d5]">
                 <span>{ARMY_BY_SLUG[parseRaidTag(f.client_order_id)!.army]?.ticker}</span>
                 <span>{f.symbol}</span>
-                <span className="truncate text-[#b9ae97]">
+                <span className="truncate text-[#d9d9d5]">
                   {Number(f.price)} × {Number(f.size)} · trade {f.trade_id}
                 </span>
                 <span className="text-right">{fmtExact(fee)}</span>

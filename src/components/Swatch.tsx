@@ -2,7 +2,7 @@ import type { Army } from "@/lib/armies";
 
 /** The army's ink and pattern as a CSS background, so every list matches the map. */
 export function swatchBackground(a: Army): string {
-  if (a.garrison) return `repeating-linear-gradient(45deg, ${a.ink} 0 1px, var(--paper-2) 1px 5px)`;
+  if (a.garrison) return `repeating-linear-gradient(45deg, ${a.ink} 0 1px, var(--garrison) 1px 5px)`;
   switch (a.pattern) {
     case "diagonal":
       return `repeating-linear-gradient(45deg, ${a.ink} 0 3px, color-mix(in srgb, ${a.ink} 35%, var(--paper)) 3px 6px)`;

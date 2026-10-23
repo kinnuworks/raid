@@ -197,7 +197,7 @@ export function Terminal({ army, isRecruit }: { army?: string; isRecruit?: boole
 
         <div className="mt-4 grid grid-cols-4 gap-1">
           {Object.keys(markets).map((s) => (
-            <button key={s} onClick={() => setSymbol(s)} className="num min-h-10 border text-[13px]" style={{ borderColor: "#5b5547", background: s === symbol ? "#ece4d2" : "transparent", color: s === symbol ? "#1b1a17" : "#ece4d2" }}>
+            <button key={s} onClick={() => setSymbol(s)} className="num min-h-10 border text-[13px]" style={{ borderColor: "#5c5c5a", background: s === symbol ? "#ededeb" : "transparent", color: s === symbol ? "#1b1a17" : "#ededeb" }}>
               {s.replace("-USD", "")}
             </button>
           ))}
@@ -209,7 +209,7 @@ export function Terminal({ army, isRecruit }: { army?: string; isRecruit?: boole
               key={s}
               onClick={() => setSide(s)}
               className="display min-h-11 text-[20px]"
-              style={{ background: side === s ? (s === "buy" ? "var(--verified)" : "var(--loss)") : "transparent", border: "1px solid #5b5547", color: "#ece4d2" }}
+              style={{ background: side === s ? (s === "buy" ? "var(--verified)" : "var(--loss)") : "transparent", border: "1px solid #5c5c5a", color: "#ededeb" }}
             >
               {s === "buy" ? "▲ Long" : "▼ Short"}
             </button>
@@ -218,53 +218,53 @@ export function Terminal({ army, isRecruit }: { army?: string; isRecruit?: boole
 
         <label className="mt-4 block">
           <span className="label">Size (USD)</span>
-          <input type="number" min={5} value={usd} onChange={(e) => setUsd(Number(e.target.value))} className="num mt-1 w-full border border-[#5b5547] bg-transparent p-2 text-[18px]" />
+          <input type="number" min={5} value={usd} onChange={(e) => setUsd(Number(e.target.value))} className="num mt-1 w-full border border-[#5c5c5a] bg-transparent p-2 text-[18px]" />
         </label>
         <label className="mt-3 block">
           <span className="label">Leverage · orders above {MAX_POINTS_LEVERAGE}x never score</span>
-          <input type="range" min={1} max={MAX_POINTS_LEVERAGE} value={lev} onChange={(e) => setLev(Number(e.target.value))} className="mt-2 w-full accent-[#ece4d2]" />
+          <input type="range" min={1} max={MAX_POINTS_LEVERAGE} value={lev} onChange={(e) => setLev(Number(e.target.value))} className="mt-2 w-full accent-[#ededeb]" />
           <span className="num text-[14px]">{lev}x</span>
         </label>
 
         <dl className="num mt-4 grid grid-cols-2 gap-y-1 text-[13px]">
-          <dt className="text-[#a59d88]">Mark</dt>
+          <dt className="text-[#a3a3a0]">Mark</dt>
           <dd className="text-right">{mark ? mark.toFixed(2) : "…"}</dd>
-          <dt className="text-[#a59d88]">Size</dt>
+          <dt className="text-[#a3a3a0]">Size</dt>
           <dd className="text-right">{size ? `${size} ${symbol.replace("-USD", "")}` : "…"}</dd>
-          <dt className="text-[#a59d88]">Margin</dt>
+          <dt className="text-[#a3a3a0]">Margin</dt>
           <dd className="text-right">${margin.toFixed(2)}</dd>
-          <dt className="text-[#a59d88]">
+          <dt className="text-[#a3a3a0]">
             Fees
             <span className="block text-[11px]">Strike {STRIKE_TAKER_BPS} + Raid {BUILDER_FEE_BPS} bps</span>
           </dt>
           <dd className="text-right">${fees.toFixed(4)}</dd>
-          <dt className="text-[#a59d88]">Est. liquidation</dt>
+          <dt className="text-[#a3a3a0]">Est. liquidation</dt>
           <dd className="text-right">{mark ? liq.toFixed(2) : "…"}</dd>
         </dl>
 
-        <div className="mt-4 border border-[#ece4d2] p-3">
+        <div className="mt-4 border border-[#ededeb] p-3">
           <p className="label">Max you can lose</p>
           <p className="num text-[22px]">${worstCase.toFixed(2)}</p>
-          <p className="num text-[12px] text-[#a59d88]">
+          <p className="num text-[12px] text-[#a3a3a0]">
             {isRecruit ? "Season" : "Daily"} cap left: ${capLeft.toFixed(2)} of ${isRecruit ? RECRUIT_RULES.seasonLossCapUsd : DAILY_LOSS_CAP}
           </p>
         </div>
 
         {blocked && <p className="mt-3 text-[13px] text-[#f3a08f]">{blocked}</p>}
-        <button className="btn mt-4 w-full" style={{ background: "#ece4d2", color: "#1b1a17", borderColor: "#ece4d2" }} disabled={preview || busy || !army || !!blocked || !size} onClick={placeOrder}>
+        <button className="btn mt-4 w-full" style={{ background: "#ededeb", color: "#1b1a17", borderColor: "#ededeb" }} disabled={preview || busy || !army || !!blocked || !size} onClick={placeOrder}>
           {preview ? "Enlist to place orders" : busy ? "Sending…" : `${side === "buy" ? "Long" : "Short"} ${symbol.replace("-USD", "")}`}
         </button>
 
-        <div className="mt-6 border-t border-[#5b5547] pt-4">
+        <div className="mt-6 border-t border-[#5c5c5a] pt-4">
           <p className="label">Deposit from your wallet</p>
           <div className="mt-2 flex gap-2">
-            <input type="number" min={25} value={depositAda} onChange={(e) => setDepositAda(Number(e.target.value))} className="num w-28 border border-[#5b5547] bg-transparent p-2" />
+            <input type="number" min={25} value={depositAda} onChange={(e) => setDepositAda(Number(e.target.value))} className="num w-28 border border-[#5c5c5a] bg-transparent p-2" />
             <span className="num self-center text-[13px]">ADA</span>
-            <button className="btn ghost ml-auto" style={{ color: "#ece4d2", borderColor: "#ece4d2" }} onClick={deposit} disabled={preview || busy}>
+            <button className="btn ghost ml-auto" style={{ color: "#ededeb", borderColor: "#ededeb" }} onClick={deposit} disabled={preview || busy}>
               Deposit
             </button>
           </div>
-          <p className="mt-2 text-[12px] text-[#a59d88]">Strike swaps ADA to USDM and refunds the DEX fee. Withdrawals only ever go back to this wallet.</p>
+          <p className="mt-2 text-[12px] text-[#a3a3a0]">Strike swaps ADA to USDM and refunds the DEX fee. Withdrawals only ever go back to this wallet.</p>
         </div>
 
         {msg && (

@@ -19,7 +19,7 @@ export async function ogFonts() {
   ];
 }
 
-const PAPER = "#EDE6D6";
+const PAPER = "#FFFFFF";
 const INK = "#1B1A17";
 
 /** The ground community armies hold, at a size that still reads in an X thumbnail. */
@@ -27,7 +27,7 @@ export function MiniBoard({ highlight }: { highlight?: string }) {
   const held = season0.tiles.filter((t) => t.owner && !ARMY_BY_SLUG[t.owner].garrison);
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-      <div style={{ display: "flex", fontFamily: "Mono", fontSize: 16, color: "#4A4639" }}>{`Community ground: ${held.length} of ${season0.tiles.length} markets`}</div>
+      <div style={{ display: "flex", fontFamily: "Mono", fontSize: 16, color: "#4A4A48" }}>{`Community ground: ${held.length} of ${season0.tiles.length} markets`}</div>
       <div style={{ display: "flex", flexWrap: "wrap", width: 440, gap: 8 }}>
         {held.map((t) => {
           const a = ARMY_BY_SLUG[t.owner!];
@@ -67,10 +67,10 @@ export function CardFrame({ children, footer }: { children: React.ReactNode; foo
           <path d="M9 23V7l12 4.5L11 16" fill="none" stroke={PAPER} strokeWidth="2.6" />
         </svg>
         <div style={{ fontFamily: "Display", fontSize: 38, letterSpacing: 1 }}>RAID</div>
-        <div style={{ marginLeft: "auto", fontFamily: "Mono", fontSize: 18, color: "#4A4639" }}>token armies on Strike</div>
+        <div style={{ marginLeft: "auto", fontFamily: "Mono", fontSize: 18, color: "#4A4A48" }}>token armies on Strike</div>
       </div>
       <div style={{ display: "flex", flex: 1, marginTop: 28, marginBottom: 18 }}>{children}</div>
-      <div style={{ display: "flex", borderTop: `2px solid ${INK}`, paddingTop: 14, fontFamily: "Mono", fontSize: 20, color: "#4A4639" }}>{footer}</div>
+      <div style={{ display: "flex", borderTop: `2px solid ${INK}`, paddingTop: 14, fontFamily: "Mono", fontSize: 20, color: "#4A4A48" }}>{footer}</div>
     </div>
   );
 }

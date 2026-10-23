@@ -14,7 +14,7 @@ export default async function Image() {
         <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
           <div style={{ fontFamily: "Display", fontSize: 84, lineHeight: 0.9 }}>YOUR TOKEN IS YOUR ARMY.</div>
           <div style={{ fontFamily: "Display", fontSize: 84, lineHeight: 0.9 }}>TAKE STRIKE&apos;S MARKETS.</div>
-          <div style={{ fontFamily: "Mono", fontSize: 24, marginTop: 20, color: "#4A4639" }}>{`The garrison holds ${garrison} of ${season0.tiles.length}. Your move.`}</div>
+          <div style={{ fontFamily: "Mono", fontSize: 24, marginTop: 20, color: "#4A4A48" }}>{`The garrison holds ${garrison} of ${season0.tiles.length}. Your move.`}</div>
         </div>
         <div style={{ display: "flex", alignItems: "flex-end" }}>
           <MiniBoard />
