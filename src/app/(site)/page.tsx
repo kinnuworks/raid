@@ -6,7 +6,7 @@ import { Provenance } from "@/components/Provenance";
 import { Replay } from "@/components/Replay";
 import { Swatch } from "@/components/Swatch";
 import { LiveStrip } from "@/components/LiveStrip";
-import { Section, SubHead } from "@/components/Section";
+import { Section, SubHead, accent, shadow } from "@/components/Section";
 import { RECRUIT_RULES } from "@/lib/score";
 import { BUILDER_FEE_BPS } from "@/lib/strike/config";
 
@@ -56,7 +56,7 @@ export default function Home() {
             </ul>
           </div>
 
-          <aside className="self-end border-l-4 border-ink pl-5">
+          <aside className="pop self-end p-5" style={shadow("var(--vermilion)")}>
             <p className="label">Dispatch from the front</p>
             <p className="display mt-2 text-[34px]">
               The garrison holds {garrisonHeld}&nbsp;of&nbsp;{tiles.length}. Your&nbsp;move.
@@ -84,7 +84,7 @@ export default function Home() {
             {CONTENTS.map(([id, title], i) => (
               <li key={id} className="border-b border-r border-[var(--rule-strong)]">
                 <a href={`#${id}`} className="flex min-h-12 items-center gap-3 px-3 py-2 text-[14px] font-semibold hover:bg-[var(--paper-2)]">
-                  <span className="num text-[12px] text-ink-2">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="num border-2 border-ink px-1.5 text-[12px]" style={{ background: accent(i + 1).bg, color: accent(i + 1).fg }}>{String(i + 1).padStart(2, "0")}</span>
                   {title}
                 </a>
               </li>
@@ -148,16 +148,18 @@ export default function Home() {
       </Section>
 
       <Section id="claim" n={2} band label="How a market is claimed" title="Many small traders beat one whale" note={<Link href="/rules" className="link font-semibold">Read the full rules</Link>}>
-        <ol className="grid border-l border-t border-[var(--rule-strong)] md:grid-cols-3">
+        <ol className="grid gap-5 md:grid-cols-3 md:gap-6">
           {CLAIM.map(([h, body], i) => (
-            <li key={h} className="border-b border-r border-[var(--rule-strong)] bg-[var(--paper)] p-5">
-              <span className="num text-[13px] font-semibold text-ink-2">Step {i + 1}</span>
+            <li key={h} className="pop p-5">
+              <span className="num inline-block border-2 border-ink px-1.5 text-[13px] font-semibold" style={{ background: accent(i + 1).bg, color: accent(i + 1).fg }}>
+                Step {i + 1}
+              </span>
               <h3 className="display mt-2 text-[24px]">{h}</h3>
               <p className="mt-2 text-[15px] leading-relaxed text-ink-2">{body}</p>
             </li>
           ))}
         </ol>
-        <p className="num mt-5 border-l-2 border-ink bg-[var(--paper)] px-3 py-2 text-[13px]">
+        <p className="num mt-8 border-l-4 border-[var(--vermilion)] bg-[var(--paper)] px-3 py-2 text-[13px]">
           tile score(army, market) = Σ over members √(fees paid by that member on that market)
         </p>
       </Section>
@@ -169,8 +171,8 @@ export default function Home() {
         title="New traders who stay are the headline"
         note={<Link href="/recruits" className="link font-semibold">See every recruit check, live</Link>}
       >
-        <div className="grid gap-10 md:grid-cols-2">
-          <div>
+        <div className="grid gap-8 md:grid-cols-2 md:gap-10">
+          <div className="pop p-5" style={shadow("var(--ultramarine)")}>
             <SubHead title="When a recruit counts" />
             <ul className="mt-1">
               {[
@@ -190,7 +192,7 @@ export default function Home() {
               paid to outside counterparties.
             </p>
           </div>
-          <div>
+          <div className="pop p-5" style={shadow("var(--vermilion)")}>
             <SubHead title="What never scores" />
             <ul className="mt-1">
               {[
@@ -364,7 +366,7 @@ function Worth({ armies }: { armies: { slug: string; volume7d: number; traders7d
           checked by anyone.
         </p>
       </div>
-      <section aria-labelledby="worth">
+      <section aria-labelledby="worth" className="pop p-5" style={shadow("var(--ochre)")}>
         <SubHead id="worth" title="What the armies are worth to Strike" />
         <dl className="mt-3 grid grid-cols-[1fr_auto] gap-x-6 gap-y-2 text-[15px]">
           <dt className="text-ink-2">Mainnet volume from community-army traders, last 7 days</dt>

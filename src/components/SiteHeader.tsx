@@ -11,6 +11,11 @@ const NAV = [
 export function SiteHeader() {
   return (
     <header className="rule-b">
+      <div aria-hidden className="flex h-1.5">
+        {["--vermilion", "--ultramarine", "--ochre", "--field", "--plum"].map((c) => (
+          <span key={c} className="flex-1" style={{ background: `var(${c})` }} />
+        ))}
+      </div>
       <div className="mx-auto flex max-w-[1400px] items-stretch gap-6 px-4 md:px-8">
         <Link href="/" className="flex items-center gap-3 py-3" aria-label="Raid home">
           <RaidMark />
@@ -27,7 +32,7 @@ export function SiteHeader() {
           <span className="label hidden sm:inline">
             Live on <span className="num text-ink">{LIVE_NETWORK}</span>
           </span>
-          <Link href="/join" className="btn">
+          <Link href="/join" className="btn" style={{ background: "var(--vermilion)" }}>
             Enlist
           </Link>
         </div>

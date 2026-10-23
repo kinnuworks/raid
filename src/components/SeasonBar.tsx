@@ -11,7 +11,7 @@ export function SeasonBar() {
 }
 
 export function SeasonBarStatic({ live = false }: { live?: boolean }) {
-  const seg = (on: boolean) => `flex min-h-11 items-center gap-2 px-3 ${on ? "bg-[var(--ink)] text-[var(--paper)]" : "hover:bg-[var(--paper-2)]"}`;
+  const seg = (on: boolean) => `flex min-h-11 items-center gap-2 px-3 ${on ? "bg-[var(--ultramarine)] text-[var(--paper)] shadow-[inset_0_-3px_0_var(--ink)]" : "hover:bg-[var(--paper-2)]"}`;
   return (
     <div className="rule-b">
       <div className="mx-auto flex max-w-[1400px] flex-wrap items-stretch px-4 text-[13px] md:px-8">

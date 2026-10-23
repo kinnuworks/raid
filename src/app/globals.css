@@ -214,3 +214,15 @@ a.link:hover {
     transition: none;
   }
 }
+
+/* Pop-out panels: like a counter lifted off the board. 2px ink edge, solid offset shadow, no blur. */
+.pop {
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  box-shadow: 6px 6px 0 var(--pop-shadow, var(--ink));
+}
+@media (max-width: 767px) {
+  .pop {
+    box-shadow: 4px 4px 0 var(--pop-shadow, var(--ink));
+  }
+}
