@@ -59,7 +59,10 @@ async function RecruitsPageContent() {
           <tbody>
             {recruits.map((r) => (
               <tr key={r.account_id} className="rule-t align-top">
-                <td className="num whitespace-nowrap py-3" title={r.account_id}>{short(r.account_id)}</td>
+                <td className="num whitespace-nowrap py-3" title={r.account_id}>
+                  {short(r.account_id)}
+                  {r.demo && <span className="mt-1 block text-[11px] text-ink-2">team demo wallet</span>}
+                </td>
                 <td className="py-3">
                   <span className="flex items-center gap-2">
                     <Swatch army={ARMY_BY_SLUG[r.army]} className="h-3.5 w-3.5" />

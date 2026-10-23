@@ -6,6 +6,7 @@ import { listMembers, type Member } from "./db";
 import { fundingSources } from "./koios";
 import { publicApi, type PublicFill } from "./strike/client";
 import { LIVE_NETWORK } from "./strike/config";
+import demoSeed from "@/data/seed-members.json";
 import {
   cappedFeesByMember,
   checkRecruit,
@@ -24,8 +25,12 @@ import {
 
 export const SEASON_START = Date.parse(process.env.RAID_SEASON_START ?? "2026-10-22T00:00:00Z");
 
+/** Wallets the team created to demonstrate the season. Shown as such, so real enlistments stand apart. */
+const DEMO_ACCOUNTS = new Set((demoSeed as { account_id: string }[]).map((m) => m.account_id));
+
 export interface RecruitRow {
   account_id: string;
+  demo: boolean;
   army: string;
   recruited_by: string | null;
   depositedUsd: number;
@@ -36,7 +41,7 @@ export interface LiveSeason {
   network: string;
   computedAt: string;
   seasonStart: string;
-  members: { account_id: string; army: string; is_recruit: boolean; qualified: boolean; depositedUsd: number; feesPaid: number; fills: number }[];
+  members: { account_id: string; army: string; is_recruit: boolean; demo: boolean; qualified: boolean; depositedUsd: number; feesPaid: number; fills: number }[];
   tiles: (TileResult & { traders: Record<string, number> })[];
   recruits: RecruitRow[];
   recruitBoard: { army: string; confirmed: number; pending: number; flagged: number; rejected: number; score: number }[];
@@ -104,7 +109,7 @@ export async function liveSeason(force = false): Promise<LiveSeason> {
           check.status = "flagged";
           check.reasons.unshift("every trade so far was against another Raid account");
         }
-        return { account_id: p.m.account_id, army: p.m.army, recruited_by: p.m.recruited_by, depositedUsd: p.deposited, check };
+        return { account_id: p.m.account_id, demo: DEMO_ACCOUNTS.has(p.m.account_id), army: p.m.army, recruited_by: p.m.recruited_by, depositedUsd: p.deposited, check };
       }),
   );
 
@@ -149,6 +154,7 @@ export async function liveSeason(force = false): Promise<LiveSeason> {
       account_id: p.m.account_id,
       army: p.m.army,
       is_recruit: p.m.is_recruit,
+      demo: DEMO_ACCOUNTS.has(p.m.account_id),
       qualified: qualified.has(p.m.account_id),
       depositedUsd: p.deposited,
       feesPaid: feesPaid(keptBy.get(p.m.account_id) ?? []),

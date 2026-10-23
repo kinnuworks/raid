@@ -7,7 +7,7 @@ import { ARMY_BY_SLUG } from "@/lib/armies";
 interface Season {
   network: string;
   computedAt: string;
-  members: unknown[];
+  members: { demo: boolean }[];
   tiles: { symbol: string; owner: string | null }[];
   recruitBoard: { confirmed: number; pending: number; flagged: number; rejected: number }[];
   fees: Record<string, { builderFee: number; fills: number }>;
@@ -38,7 +38,9 @@ export function LiveStrip() {
         <span className="num text-ink-2">reading the season from Strike…</span>
       ) : (
         <>
-          <span className="num">{s.members.length} enlisted</span>
+          <span className="num">
+            {s.members.length} enlisted ({s.members.filter((m) => m.demo).length} team demo wallets)
+          </span>
           <span className="num">{sum("confirmed")} recruits confirmed</span>
           <span className="num">{sum("pending")} waiting on day two</span>
           <span className="num">
