@@ -31,7 +31,10 @@ async function ArmyPageContent(props: PageProps<"/army/[slug]">) {
   const held = season0.tiles.filter((t) => t.owner === slug);
   const contested = season0.tiles.filter((t) => t.runnerUp === slug);
   const foughtIn = season0.tiles.filter((t) => (t.traders as Record<string, number | undefined>)[slug]);
-  const ranked = [...season0.armies].filter((a) => !ARMY_BY_SLUG[a.slug].garrison).sort((a, b) => b.volume7d - a.volume7d);
+  const heldBy = (s: string) => season0.tiles.filter((t) => t.owner === s).length;
+  const ranked = [...season0.armies]
+    .filter((a) => !ARMY_BY_SLUG[a.slug].garrison)
+    .sort((a, b) => heldBy(b.slug) - heldBy(a.slug) || b.volume7d - a.volume7d);
   const rank = ranked.findIndex((a) => a.slug === slug) + 1;
 
   const live = await seasonSnapshot();
@@ -50,7 +53,7 @@ async function ArmyPageContent(props: PageProps<"/army/[slug]">) {
 
   return (
     <main className="mx-auto max-w-[1300px] px-4 pb-24 pt-8 md:px-8">
-      <p className="kicker">{army.garrison ? "Garrison" : `Army · ${rank} of ${ranked.length} by volume this week`}</p>
+      <p className="kicker">{army.garrison ? "Garrison" : `Army · ${rank} of ${ranked.length} by markets held this week`}</p>
       <div className="mt-2 flex items-center gap-4">
         <Swatch army={army} className="h-16 w-6 md:h-24 md:w-8" />
         <h1 className="display text-[clamp(64px,10vw,140px)]">{army.ticker}</h1>
