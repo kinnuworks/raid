@@ -10,7 +10,7 @@ export function EmbedSnippet({ army }: { army: string }) {
   return (
     <div className="mt-8">
       <p className="label">Put this army on your community&apos;s site</p>
-      <pre className="num mt-2 overflow-x-auto border border-ink bg-[var(--paper-2)] p-3 text-[12px]">{code}</pre>
+      <pre className="num mt-2 overflow-x-auto border border-ink bg-[var(--paper)] p-3 text-[12px]">{code}</pre>
       <button
         className="btn ghost mt-2"
         onClick={() => navigator.clipboard.writeText(code).then(() => (setCopied(true), setTimeout(() => setCopied(false), 1500)))}

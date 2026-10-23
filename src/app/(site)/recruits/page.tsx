@@ -8,6 +8,7 @@ import { seasonSnapshot } from "@/lib/season";
 import { Provenance } from "@/components/Provenance";
 import { Swatch } from "@/components/Swatch";
 import { NextDayCountdown } from "@/components/Countdown";
+import { PageHead, Section } from "@/components/Section";
 
 const short = (id: string) => `…${id.slice(-6)}`;
 
@@ -17,19 +18,18 @@ async function RecruitsPageContent() {
   const order = { confirmed: 0, pending: 1, flagged: 2, rejected: 3 } as const;
   const recruits = [...s.recruits].sort((a, b) => order[a.check.status] - order[b.check.status]);
   return (
-    <main className="mx-auto max-w-[1400px] px-4 pb-24 pt-8 md:px-8">
-      <p className="kicker">Season 1 · Strike {s.network} · live</p>
-      <h1 className="display mt-2 text-[clamp(40px,6vw,76px)]">New traders who stayed</h1>
-      <p className="mt-3 max-w-[70ch] text-[17px] text-ink-2">
+    <main className="pb-24">
+      <PageHead kicker={`Season 1 · Strike ${s.network} · live`} title="New traders who stayed" wide>
+        <p className="max-w-[70ch]">
         An army scores for a recruit only when a wallet that never traded on Strike joins through a member&apos;s link, deposits at least $
         {RECRUIT_RULES.minDepositUsd}, trades against someone outside every army, was not funded by a Raid member, and trades on {RECRUIT_RULES.minTradingDays}{" "}
         separate days. Each recruiter is credited for at most {RECRUIT_RULES.maxCreditedPerRecruiter}. An army&apos;s recruit score is the sum, over its confirmed
         recruits, of the square root of the fees each one paid to outside counterparties.
-      </p>
+        </p>
+      </PageHead>
 
-      <section className="mt-8">
+      <Section id="board" n={1} label="Recruit board" title="Armies by recruit score" note={<NextDayCountdown />}>
         <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2 border-y border-[var(--rule-strong)] py-3">
-          <span className="label">Recruit board</span>
           {s.recruitBoard.length === 0 && <span className="text-ink-2">No recruits yet.</span>}
           {s.recruitBoard.map((r, i) => (
             <Link key={r.army} href={`/army/${r.army}`} className="flex items-baseline gap-2 hover:underline">
@@ -41,12 +41,13 @@ async function RecruitsPageContent() {
               </span>
             </Link>
           ))}
-          <span className="ml-auto text-[13px] text-ink-2">
-            <NextDayCountdown />
-          </span>
         </div>
+      </Section>
 
-        <table className="mt-2 w-full text-[14px]">
+      <Section id="checks" n={2} band label="Every recruit, checked" title="Account by account" note="Confirmed first, then waiting, flagged and rejected. Hover an account for its full id.">
+        <div className="overflow-x-auto">
+
+        <table className="w-full min-w-[560px] text-[14px]">
           <thead>
             <tr className="label text-left">
               <th className="w-[90px] py-2 font-medium">Account</th>
@@ -95,8 +96,11 @@ async function RecruitsPageContent() {
             )}
           </tbody>
         </table>
-      </section>
-      <Provenance className="mt-12" generatedAt={s.computedAt} rows={Object.entries(s.sources)} footnote={`${s.internalFillsDropped} fills dropped as trades between Raid accounts.`} />
+        </div>
+      </Section>
+      <div className="mx-auto max-w-[1400px] px-4 md:px-8">
+      <Provenance generatedAt={s.computedAt} rows={Object.entries(s.sources)} footnote={`${s.internalFillsDropped} fills dropped as trades between Raid accounts.`} />
+      </div>
     </main>
   );
 }

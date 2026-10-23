@@ -56,7 +56,8 @@ export function Recompute({ server, accounts, seasonStart }: { server: Rows; acc
           {state === "running" ? "Fetching from Strike…" : "Recompute in my browser"}
         </button>
       </div>
-      <table className="num mt-4 w-full text-[14px]">
+      <div className="-mx-1 overflow-x-auto px-1">
+      <table className="num mt-4 w-full min-w-[520px] text-[14px] [&_td+td]:pl-4 [&_th+th]:pl-4">
         <thead>
           <tr className="label text-left">
             <th className="py-1">Army</th>
@@ -88,6 +89,7 @@ export function Recompute({ server, accounts, seasonStart }: { server: Rows; acc
           </tr>
         </tbody>
       </table>
+      </div>
       {state === "done" && (
         <p className="mt-4">
           <span className={`stamp ${match ? "" : "reject"}`} style={match ? { color: "#9fd3b8", borderColor: "#9fd3b8" } : undefined}>

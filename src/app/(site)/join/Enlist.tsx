@@ -190,7 +190,7 @@ export function Enlist({ refCode, recruiterArmy }: { refCode?: string; recruiter
           </div>
         )}
         {step !== "error" && step !== "done" && (
-          <div className="border border-[var(--rule-strong)] p-4 text-[14px] text-ink-2">
+          <div className="pop p-4 text-[14px] text-ink-2" style={{ "--pop-shadow": "var(--field)" } as React.CSSProperties}>
             <p className="label">What Raid checks</p>
             <ul className="mt-2 list-disc space-y-1 pl-4">
               <li>Strike links your account to this wallet.</li>
@@ -215,7 +215,7 @@ function StepRow({ n, title, active, done, children }: { n: number; title: strin
         {done ? "✓" : n}
       </span>
       <div>
-        <h2 className="display text-[26px]">{title}</h2>
+        <h3 className="display text-[26px]">{title}</h3>
         <div className="mt-2">{children}</div>
       </div>
     </li>

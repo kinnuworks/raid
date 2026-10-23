@@ -1,5 +1,6 @@
 import { RECRUIT_RULES } from "@/lib/score";
 import { BUILDER_FEE_BPS, LIVE_NETWORK } from "@/lib/strike/config";
+import { PageHead, Section } from "@/components/Section";
 
 const RULES: { h: string; body: React.ReactNode; formula?: string }[] = [
   {
@@ -47,23 +48,54 @@ const RULES: { h: string; body: React.ReactNode; formula?: string }[] = [
   },
 ];
 
+/** Rules are grouped so the page reads top to bottom: who you fight for, how ground is scored, then the limits. */
+const GROUPS: { id: string; label: string; title: string; rules: number[] }[] = [
+  { id: "armies", label: "Armies", title: "Who you fight for", rules: [0, 1] },
+  { id: "scoring", label: "Scoring", title: "How ground is won", rules: [2, 3, 4] },
+  { id: "recruits", label: "Recruits", title: "New traders count most", rules: [5] },
+  { id: "guardrails", label: "Guardrails and spoils", title: "Limits, and what the winners get", rules: [6, 7] },
+  { id: "fees", label: "Fees and known limits", title: "What Raid charges, and what it can't see", rules: [9, 8] },
+];
+
 export default function RulesPage() {
+  let n = 0;
   return (
-    <main className="mx-auto max-w-[1400px] px-4 pb-24 pt-8 md:px-8">
-      <p className="kicker">Rules of engagement · live on Strike {LIVE_NETWORK}</p>
-      <h1 className="display mt-2 text-[clamp(40px,6vw,76px)]">How a market is claimed</h1>
-      <ol className="mt-8">
-        {RULES.map((r, i) => (
-          <li key={r.h} className="grid grid-cols-[44px_1fr] gap-4 border-t border-[var(--rule)] py-6">
-            <span className="num text-[15px] font-semibold">{i + 1}</span>
-            <div>
-              <h2 className="display text-[26px]">{r.h}</h2>
-              <p className="mt-2 max-w-[68ch] text-[16px] text-ink-2">{r.body}</p>
-              {r.formula && <p className="num mt-3 border-l-2 border-ink bg-[var(--paper-2)] px-3 py-2 text-[13px]">{r.formula}</p>}
-            </div>
-          </li>
-        ))}
-      </ol>
+    <main className="pb-24">
+      <PageHead kicker={`Rules of engagement · live on Strike ${LIVE_NETWORK}`} title="How a market is claimed">
+        <p>
+          {RULES.length} rules decide which army holds each market and which recruits count. Where a rule is a calculation, the formula sits right under it.
+        </p>
+        <ol className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-[14px] text-ink">
+          {GROUPS.map((g, i) => (
+            <li key={g.id}>
+              <a href={`#${g.id}`} className="link font-semibold">
+                <span className="num mr-1.5 text-[12px] text-ink-2">{String(i + 1).padStart(2, "0")}</span>
+                {g.label}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </PageHead>
+      {GROUPS.map((g, gi) => (
+        <Section key={g.id} id={g.id} n={gi + 1} label={g.label} title={g.title} band={gi % 2 === 1}>
+          <ol>
+            {g.rules.map((ri) => {
+              const r = RULES[ri];
+              n++;
+              return (
+                <li key={r.h} className="grid grid-cols-[44px_1fr] gap-4 border-t border-[var(--rule-strong)] py-6 first:border-t-0 first:pt-0 md:grid-cols-[64px_1fr]">
+                  <span className="num pt-1 text-[15px] font-semibold"><span className="hidden md:inline">Rule </span>{n}</span>
+                  <div>
+                    <h3 className="display text-[26px]">{r.h}</h3>
+                    <p className="mt-2 max-w-[68ch] text-[16px] leading-relaxed text-ink-2">{r.body}</p>
+                    {r.formula && <p className="num mt-3 max-w-[90ch] border-l-2 border-ink bg-[var(--paper-3)] px-3 py-2 text-[13px]">{r.formula}</p>}
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        </Section>
+      ))}
     </main>
   );
 }

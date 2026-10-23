@@ -11,6 +11,7 @@ import { Swatch } from "@/components/Swatch";
 import { WarMap } from "@/components/WarMap";
 import { ShareButton } from "@/components/ShareButton";
 import { EmbedSnippet } from "@/components/EmbedSnippet";
+import { Section, SubHead, shadow } from "@/components/Section";
 
 export function generateStaticParams() {
   return ARMIES.map((a) => ({ slug: a.slug }));
@@ -52,7 +53,8 @@ async function ArmyPageContent(props: PageProps<"/army/[slug]">) {
   ];
 
   return (
-    <main className="mx-auto max-w-[1400px] px-4 pb-24 pt-8 md:px-8">
+    <main className="pb-24">
+      <header className="mx-auto max-w-[1400px] px-4 pb-10 pt-10 md:px-8 md:pb-12 md:pt-14">
       <p className="kicker">{army.garrison ? "Garrison" : `Army · ${rank} of ${ranked.length} by markets held this week`}</p>
       <div className="mt-2 flex items-center gap-4">
         <Swatch army={army} className="h-16 w-6 md:h-24 md:w-8" />
@@ -67,42 +69,39 @@ async function ArmyPageContent(props: PageProps<"/army/[slug]">) {
           </div>
         ))}
       </dl>
+      </header>
 
-      <section className="mt-10 grid gap-10 xl:grid-cols-[1fr_380px]">
+      <Section id="ground" n={1} label="Season 0 · Strike mainnet" title={`Where ${army.ticker} stands`} note={`Last ${season0.windowDays} days, read-only.`}>
         <div>
-          <div className="rule-b flex flex-wrap items-baseline justify-between gap-2 pb-2">
-            <h2 className="display text-[28px]">Season 0 · Strike mainnet</h2>
-            <span className="label">last {season0.windowDays} days, read-only</span>
-          </div>
           {held.length === 0 && (
-            <p className="mt-4 border-l-4 pl-4 text-[17px]" style={{ borderColor: army.ink }}>
+            <p className="border-l-4 pl-4 text-[17px]" style={{ borderColor: army.ink }}>
               No ground held. {plural(foughtIn.length, "market")} where {army.ticker} traders fought this week
               {contested.length ? `, runner-up in ${contested.map((t) => t.symbol.replace("-USD", "")).join(", ")}` : ""}.
             </p>
           )}
           {held.length > 0 && (
-            <p className="mt-4 border-l-4 pl-4 text-[17px]" style={{ borderColor: army.ink }}>
+            <p className="border-l-4 pl-4 text-[17px]" style={{ borderColor: army.ink }}>
               Holds {held.map((t) => t.symbol.replace("-USD", "")).join(", ")}
               {contested.length ? `. Runner-up in ${contested.map((t) => t.symbol.replace("-USD", "")).join(", ")}` : ""}.
             </p>
           )}
-          <div className="mt-4">
+          <div className="mt-6 max-w-[980px]">
             <WarMap tiles={season0.tiles} highlight={slug} />
           </div>
         </div>
+      </Section>
 
-        <aside>
-          <div className="rule-b flex items-baseline justify-between pb-2">
-            <h2 className="display text-[28px]">Season 1 · live</h2>
-            <span className="label">Strike {live.network}</span>
-          </div>
+      <Section id="live" n={2} band label={`Season 1 · Strike ${live.network} · live`} title={`${army.ticker} this season`}>
+        <div className="grid gap-10 lg:grid-cols-2">
+        <div className="pop min-w-0 self-start p-5" style={shadow(army.ink)}>
+          <SubHead title="Enlisted and recruited" />
           {live.network === "testnet" && (
-            <p className="mt-2 text-[13px] text-ink-2">
+            <p className="mt-3 text-[13px] text-ink-2">
               Testnet wallets can&apos;t hold the real {army.ticker}, so membership here is checked against t{army.ticker}, a labelled stand-in Raid minted on
               Cardano preprod. On mainnet the same check reads the real token.
             </p>
           )}
-          <dl className="mt-2 grid grid-cols-[1fr_auto] gap-y-2 text-[15px]">
+          <dl className="mt-3 grid grid-cols-[1fr_auto] gap-x-6 gap-y-2 text-[15px]">
             <dt className="text-ink-2">Enlisted in {army.ticker} (of {live.members.length} across all armies)</dt>
             <dd className="num">{liveMembers.length}</dd>
             <dt className="text-ink-2">Confirmed recruits</dt>
@@ -120,7 +119,10 @@ async function ArmyPageContent(props: PageProps<"/army/[slug]">) {
               </Link>
             </dd>
           </dl>
-          <p className="mt-3 text-[13px] text-ink-2">
+        </div>
+        <div className="min-w-0">
+          <SubHead title="Fees, banner and sharing" />
+          <p className="mt-3 text-[14px] text-ink-2">
             Builder fees are paid to Raid&apos;s builder account by Strike on every fill. At the end of the season each army&apos;s share goes to the
             treasury wallet its community names, and every payout will be listed on the Proof of Fees page.
           </p>
@@ -131,11 +133,12 @@ async function ArmyPageContent(props: PageProps<"/army/[slug]">) {
             <ShareButton army={army.slug} text={`${army.ticker} on Raid: ${plural(held.length, "market")} held on Strike this week, ${plural(s0.traders7d, "trader")} in the field. Come take ground.`} />
           </div>
           <EmbedSnippet army={army.slug} />
-          <p className="mt-6 text-[13px] text-ink-3">
+          <p className="mt-6 text-[13px] text-ink-2">
             Net PnL is shown as it is, losses included. It never affects the score: armies rank on traders who pay fees to outsiders and on new traders who stay.
           </p>
-        </aside>
-      </section>
+        </div>
+        </div>
+      </Section>
     </main>
   );
 }

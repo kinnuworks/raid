@@ -1,12 +1,14 @@
 import { TradeShell } from "./TradeShell";
+import { PageHead } from "@/components/Section";
 
 export default function TradePage() {
   return (
-    <main className="mx-auto max-w-[1400px] px-4 pb-24 pt-8 md:px-8">
-      <p className="kicker">Field terminal</p>
-      <h1 className="display mt-2 text-[clamp(40px,5vw,64px)]">Take the field</h1>
-      <div className="mt-6">
-        <TradeShell />
+    <main className="pb-24">
+      <PageHead kicker="Field terminal" title="Take the field" />
+      <div className="border-t-2 border-ink">
+        <div className="mx-auto max-w-[1400px] px-4 pt-8 md:px-8 md:pt-10">
+          <TradeShell />
+        </div>
       </div>
     </main>
   );
