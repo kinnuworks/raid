@@ -6,6 +6,9 @@ import { Provenance } from "@/components/Provenance";
 import { Replay } from "@/components/Replay";
 import { Swatch } from "@/components/Swatch";
 import { LiveStrip } from "@/components/LiveStrip";
+import { Section, SubHead } from "@/components/Section";
+import { RECRUIT_RULES } from "@/lib/score";
+import { BUILDER_FEE_BPS } from "@/lib/strike/config";
 
 export default function Home() {
   const tiles = season0.tiles;
@@ -22,145 +25,250 @@ export default function Home() {
   const topCommunity = [...held.entries()].filter(([s]) => !ARMY_BY_SLUG[s].garrison).sort((a, b) => b[1] - a[1])[0];
 
   return (
-    <main className="mx-auto max-w-[1400px] px-4 pb-24 md:px-8">
-      <section className="grid gap-8 pt-8 lg:grid-cols-[1fr_380px] lg:pt-12">
-        <div>
-          <p className="kicker">
-            Season 0 · computed from Strike mainnet public data, last {season0.windowDays} days, {tiles.length} markets listed today
-          </p>
-          <h1 className="display mt-3 text-[clamp(40px,7vw,96px)]">
-            <span className="block max-w-[15ch]">Your token is your army.</span>
-            <span className="block max-w-[15ch]">Take Strike&apos;s markets.</span>
-          </h1>
-          <p className="mt-5 max-w-[60ch] text-[17px] leading-relaxed text-ink-2">
-            Raid turns Cardano communities (SNEK, HOSKY, NIGHT and eleven more) into trading armies on Strike. Hold the token, enlist with one
-            signature, and claim markets by bringing traders who pay real fees. Wash trades and self-funded recruits never score, and you can check
-            every fee yourself.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Link href="/join" className="btn">
-              Enlist your wallet
+    <main className="pb-24">
+      <div className="mx-auto max-w-[1400px] px-4 pb-12 md:px-8 md:pb-16">
+        <section className="grid gap-8 pt-8 lg:grid-cols-[1fr_380px] lg:pt-12" aria-labelledby="intro">
+          <div>
+            <p className="kicker">
+              Season 0 · computed from Strike mainnet public data, last {season0.windowDays} days, {tiles.length} markets listed today
+            </p>
+            <h1 id="intro" className="display mt-3 text-[clamp(40px,7vw,96px)]">
+              <span className="block max-w-[15ch]">Your token is your army.</span>
+              <span className="block max-w-[15ch]">Take Strike&apos;s markets.</span>
+            </h1>
+            <p className="mt-5 max-w-[60ch] text-[17px] leading-relaxed text-ink-2">
+              Raid turns Cardano communities (SNEK, HOSKY, NIGHT and eleven more) into trading armies on Strike. Hold the token, enlist with one
+              signature, and claim markets by bringing traders who pay real fees. Wash trades and self-funded recruits never score, and you can check
+              every fee yourself.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link href="/join" className="btn">
+                Enlist your wallet
+              </Link>
+              <Link href="#claim" className="btn ghost">
+                How a market is claimed
+              </Link>
+            </div>
+            <ul className="mt-4 flex flex-col gap-1 text-[13px] text-ink-2 sm:flex-row sm:gap-0 sm:[&>li+li]:before:mx-3 sm:[&>li+li]:before:content-['·']">
+              <li>Live on Strike testnet</li>
+              <li>No wallet needed to look around</li>
+              <li>Your trading key never leaves your browser</li>
+            </ul>
+          </div>
+
+          <aside className="self-end border-l-4 border-ink pl-5">
+            <p className="label">Dispatch from the front</p>
+            <p className="display mt-2 text-[34px]">
+              The garrison holds {garrisonHeld}&nbsp;of&nbsp;{tiles.length}. Your&nbsp;move.
+            </p>
+            <p className="mt-3 text-[15px] text-ink-2">
+              Community armies hold {communityHeld}
+              {topCommunity ? `, led by ${ARMY_BY_SLUG[topCommunity[0]].ticker} with ${plural(topCommunity[1], "market")}` : ""}.{" "}
+              {fmtInt(snek.holders)} wallets on Strike hold SNEK; the Snek army holds {plural(held.get("snek") ?? 0, "market")}.
+            </p>
+            <Link href="/army/snek" className="link mt-3 inline-block text-[15px] font-semibold">
+              The Snek army needs ground
             </Link>
-            <Link href="/rules" className="btn ghost">
-              How a market is claimed
-            </Link>
-          </div>
-          <ul className="mt-4 flex flex-col gap-1 text-[13px] text-ink-2 sm:flex-row sm:gap-0 sm:[&>li+li]:before:mx-3 sm:[&>li+li]:before:content-['·']">
-            <li>Live on Strike testnet</li>
-            <li>No wallet needed to look around</li>
-            <li>Your trading key never leaves your browser</li>
-          </ul>
-        </div>
-
-        <aside className="self-end border-l-4 border-ink pl-5">
-          <p className="label">Dispatch from the front</p>
-          <p className="display mt-2 text-[34px]">
-            The garrison holds {garrisonHeld}&nbsp;of&nbsp;{tiles.length}. Your&nbsp;move.
-          </p>
-          <p className="mt-3 text-[15px] text-ink-2">
-            Community armies hold {communityHeld}
-            {topCommunity ? `, led by ${ARMY_BY_SLUG[topCommunity[0]].ticker} with ${plural(topCommunity[1], "market")}` : ""}.{" "}
-            {fmtInt(snek.holders)} wallets on Strike hold SNEK; the Snek army holds {plural(held.get("snek") ?? 0, "market")}.
-          </p>
-          <Link href="/army/snek" className="link mt-3 inline-block text-[15px] font-semibold">
-            The Snek army needs ground
-          </Link>
-          <p className="mt-4 border-t border-[var(--rule)] pt-3 text-[13px] text-ink-2">
-            Spoils: each army&apos;s share of builder fees goes to its community treasury at season end, and the army holding the most markets flies its
-            banner over next season&apos;s map.
-          </p>
-        </aside>
-      </section>
-
-      <LiveStrip />
-
-      <section className="mt-10 grid gap-10 xl:grid-cols-[1fr_380px]">
-        <div>
-          <div className="rule-b flex flex-wrap items-baseline justify-between gap-2 pb-2">
-            <h2 className="display text-[30px]">The board</h2>
-            <span className="label">A market goes to the army whose traders paid the most fees there this week</span>
-          </div>
-          <div className="mt-4">
-            <Replay final={tiles} days={season0.days} generatedAt={season0.generatedAt} />
-          </div>
-          <Legend />
-        </div>
-
-        <section aria-label="Armies">
-          <div className="rule-b flex items-baseline justify-between pb-2">
-            <h2 className="display text-[30px]">Armies</h2>
-            <span className="label">markets held, then volume</span>
-          </div>
-          <table className="w-full text-[14px]">
-            <thead className="sr-only">
-              <tr>
-                <th>Rank</th>
-                <th>Army</th>
-                <th>Markets held and volume, 7 days</th>
-              </tr>
-            </thead>
-            <tbody>
-              {armies.map((a, i) => {
-                const army = ARMY_BY_SLUG[a.slug];
-                const above = armies[i - 1];
-                return (
-                  <tr key={a.slug} className="rule-b">
-                    <td className="num w-8 py-2 pr-2 text-right align-top text-[15px] font-semibold">{i + 1}</td>
-                    <td className="py-2 align-top">
-                      <Link href={`/army/${a.slug}`} className="flex items-start gap-2.5 hover:underline">
-                        <Swatch army={army} className="mt-1 h-5 w-3" />
-                        <span>
-                          <span className="display block text-[22px]">{army.ticker}</span>
-                          <span className="block text-[12px] text-ink-2">
-                            {plural(a.traders7d, "trader")} this week · {fmtInt(a.holders)} holders
-                          </span>
-                        </span>
-                      </Link>
-                    </td>
-                    <td className="num py-2 text-right align-top">
-                      <span className="block text-[15px] font-semibold">{plural(held.get(a.slug) ?? 0, "market")}</span>
-                      <span className="block text-[12px] text-ink-2">{fmtUsd(a.volume7d)} volume</span>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-          <p className="mt-4 flex items-start gap-2.5 text-[13px] text-ink-2">
-            <Swatch army={ARMY_BY_SLUG.strike} className="mt-0.5 h-5 w-3" />
-            <span>
-              Garrison: wallets that hold only STRIKE. {plural(garrison.traders7d, "trader")}, {fmtUsd(garrison.volume7d)} this week, holding{" "}
-              {plural(garrisonHeld, "market")}. Shown in grey so the community race stays readable.
-            </span>
-          </p>
+            <p className="mt-4 border-t border-[var(--rule)] pt-3 text-[13px] text-ink-2">
+              Spoils: each army&apos;s share of builder fees goes to its community treasury at season end, and the army holding the most markets flies its
+              banner over next season&apos;s map.
+            </p>
+          </aside>
         </section>
-      </section>
 
-      <Worth armies={season0.armies.filter((a) => !ARMY_BY_SLUG[a.slug].garrison)} />
+        <LiveStrip />
 
-      <Faq />
+        <nav aria-label="On this page" className="mt-8">
+          <p className="label">On this page</p>
+          <ol className="mt-2 grid grid-cols-1 border-l border-t border-[var(--rule-strong)] sm:grid-cols-2 lg:grid-cols-5">
+            {CONTENTS.map(([id, title], i) => (
+              <li key={id} className="border-b border-r border-[var(--rule-strong)]">
+                <a href={`#${id}`} className="flex min-h-12 items-center gap-3 px-3 py-2 text-[14px] font-semibold hover:bg-[var(--paper-2)]">
+                  <span className="num text-[12px] text-ink-2">{String(i + 1).padStart(2, "0")}</span>
+                  {title}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      </div>
 
-      <Provenance
-        className="mt-14"
-        generatedAt={season0.generatedAt}
-        rows={[
-          ["Leaderboard", season0.sources.leaderboard],
-          ["Holdings", season0.sources.holdings],
-          ["Fills", season0.sources.fills],
-          ["24h volume", season0.sources.volume],
-        ]}
-        footnote={`${fmtInt(season0.totals.leaderboardAccounts)} accounts read, ${fmtInt(season0.totals.resolvedStakeKeys)} Cardano stake keys resolved, ${fmtInt(
-          season0.totals.armyMembers,
-        )} wallets hold an army token, ${fmtInt(season0.totals.fillsScanned)} fills scanned, ${fmtInt(season0.totals.internalFillsDropped)} dropped as trades between army members.`}
-      />
+      <Section id="map" n={1} label="Season 0 · Strike mainnet" title="The board" note="A market goes to the army whose traders paid the most fees there this week.">
+        <div className="grid gap-10 xl:grid-cols-[1fr_380px]">
+          <div>
+            <Replay final={tiles} days={season0.days} generatedAt={season0.generatedAt} />
+            <Legend />
+          </div>
+
+          <section aria-labelledby="armies">
+            <SubHead id="armies" title="Armies" note="markets held, then volume" />
+            <table className="w-full text-[14px]">
+              <thead className="sr-only">
+                <tr>
+                  <th>Rank</th>
+                  <th>Army</th>
+                  <th>Markets held and volume, 7 days</th>
+                </tr>
+              </thead>
+              <tbody>
+                {armies.map((a, i) => {
+                  const army = ARMY_BY_SLUG[a.slug];
+                  return (
+                    <tr key={a.slug} className="rule-b">
+                      <td className="num w-8 py-2 pr-2 text-right align-top text-[15px] font-semibold">{i + 1}</td>
+                      <td className="py-2 align-top">
+                        <Link href={`/army/${a.slug}`} className="flex items-start gap-2.5 hover:underline">
+                          <Swatch army={army} className="mt-1 h-5 w-3" />
+                          <span>
+                            <span className="display block text-[22px]">{army.ticker}</span>
+                            <span className="block text-[12px] text-ink-2">
+                              {plural(a.traders7d, "trader")} this week · {fmtInt(a.holders)} holders
+                            </span>
+                          </span>
+                        </Link>
+                      </td>
+                      <td className="num py-2 text-right align-top">
+                        <span className="block text-[15px] font-semibold">{plural(held.get(a.slug) ?? 0, "market")}</span>
+                        <span className="block text-[12px] text-ink-2">{fmtUsd(a.volume7d)} volume</span>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+            <p className="mt-4 flex items-start gap-2.5 text-[13px] text-ink-2">
+              <Swatch army={ARMY_BY_SLUG.strike} className="mt-0.5 h-5 w-3" />
+              <span>
+                Garrison: wallets that hold only STRIKE. {plural(garrison.traders7d, "trader")}, {fmtUsd(garrison.volume7d)} this week, holding{" "}
+                {plural(garrisonHeld, "market")}. Shown in grey so the community race stays readable.
+              </span>
+            </p>
+          </section>
+        </div>
+      </Section>
+
+      <Section id="claim" n={2} band label="How a market is claimed" title="Many small traders beat one whale" note={<Link href="/rules" className="link font-semibold">Read the full rules</Link>}>
+        <ol className="grid border-l border-t border-[var(--rule-strong)] md:grid-cols-3">
+          {CLAIM.map(([h, body], i) => (
+            <li key={h} className="border-b border-r border-[var(--rule-strong)] bg-[var(--paper)] p-5">
+              <span className="num text-[13px] font-semibold text-ink-2">Step {i + 1}</span>
+              <h3 className="display mt-2 text-[24px]">{h}</h3>
+              <p className="mt-2 text-[15px] leading-relaxed text-ink-2">{body}</p>
+            </li>
+          ))}
+        </ol>
+        <p className="num mt-5 border-l-2 border-ink bg-[var(--paper)] px-3 py-2 text-[13px]">
+          tile score(army, market) = Σ over members √(fees paid by that member on that market)
+        </p>
+      </Section>
+
+      <Section
+        id="recruits"
+        n={3}
+        label="Recruits and anti-cheat"
+        title="New traders who stay are the headline"
+        note={<Link href="/recruits" className="link font-semibold">See every recruit check, live</Link>}
+      >
+        <div className="grid gap-10 md:grid-cols-2">
+          <div>
+            <SubHead title="When a recruit counts" />
+            <ul className="mt-1">
+              {[
+                "The wallet had never traded on Strike and joined through a member's link",
+                `It deposits at least $${RECRUIT_RULES.minDepositUsd}`,
+                "It pays fees against a counterparty outside every army",
+                "No Raid member funded it on-chain",
+                `It trades on ${RECRUIT_RULES.minTradingDays} separate UTC days`,
+              ].map((t) => (
+                <li key={t} className="rule-b py-2.5 text-[15px]">
+                  {t}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-3 text-[14px] text-ink-2">
+              Each recruiter is credited for at most {RECRUIT_RULES.maxCreditedPerRecruiter} recruits a season. A recruit adds the square root of the fees it
+              paid to outside counterparties.
+            </p>
+          </div>
+          <div>
+            <SubHead title="What never scores" />
+            <ul className="mt-1">
+              {[
+                ["Trades between Raid accounts", "Both sides of a Strike trade share a public trade_id, so these fills are dropped, same army or rival armies."],
+                ["Recruits funded by a member", "Funding is traced two hops back on-chain."],
+                ["Fees past $5 a day", "Fees count toward a market up to $5 per wallet per UTC day."],
+                ["Orders above 3x leverage", "Part of the guardrails: the order ticket also shows the most you can lose before you confirm."],
+              ].map(([h, t]) => (
+                <li key={h} className="rule-b py-2.5">
+                  <span className="block text-[15px] font-semibold">{h}</span>
+                  <span className="block text-[14px] text-ink-2">{t}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </Section>
+
+      <Section
+        id="proof"
+        n={4}
+        band
+        label="Proof of fees"
+        title="Every fee is in Strike's public data"
+        note={<Link href="/proof" className="link font-semibold">Recompute the fees in your browser</Link>}
+      >
+        <Worth armies={season0.armies.filter((a) => !ARMY_BY_SLUG[a.slug].garrison)} />
+      </Section>
+
+      <Section id="faq" n={5} label="Questions" title="Before you enlist">
+        <Faq />
+      </Section>
+
+      <div className="mx-auto max-w-[1400px] px-4 md:px-8">
+        <Provenance
+          generatedAt={season0.generatedAt}
+          rows={[
+            ["Leaderboard", season0.sources.leaderboard],
+            ["Holdings", season0.sources.holdings],
+            ["Fills", season0.sources.fills],
+            ["24h volume", season0.sources.volume],
+          ]}
+          footnote={`${fmtInt(season0.totals.leaderboardAccounts)} accounts read, ${fmtInt(season0.totals.resolvedStakeKeys)} Cardano stake keys resolved, ${fmtInt(
+            season0.totals.armyMembers,
+          )} wallets hold an army token, ${fmtInt(season0.totals.fillsScanned)} fills scanned, ${fmtInt(season0.totals.internalFillsDropped)} dropped as trades between army members.`}
+        />
+      </div>
     </main>
   );
 }
 
+const CONTENTS: [string, string][] = [
+  ["map", "The board"],
+  ["claim", "How a market is claimed"],
+  ["recruits", "Recruits and anti-cheat"],
+  ["proof", "Proof of fees"],
+  ["faq", "Before you enlist"],
+];
+
+const CLAIM: [string, string][] = [
+  [
+    "Hold the token, pick your army",
+    "Raid reads the tokens your wallet holds. If it holds several army tokens you pick one for the season, then sign once to enlist.",
+  ],
+  [
+    "Trade and pay fees",
+    "Each day, every member who traded a market adds the square root of the fees they paid there. Ten traders paying $1 each beat one whale paying $10.",
+  ],
+  [
+    "Hold the most ground",
+    "The army with the highest score holds the market. Fees count up to $5 per wallet per UTC day, so no wallet can buy ground. A lead under 15% shows as contested.",
+  ],
+];
+
 function Legend() {
   const sample = ARMIES.filter((a) => ["snek", "indy", "fren"].includes(a.slug));
   return (
-    <dl className="mt-5 grid gap-x-8 gap-y-2 text-[13px] text-ink-2 sm:grid-cols-2">
+    <dl className="mt-6 grid gap-x-8 gap-y-2 text-[13px] text-ink-2 sm:grid-cols-2">
       <div className="flex items-center gap-2">
         <dt className="flex gap-1">
           {sample.map((a) => (
@@ -221,10 +329,7 @@ const FAQ: [string, string][] = [
 
 function Faq() {
   return (
-    <section className="mt-16 max-w-[860px]" aria-labelledby="faq">
-      <h2 id="faq" className="display rule-b pb-2 text-[30px]">
-        Before you enlist
-      </h2>
+    <div className="max-w-[860px] border-t border-[var(--rule-strong)]">
       {FAQ.map(([q, a]) => (
         <details key={q} className="rule-b group">
           <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-6 py-3 text-[17px] font-semibold">
@@ -236,7 +341,7 @@ function Faq() {
           <p className="max-w-[68ch] pb-4 text-[15px] leading-relaxed text-ink-2">{a}</p>
         </details>
       ))}
-    </section>
+    </div>
   );
 }
 
@@ -248,12 +353,20 @@ function Worth({ armies }: { armies: { slug: string; volume7d: number; traders7d
   const holders = armies.reduce((s, a) => s + a.members, 0);
   const builderWeek = (volume * 10) / 1e4;
   return (
-    <section className="mt-16 grid gap-6 border-y-2 border-ink py-6 md:grid-cols-[1fr_2fr]" aria-labelledby="worth">
-      <h2 id="worth" className="display text-[30px]">
-        What the armies are worth to Strike
-      </h2>
-      <div>
-        <dl className="grid grid-cols-1 gap-y-2 text-[15px] sm:grid-cols-[1fr_auto]">
+    <div className="grid gap-10 md:grid-cols-2">
+      <div className="max-w-[60ch] text-[15px] leading-relaxed text-ink-2">
+        <p>
+          Every order Raid sends carries a public tag in Strike&apos;s <span className="num text-ink">client_order_id</span>. Orders that take liquidity
+          carry a {BUILDER_FEE_BPS} bps builder fee on top of Strike&apos;s own fee, and Strike pays it to Raid&apos;s builder account on every fill.
+        </p>
+        <p className="mt-3">
+          On the Proof of Fees page your browser fetches the tagged fills from Strike and adds them up without asking Raid, so each army&apos;s share can be
+          checked by anyone.
+        </p>
+      </div>
+      <section aria-labelledby="worth">
+        <SubHead id="worth" title="What the armies are worth to Strike" />
+        <dl className="mt-3 grid grid-cols-[1fr_auto] gap-x-6 gap-y-2 text-[15px]">
           <dt className="text-ink-2">Mainnet volume from community-army traders, last 7 days</dt>
           <dd className="num text-right font-semibold">{fmtUsd(volume)}</dd>
           <dt className="text-ink-2">Traders behind it</dt>
@@ -267,7 +380,7 @@ function Worth({ armies }: { armies: { slug: string; volume7d: number; traders7d
           Computed from Season 0&apos;s mainnet fills. The testnet season&apos;s fees are small because they come from ten test wallets; these are the
           same armies&apos; real numbers on mainnet, before Raid recruits a single new trader.
         </p>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
