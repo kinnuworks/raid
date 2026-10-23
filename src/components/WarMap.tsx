@@ -250,7 +250,7 @@ function Board({
                 key={`${tile.symbol}-${tile.owner}-${animateKey ?? ""}`}
                 points={pts}
                 fill={fill}
-                opacity={faded ? 0.22 : 0.94}
+                opacity={faded ? 0.35 : 0.94}
                 className={animateKey ? "ink-in" : undefined}
               />
               <polygon points={pts} fill="none" stroke="var(--ink)" strokeOpacity="0.35" strokeWidth="1" strokeDasharray={owner ? undefined : "3 3"} />
@@ -270,7 +270,7 @@ function Board({
                 </text>
               )}
               {owner && !owner.garrison && (
-                <g transform={`translate(${cx - 16},${cy - 8})`} opacity={faded ? 0.45 : 1} filter="url(#chit-shadow)">
+                <g transform={`translate(${cx - 16},${cy - 5})`} opacity={faded ? 0.6 : 1} filter="url(#chit-shadow)">
                   {Array.from({ length: ticks }).map((_, i) => (
                     <rect key={i} x={16 - ticks * 3 + i * 6} y={-7} width="4" height="4" fill="var(--ink)" />
                   ))}

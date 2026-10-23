@@ -45,13 +45,11 @@ export default function Home() {
               How a market is claimed
             </Link>
           </div>
-          <p className="mt-4 flex flex-wrap gap-x-3 gap-y-1 text-[13px] text-ink-2">
-            <span>Live on Strike testnet</span>
-            <span aria-hidden>·</span>
-            <span>No wallet needed to look around</span>
-            <span aria-hidden>·</span>
-            <span>Your trading key never leaves your browser</span>
-          </p>
+          <ul className="mt-4 flex flex-col gap-1 text-[13px] text-ink-2 sm:flex-row sm:gap-0 sm:[&>li+li]:before:mx-3 sm:[&>li+li]:before:content-['·']">
+            <li>Live on Strike testnet</li>
+            <li>No wallet needed to look around</li>
+            <li>Your trading key never leaves your browser</li>
+          </ul>
         </div>
 
         <aside className="self-end border-l-4 border-ink pl-5">
@@ -137,6 +135,8 @@ export default function Home() {
           </p>
         </section>
       </section>
+
+      <Worth armies={season0.armies.filter((a) => !ARMY_BY_SLUG[a.slug].garrison)} />
 
       <Faq />
 
@@ -236,6 +236,38 @@ function Faq() {
           <p className="max-w-[68ch] pb-4 text-[15px] leading-relaxed text-ink-2">{a}</p>
         </details>
       ))}
+    </section>
+  );
+}
+
+/** What these armies' real mainnet trading would be worth through Raid, at the same 10 bps builder fee. */
+function Worth({ armies }: { armies: { slug: string; volume7d: number; traders7d: number; members: number }[] }) {
+  const volume = armies.reduce((s, a) => s + a.volume7d, 0);
+  const traders = armies.reduce((s, a) => s + a.traders7d, 0);
+  // Each wallet is counted once, in the army of its rarest token.
+  const holders = armies.reduce((s, a) => s + a.members, 0);
+  const builderWeek = (volume * 10) / 1e4;
+  return (
+    <section className="mt-16 grid gap-6 border-y-2 border-ink py-6 md:grid-cols-[1fr_2fr]" aria-labelledby="worth">
+      <h2 id="worth" className="display text-[30px]">
+        What the armies are worth to Strike
+      </h2>
+      <div>
+        <dl className="grid grid-cols-1 gap-y-2 text-[15px] sm:grid-cols-[1fr_auto]">
+          <dt className="text-ink-2">Mainnet volume from community-army traders, last 7 days</dt>
+          <dd className="num text-right font-semibold">{fmtUsd(volume)}</dd>
+          <dt className="text-ink-2">Traders behind it</dt>
+          <dd className="num text-right font-semibold">{fmtInt(traders)}</dd>
+          <dt className="text-ink-2">Builder fees at 10 bps if that volume came through Raid, per week</dt>
+          <dd className="num text-right font-semibold">{fmtUsd(builderWeek)}</dd>
+          <dt className="text-ink-2">Strike wallets that hold a community army token, each counted once</dt>
+          <dd className="num text-right font-semibold">{fmtInt(holders)}</dd>
+        </dl>
+        <p className="mt-3 max-w-[70ch] text-[13px] text-ink-2">
+          Computed from Season 0&apos;s mainnet fills. The testnet season&apos;s fees are small because they come from ten test wallets; these are the
+          same armies&apos; real numbers on mainnet, before Raid recruits a single new trader.
+        </p>
+      </div>
     </section>
   );
 }

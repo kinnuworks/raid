@@ -17,13 +17,14 @@ async function RecruitsPageContent() {
   const order = { confirmed: 0, pending: 1, flagged: 2, rejected: 3 } as const;
   const recruits = [...s.recruits].sort((a, b) => order[a.check.status] - order[b.check.status]);
   return (
-    <main className="mx-auto max-w-[1300px] px-4 pb-24 pt-8 md:px-8">
+    <main className="mx-auto max-w-[1400px] px-4 pb-24 pt-8 md:px-8">
       <p className="kicker">Season 1 · Strike {s.network} · live</p>
       <h1 className="display mt-2 text-[clamp(40px,6vw,76px)]">New traders who stayed</h1>
       <p className="mt-3 max-w-[70ch] text-[17px] text-ink-2">
         An army scores for a recruit only when a wallet that never traded on Strike joins through a member&apos;s link, deposits at least $
         {RECRUIT_RULES.minDepositUsd}, trades against someone outside every army, was not funded by a Raid member, and trades on {RECRUIT_RULES.minTradingDays}{" "}
-        separate days. Each recruiter is credited for at most {RECRUIT_RULES.maxCreditedPerRecruiter}.
+        separate days. Each recruiter is credited for at most {RECRUIT_RULES.maxCreditedPerRecruiter}. An army&apos;s recruit score is the sum, over its confirmed
+        recruits, of the square root of the fees each one paid to outside counterparties.
       </p>
 
       <section className="mt-8">
@@ -36,7 +37,7 @@ async function RecruitsPageContent() {
               <Swatch army={ARMY_BY_SLUG[r.army]} className="h-3.5 w-3.5 self-center" />
               <span className="display text-[22px]">{ARMY_BY_SLUG[r.army].ticker}</span>
               <span className="num text-[13px] text-ink-2">
-                {r.confirmed} confirmed · {r.pending} waiting on day two · {r.flagged} flagged · {r.rejected} rejected · score {r.score.toFixed(3)}
+                {r.confirmed} confirmed · {r.pending} waiting on day two · {r.flagged} flagged · {r.rejected} rejected · recruit score {r.score.toFixed(3)}
               </span>
             </Link>
           ))}
@@ -77,7 +78,7 @@ async function RecruitsPageContent() {
                   {r.check.status === "confirmed" && <span className="stamp text-[14px]">Confirmed</span>}
                   {r.check.status === "pending" && <span className="display text-[17px] text-ink-2">Waiting</span>}
                   {r.check.status === "flagged" && <span className="display text-[17px]">Flagged</span>}
-                  {r.check.status === "rejected" && <span className="display text-[17px] line-through decoration-2">Rejected</span>}
+                  {r.check.status === "rejected" && <span className="stamp reject text-[14px]">Rejected</span>}
                   {r.check.reasons.length > 0 && <p className="mt-1 text-[13px] text-ink-2">{r.check.reasons.join(" · ")}</p>}
                 </td>
               </tr>

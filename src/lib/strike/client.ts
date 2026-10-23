@@ -181,6 +181,9 @@ export interface PublicPosition {
   mark_price?: string;
   leverage?: number;
   liquidation_price?: string;
+  /** Strike's field name for unrealized PnL. */
+  upnl?: string;
   unrealized_pnl?: string;
+  margin_mode?: string;
   [k: string]: unknown;
 }

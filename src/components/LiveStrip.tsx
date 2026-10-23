@@ -27,7 +27,7 @@ export function LiveStrip() {
   if (failed) return null;
   const sum = (k: "confirmed" | "pending" | "flagged" | "rejected") => s?.recruitBoard.reduce((a, r) => a + r[k], 0) ?? 0;
   const fees = s ? Object.values(s.fees).reduce((a, f) => a + f.builderFee, 0) : 0;
-  const held = s?.tiles.filter((t) => t.owner).map((t) => `${t.symbol.replace("-USD", "")} ${ARMY_BY_SLUG[t.owner!]?.ticker}`) ?? [];
+  const held = s?.tiles.filter((t) => t.owner).map((t) => `${t.symbol.replace("-USD", "")} → ${ARMY_BY_SLUG[t.owner!]?.ticker}`) ?? [];
   return (
     <Link href="/recruits" className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 border-y-2 border-ink py-3 text-[14px] hover:bg-[var(--paper-2)]">
       <span className="flex items-center gap-2 font-semibold">
@@ -41,9 +41,11 @@ export function LiveStrip() {
           <span className="num">{s.members.length} enlisted</span>
           <span className="num">{sum("confirmed")} recruits confirmed</span>
           <span className="num">{sum("pending")} waiting on day two</span>
-          <span className="num">{sum("flagged") + sum("rejected")} cheaters caught</span>
+          <span className="num">
+            {sum("flagged")} flagged · {sum("rejected")} rejected
+          </span>
           <span className="num">${fees.toFixed(2)} builder fees</span>
-          {held.length > 0 && <span className="num text-ink-2">{held.join(" · ")}</span>}
+          {held.length > 0 && <span className="num text-ink-2">testnet ground: {held.join(", ")}</span>}
           <span className="ml-auto font-semibold underline underline-offset-2">See every check</span>
         </>
       )}

@@ -101,10 +101,10 @@ export function Recompute({ server, accounts, seasonStart }: { server: Rows; acc
           <p className="label">Line items, newest first: floor(price × size × bps ÷ 10,000)</p>
           <ul className="num mt-2 max-h-80 overflow-auto text-[12px]">
             {lines.map(({ f, fee }) => (
-              <li key={`${f.account_id}-${f.trade_id}`} className="grid grid-cols-[70px_80px_1fr_110px] gap-2 border-t border-[#3a362d] py-1">
+              <li key={`${f.account_id}-${f.trade_id}`} className="grid grid-cols-[70px_80px_1fr_110px] gap-2 border-t border-[#3a362d] py-1 text-[12px] text-[#d9d0bb]">
                 <span>{ARMY_BY_SLUG[parseRaidTag(f.client_order_id)!.army]?.ticker}</span>
                 <span>{f.symbol}</span>
-                <span className="truncate text-[#a59d88]">
+                <span className="truncate text-[#b9ae97]">
                   {Number(f.price)} × {Number(f.size)} · trade {f.trade_id}
                 </span>
                 <span className="text-right">{fmtExact(fee)}</span>

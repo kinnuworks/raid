@@ -71,12 +71,12 @@ export function Replay({ final, days, generatedAt }: { final: MapTile[]; days: D
         <button className="btn" onClick={() => (playing ? setPlaying(false) : (setFrame(null), setPlaying(true)))} aria-pressed={playing}>
           {playing ? "Pause" : `Replay the last ${days.length} days`}
         </button>
-        <div className="flex flex-wrap items-stretch" role="group" aria-label="Pick a day">
+        <div className="-mx-4 flex snap-x items-stretch overflow-x-auto px-4 sm:mx-0 sm:px-0" role="group" aria-label="Pick a day">
           {days.map((d, i) => (
             <button
               key={d.date}
               onClick={() => (setPlaying(false), setFrame(i))}
-              className="num min-h-11 min-w-11 border border-ink px-2 text-[12px] -ml-px first:ml-0"
+              className="num min-h-11 min-w-11 shrink-0 snap-start border border-ink px-2 text-[12px] -ml-px first:ml-0"
               style={frame === i ? { background: "var(--ink)", color: "var(--paper)" } : undefined}
               aria-pressed={frame === i}
               title={d.date}
@@ -86,7 +86,7 @@ export function Replay({ final, days, generatedAt }: { final: MapTile[]; days: D
           ))}
           <button
             onClick={() => (setPlaying(false), setFrame(null))}
-            className="num -ml-px min-h-11 border border-ink px-3 text-[12px]"
+            className="num -ml-px min-h-11 shrink-0 border border-ink px-3 text-[12px]"
             style={frame === null ? { background: "var(--ink)", color: "var(--paper)" } : undefined}
             aria-pressed={frame === null}
           >

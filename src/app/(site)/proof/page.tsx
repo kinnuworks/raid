@@ -10,7 +10,7 @@ async function ProofPageContent() {
   await connection();
   const s = await seasonSnapshot();
   return (
-    <main className="mx-auto max-w-[1100px] px-4 pb-24 pt-8 md:px-8">
+    <main className="mx-auto max-w-[1400px] px-4 pb-24 pt-8 md:px-8">
       <p className="kicker">Proof of Fees</p>
       <h1 className="display mt-2 text-[clamp(40px,6vw,76px)]">Check every fee yourself</h1>
       <div className="mt-4 grid gap-6 text-[16px] text-ink-2 md:grid-cols-2">

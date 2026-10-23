@@ -38,10 +38,10 @@ export default async function Image({ params }: { params: Promise<{ slug: string
             </div>
           ) : null}
           <div style={{ fontFamily: "Mono", fontSize: 24, marginTop: 12, color: "#4A4639" }}>
-            {`${s.holders} holders on Strike · ${s.traders7d} ${s.traders7d === 1 ? "trader" : "traders"} this week`}
+            {`${s.traders7d} ${s.traders7d === 1 ? "trader" : "traders"} this week${target && target.runnerUp === a.slug ? ` · runner-up in ${target.symbol.replace("-USD", "")}` : ""}`}
           </div>
         </div>
-        <div style={{ display: "flex", alignItems: "flex-end" }}>
+        <div style={{ display: "flex", alignItems: "flex-end", marginLeft: 40 }}>
           <MiniBoard highlight={a.slug} />
         </div>
       </CardFrame>

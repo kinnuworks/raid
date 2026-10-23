@@ -52,7 +52,7 @@ async function ArmyPageContent(props: PageProps<"/army/[slug]">) {
   ];
 
   return (
-    <main className="mx-auto max-w-[1300px] px-4 pb-24 pt-8 md:px-8">
+    <main className="mx-auto max-w-[1400px] px-4 pb-24 pt-8 md:px-8">
       <p className="kicker">{army.garrison ? "Garrison" : `Army · ${rank} of ${ranked.length} by markets held this week`}</p>
       <div className="mt-2 flex items-center gap-4">
         <Swatch army={army} className="h-16 w-6 md:h-24 md:w-8" />
@@ -103,7 +103,7 @@ async function ArmyPageContent(props: PageProps<"/army/[slug]">) {
             </p>
           )}
           <dl className="mt-2 grid grid-cols-[1fr_auto] gap-y-2 text-[15px]">
-            <dt className="text-ink-2">Enlisted through Raid</dt>
+            <dt className="text-ink-2">Enlisted in {army.ticker} (of {live.members.length} across all armies)</dt>
             <dd className="num">{liveMembers.length}</dd>
             <dt className="text-ink-2">Confirmed recruits</dt>
             <dd className="num">{board?.confirmed ?? 0}</dd>

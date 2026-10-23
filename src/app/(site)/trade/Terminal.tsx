@@ -166,10 +166,8 @@ export function Terminal({ army, isRecruit }: { army?: string; isRecruit?: boole
                   <td className="py-2">{p.symbol}</td>
                   <td className="text-right">{Number(p.size)}</td>
                   <td className="text-right">{Number(p.entry_price).toFixed(2)}</td>
-                  <td className="text-right">{Number(p.liquidation_price) > 0 ? Number(p.liquidation_price).toFixed(2) : "—"}</td>
-                  <td className="text-right" style={{ color: Number(p.unrealized_pnl) >= 0 ? "var(--gain)" : "var(--loss)" }}>
-                    {Math.abs(Number(p.unrealized_pnl ?? 0)) < 0.005 ? "$0.00" : `${Number(p.unrealized_pnl) > 0 ? "+" : "−"}$${Math.abs(Number(p.unrealized_pnl)).toFixed(2)}`}
-                  </td>
+                  <td className="text-right">{Number(p.liquidation_price) > 0 ? Number(p.liquidation_price).toFixed(2) : p.margin_mode === "cross" ? "cross" : "—"}</td>
+                  <PnlCell value={Number(p.upnl ?? p.unrealized_pnl ?? 0)} />
                 </tr>
               ))}
             </tbody>
@@ -213,7 +211,7 @@ export function Terminal({ army, isRecruit }: { army?: string; isRecruit?: boole
               className="display min-h-11 text-[20px]"
               style={{ background: side === s ? (s === "buy" ? "var(--verified)" : "var(--loss)") : "transparent", border: "1px solid #5b5547", color: "#ece4d2" }}
             >
-              {s === "buy" ? "Long" : "Short"}
+              {s === "buy" ? "▲ Long" : "▼ Short"}
             </button>
           ))}
         </div>
@@ -277,5 +275,15 @@ export function Terminal({ army, isRecruit }: { army?: string; isRecruit?: boole
       </aside>
     </div>
     </>
+  );
+}
+
+/** Strike's own uPnL. Zero is plain ink; gains and losses carry a sign and a colour. */
+function PnlCell({ value }: { value: number }) {
+  const zero = Math.abs(value) < 0.005;
+  return (
+    <td className="text-right" style={{ color: zero ? "var(--ink-2)" : value > 0 ? "var(--gain)" : "var(--loss)" }}>
+      {zero ? "$0.00" : `${value > 0 ? "▲ +" : "▼ −"}$${Math.abs(value).toFixed(2)}`}
+    </td>
   );
 }
