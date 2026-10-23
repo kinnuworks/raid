@@ -131,4 +131,4 @@ Season 0 also gives Strike a ranked list of which communities already trade ther
 
 ## Stack
 
-Next.js 16 and React 19, TypeScript, Postgres (embedded PGlite locally), `@noble/ed25519`, WebCrypto, Satori for share cards and Vitest. The map is hand-built SVG.
+Next.js 16 and React 19, TypeScript, Postgres (Neon in production, embedded PGlite locally), `@noble/ed25519`, WebCrypto, Satori for share cards and Vitest. The map is hand-built SVG.
